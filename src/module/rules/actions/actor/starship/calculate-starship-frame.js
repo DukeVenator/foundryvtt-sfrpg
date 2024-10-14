@@ -265,16 +265,12 @@ export default function(engine) {
         const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
         for (const component of starshipComponents) {
             const componentData = component.system;
-
-            console.log(
-                `componentData.costMultipliedBySize ${componentData.costMultipliedBySize} sizeModifier ${sizeModifier} componentData.cost ${componentData.cost} `
-            );
-            let bpCost = componentData.costMultipliedBySize
+            let bpCost = (componentData.costMultipliedBySize
                 ? sizeModifier * componentData.cost
-                : componentData.cost;
-            console.log("BPCOST PRINT", bpCost);
+                : componentData.cost) ?? 0;
+            // Added Catch for undefined to prevent NAN from happening.
+            // TODO Special Abillities should not be counted in the BP cost. Or Expose a BP value in the Special Abilities section for starships
             if (bpCost === undefined) {
-                console.warn("BP COST WAS UNDEFINED!");
                 bpCost = 0;
             }
             data.attributes.bp.value += bpCost;
