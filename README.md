@@ -1,5 +1,11 @@
 # SFRPG
-This is my personal fork of the Starfinder system definition for Foundry Virtual Tabletop, as used in roleplaying sessions at The Ruby Palace. This version is forked from a development build of [foundryvtt-starfinder](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/) somewhere in-between versions 0.26.1 and 0.27.
+
+
+This is fork of Ruby's fork of the Starfinder system definition for Foundry Virtual Tabletop.  I do hope you don't mind Ruby. you provided an excellent platform for me to fork off.
+
+
+I am currently gathering a number fixes across the entire community and plan on adding any missing information as I find them. 
+
 
 ## Compatibility
 
