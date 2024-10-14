@@ -1,22 +1,22 @@
-const { ClassicLevel } = require("classic-level");
-const archiver = require('archiver');
-const argv = require('yargs').argv;
-const chalk = require('chalk');
-const fs = require('fs-extra');
-const gulp = require('gulp');
-const less = require('gulp-less');
-const path = require('path');
-const sanitize = require("sanitize-filename");
-const stringify = require('json-stringify-pretty-compact');
-const jsdom = require("jsdom");
-const terser = require("gulp-terser");
-const sourcemaps = require("gulp-sourcemaps");
-const cssClean = require('gulp-clean-css');
-
+import { ClassicLevel } from "classic-level";
+import archiver from 'archiver';
+import argv from 'yargs';
+import chalk from 'chalk';
+import fs from 'fs-extra';
+import gulp from 'gulp';
+import less from 'gulp-less';
+import path from 'path';
+import sanitize from "sanitize-filename";
+import stringify from 'json-stringify-pretty-compact';
+import jsdom from "jsdom";
+import terser from "gulp-terser";
+import sourcemaps from "gulp-sourcemaps";
+import cssClean from 'gulp-clean-css';
+import jQuery from 'jquery';
 const { JSDOM } = jsdom;
 const { window } = new JSDOM();
 
-const $ = require("jquery")(window);
+const $ = jQuery(window);
 
 function getConfig() {
     const configPath = path.resolve(process.cwd(), 'foundryconfig.json');
@@ -502,7 +502,7 @@ function sanitizeJSON(jsonInput) {
 /**
  * Unpack existing db files into json files.
  */
-async function unpack({packName, filePath, outputDirectory, partOfCook = false}) {
+async function unpackdb({packName, filePath, outputDirectory, partOfCook = false}) {
     console.log(`> Starting unpack of ${packName} into ${outputDirectory}`);
     fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => {
         if (err)
@@ -599,7 +599,7 @@ async function unpackPacks(partOfCook = false) {
         /* console.log(`> Cleaning up ${unpackDir}`);
         fs.rmdirSync(unpackDir, { recursive: true }); */
 
-        promises.push(unpack({packName: folder, filePath: packDir, outputDirectory: unpackDir, partOfCook}));
+        promises.push(unpackdb({packName: folder, filePath: packDir, outputDirectory: unpackDir, partOfCook}));
 
     }
 
@@ -1006,9 +1006,8 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
             }
         }
     }
-
     // Validate items
-    for (i in data.items) {
+    for (const i in data.items) {
         formattingCheckItems(data.items[i], pack, file, { checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks });
     }
 }
@@ -1163,7 +1162,7 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
     }
 
     // Validate items
-    for (i in data.items) {
+    for (const i in data.items) {
         formattingCheckItems(data.items[i], pack, file, { checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks });
     }
 }
@@ -1502,7 +1501,7 @@ async function postCook() {
 /** ******************/
 /*   LOCALIZATION   */
 /** ******************/
-async function copyLocalization() {
+export async function copyLocalization() {
     console.log(`Opening localization files`);
 
     const itemSourceDir = "./src/lang";
@@ -2013,23 +2012,21 @@ class LevelDatabase extends ClassicLevel {
 }
 
 const execBuild = gulp.parallel(buildLess, copyFiles, copyLibs);
-
-exports.build = gulp.series(clean, execBuild);
-exports.watch = buildWatch;
-exports.clean = clean;
-exports.link = linkUserData;
-exports.copyUser = copyUserData;
-exports.libs = copyLibs;
-exports.package = gulp.series(copyReadmeAndLicenses, packageBuild);
-exports.publish = gulp.series(
+export const build = gulp.series(clean, execBuild);
+export const watch = buildWatch;
+export const cleanTask = clean; // Renamed to avoid potential conflicts
+export const link = linkUserData;
+export const copyUser = copyUserData;
+export const libs = copyLibs;
+export const packageTask = gulp.series(copyReadmeAndLicenses, packageBuild); // Renamed to avoid conflicts with reserved keywords
+export const publish = gulp.series(
     clean,
     updateManifest,
     execBuild,
     copyReadmeAndLicenses,
     packageBuild
 );
-exports.copyLocalization = copyLocalization;
-exports.cook = gulp.series(cookPacks, clean, execBuild, postCook);
-exports.cookNoFormattingCheck = gulp.series(cookPacksNoFormattingCheck, clean, execBuild, postCook);
-exports.unpack = gulpUnpackPacks;
-exports.default = gulp.series(clean, execBuild);
+export const cook = gulp.series(cookPacks, clean, execBuild, postCook);
+export const cookNoFormattingCheck = gulp.series(cookPacksNoFormattingCheck, clean, execBuild, postCook);
+export const unpack = gulpUnpackPacks;
+export default gulp.series(clean, execBuild);
