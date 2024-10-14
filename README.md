@@ -4,8 +4,12 @@
 This is fork of Ruby's fork of the Starfinder system definition for Foundry Virtual Tabletop.  I do hope you don't mind Ruby. you provided an excellent platform for me to fork off.
 
 
-I am currently gathering a number fixes across the entire community and plan on adding any missing information as I find them. 
-
+I am currently gathering a number fixes across the entire community and plan on adding any missing information or bugs as I find them. 
+## Dukes plans 
+    I am currently in the process of making tools to increase data effiency along with maybe some more icons.
+    - Creation of a easy data creation tool.
+    - More validation states
+    - bug fixes.
 
 ## Compatibility
 
