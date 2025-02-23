@@ -6940,6 +6940,11 @@
           "units": "text",
           "value": null
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
         "equippedBulkMultiplier": 1,
@@ -7705,7 +7710,7 @@
         "value": 0
       },
       "hp": {
-        "max": 10,
+        "max": 50,
         "min": 0,
         "temp": null,
         "tempmax": null,
@@ -7732,13 +7737,13 @@
         "value": 0
       },
       "rp": {
-        "max": 10,
+        "max": 8,
         "min": 0,
         "tooltip": [],
         "value": 8
       },
       "sp": {
-        "max": 10,
+        "max": 64,
         "min": 0,
         "tooltip": [],
         "value": 64

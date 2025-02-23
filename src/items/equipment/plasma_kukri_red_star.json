@@ -7,7 +7,7 @@
     "systemId": "sfrpg",
     "systemVersion": "0.28.0"
   },
-  "img": "systems/sfrpg/icons/equipment/weapons/plasma-kukri-red.webp",
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -118,7 +118,7 @@
     "identified": true,
     "isActive": null,
     "isEquipment": true,
-    "level": 4,
+    "level": 20,
     "modifiers": [],
     "price": 2450,
     "proficient": true,
