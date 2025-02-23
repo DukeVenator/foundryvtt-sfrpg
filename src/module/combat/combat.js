@@ -398,7 +398,7 @@ export class CombatSFRPG extends Combat {
 
         // Handle timed events if the event that is occurring is phase/round/turn advance.
         if (options.eventData) {
-            this._handleTimedEffects(options.eventData);
+          this._handleTimedEffects(options.eventData);
         }
     }
 

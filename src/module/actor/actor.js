@@ -78,22 +78,38 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     _ensureNpcBonusDataExists()
     {
       if (this.type == 'npc2') {
+        let weaponTypeArray = Object.keys(CONFIG.SFRPG.weaponTypes).concat(["equipment"]);
         this.system.npcBonus = this.system.npcBonus ?? {}
-        this.system.npcBonus.base = this.system.npcBonus.base ?? {}
-        this.system.npcBonus.base.attack = this.system.npcBonus.base.attack ?? {}
-        this.system.npcBonus.base.attack.value = this.system.npcBonus.base.attack.value ?? 0
-        this.system.npcBonus.base.damage = this.system.npcBonus.base.damage ?? {}
-        this.system.npcBonus.base.damage.value = this.system.npcBonus.base.damage.value ?? 0
-        this.system.npcBonus.base.attack.mod = this.system.npcBonus.base.attack.value
-        this.system.npcBonus.base.damage.mod = this.system.npcBonus.base.damage.value
-        for (const weaponType in CONFIG.SFRPG.weaponTypes) {
+        for (const weaponType of ["base", "standard", "gunnery"].concat(weaponTypeArray)) {
           this.system.npcBonus[weaponType] = this.system.npcBonus[weaponType] ?? {}
           this.system.npcBonus[weaponType].attack = this.system.npcBonus[weaponType].attack ?? {}
           this.system.npcBonus[weaponType].attack.value = this.system.npcBonus[weaponType].attack.value ?? 0
           this.system.npcBonus[weaponType].damage = this.system.npcBonus[weaponType].damage ?? {}
-          this.system.npcBonus[weaponType].damage.value = this.system.npcBonus[weaponType].damage.value ?? 0
-          this.system.npcBonus[weaponType].attack.mod = this.system.npcBonus.base.attack.value + this.system.npcBonus[weaponType].attack.value
-          this.system.npcBonus[weaponType].damage.mod = this.system.npcBonus.base.damage.value + this.system.npcBonus[weaponType].damage.value
+          console.log(this.system.npcBonus);
+          if (weaponType == "base") {
+            // straight copies
+            this.system.npcBonus[weaponType].attack.mod = this.system.npcBonus[weaponType].attack.value;
+            this.system.npcBonus[weaponType].damage.value = this.system.npcBonus[weaponType].damage.value ?? 0
+            this.system.npcBonus[weaponType].damage.mod = this.system.npcBonus[weaponType].damage.value;
+          } else {
+            // attack bonus
+            if (weaponTypeArray.includes(weaponType)) {
+              this.system.npcBonus[weaponType].attack.mod = this.system.npcBonus.base.attack.value + this.system.npcBonus.standard.attack.value + this.system.npcBonus[weaponType].attack.value
+            } else {
+              this.system.npcBonus[weaponType].attack.mod = this.system.npcBonus.base.attack.value + this.system.npcBonus[weaponType].attack.value
+            }
+            // damage value and bonus
+            if (["grenade", "gunnery"].includes(weaponType)) {
+              this.system.npcBonus[weaponType].damage.value = 0;
+              this.system.npcBonus[weaponType].damage.mod = 0;
+            } else if (weaponTypeArray.includes(weaponType)) {
+              this.system.npcBonus[weaponType].damage.value = this.system.npcBonus[weaponType].damage.value ?? 0
+              this.system.npcBonus[weaponType].damage.mod = this.system.npcBonus.base.damage.value + this.system.npcBonus.standard.damage.value + this.system.npcBonus[weaponType].damage.value
+            } else {
+              this.system.npcBonus[weaponType].damage.value = this.system.npcBonus[weaponType].damage.value ?? 0
+              this.system.npcBonus[weaponType].damage.mod = this.system.npcBonus.base.damage.value + this.system.npcBonus[weaponType].damage.value
+            }
+          }
         }
       }
     }

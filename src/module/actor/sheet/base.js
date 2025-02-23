@@ -419,9 +419,9 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
             if (abl) parts.push(`@abilities.${abl}.mod`);
             if (["character", "drone"].includes(actor.type)) parts.push("@attributes.baseAttackBonus.value");
-            if (actor.type === "npc2" && item.type === "weapon") {
+            if (actor.type === "npc2" && ["weapon", "equipment"].includes(item.type)) {
               let npcAttackBonusType = item.system.weaponType;
-              if (!npcAttackBonusType) npcAttackBonusType = "base";
+              if (!npcAttackBonusType) npcAttackBonusType = item.type == "equipment" ? "equipment" : "standard";
               parts.push(`@npcBonus.${npcAttackBonusType}.attack.mod`);
             }
             if (isWeapon) {
@@ -471,9 +471,9 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (!formula) throw ("No damage formula, deferring to default string");
 
             // if this is an NPC we need to add the NPC damage
-            if (item.actor.type === "npc2" && item.type === "weapon" && ["mwak", "rwak"].includes(item.system.actionType)) {
+            if (item.actor.type === "npc2" && ["weapon", "equipment"].includes(item.type) && ["mwak", "rwak"].includes(item.system.actionType)) {
               let npcDamageBonusType = item.system.weaponType;
-              if (!npcDamageBonusType) npcDamageBonusType = "base";
+              if (!npcDamageBonusType) npcDamageBonusType = item.type == "equipment" ? "equipment" : "standard";
               formula = formula + ` + @npcBonus.${npcDamageBonusType}.damage.mod`;
             }
 

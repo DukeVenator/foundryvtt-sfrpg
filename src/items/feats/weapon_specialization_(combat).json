@@ -150,10 +150,10 @@
       },
       {
         "_id": "db177db7-a29e-4aa8-80ca-a7e27db8ba97",
-        "name": "Weapon specialization Operative",
+        "name": "Weapon Specialization Operative",
         "type": "untyped",
         "condition": "",
-        "effectType": "weapon-property-damage",
+        "effectType": "specific-weapon-property-damage",
         "enabled": false,
         "max": 0,
         "modifier": "-ceil(@details.level.value/2)",
@@ -161,7 +161,7 @@
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "operative"
+        "valueAffected": "basicM,operative"
       }
     ],
     "properties": {},

@@ -13,9 +13,13 @@ Foundry v12. This is tested to work correctly on v12.330.
 
 ## Objectives of the fork
 
-The official Starfinder system definition for Foundry appears to be an early alpha version that is largely abandoned (it appears dead for months at a time, gets a flurry of updates, then dies again). I've been finding problems with it continuously - it's extremely buggy, with large swathes of mistakes in the data and many questionable design choices. I'm grateful for the fact that it exists, and for those who have put time into developing it over the years (THANK YOU!), but because of the generally abandoned state of the project, I had no optimism for those issues to get fixed in any prompt amount of time. I also don't like to contribute directly to open-source projects, because in my experience this causes more drama than I can manage.
+The official Starfinder system definition for Foundry appears to be an early alpha version. I've been finding problems with it continuously - it's extremely buggy, with large swathes of mistakes in the data and many questionable design choices.
 
-Consequently, I elected to fork the project so that I could fix the most urgent problems.
+At the time that I created this fork, the project appeared to be stagnant (it seems to be dead for months at a time, then gets a flurry of updates, then dies again). While I'm grateful for the fact that it exists, and for those who have put time into developing it over the years (THANK YOU!), I had no optimism for those issues to get fixed in any prompt amount of time. I also often have to make near-immediate fixes so that my session is actually playable, and do not have time for those fixes to be reviewed (I can't put my campaign on hold every time there's a bug, which is regularly). On top of this, I don't like to contribute directly to open-source projects, because in my experience this causes more drama than I can manage. I therefore tend to avoid this for mental health reasons.
+
+Consequently, I elected to fork the project so that I could fix the most urgent problems myself.
+
+Since I made this fork, the project appears to have resumed development (at least for the time being?) so the code is now outdated. When I have time, I intend to merge upstream changes in, but I'm a little busy right now, so this is a low priority for me.
 
 ### Short term objectives
 * Bug fixes to the core
@@ -31,7 +35,7 @@ Consequently, I elected to fork the project so that I could fix the most urgent 
 
 ## Current status
 
-Development on this fork is slow. I am currently only putting in fixes required for my campaign, as I don't want to accidentally break everything and disrupt the sessions.
+Development on this fork is slow. I am currently only putting in fixes required for my campaign, as I don't want to accidentally break everything and disrupt the sessions. I intend to merge upstream changes when my roleplaying group next goes on hiatus.
 
 ## Support
 
