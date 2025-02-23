@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
   "img": "icons/weapons/swords/scimitar-broad.webp",
   "system": {
@@ -21,7 +21,7 @@
       "condition": "",
       "cost": null
     },
-    "ammunitionType": "charge",
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
@@ -57,7 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": true,
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -131,11 +131,13 @@
       "units": "text",
       "value": ""
     },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 4,
     "modifiers": [],
     "price": 2150,
@@ -256,22 +258,7 @@
     },
     "source": "AR pg. 35",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

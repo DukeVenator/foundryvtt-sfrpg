@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -18,8 +18,8 @@
     "actionType": "",
     "activation": {
       "type": "reaction",
-      "condition": "Spend a nanite surge as part of the Reaction",
-      "cost": null
+      "condition": "Spend a nanite surge",
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Your nanites can move the molecules of your armor to defend your allies. You gain the @UUID[Compendium.sfrpg.feats.Item.1auTCZ8OB64XqXcZ]{Bodyguard} feat as a bonus feat. While you’re within reach of your @UUID[Compendium.sfrpg.class-features.Item.KOxmSWm5D1jHy8VU]{Cloud Array (Ex)}, you can spend a @UUID[Compendium.sfrpg.class-features.Item.vh6n0Ad3lamOJXpV]{Nanite Surge (Ex)} as part of the reaction to use the feat on an ally in or adjacent to your cloud array.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Your nanites can move the molecules of your armor to defend your allies. You gain the @UUID[Compendium.sfrpg.feats.Item.1auTCZ8OB64XqXcZ]{Bodyguard} feat as a bonus feat. While you’re within reach of your @UUID[Compendium.sfrpg.class-features.Item.KOxmSWm5D1jHy8VU]{Cloud Array (Ex)}, you can spend a @UUID[Compendium.sfrpg.class-features.Item.vh6n0Ad3lamOJXpV]{Nanite Surge (Ex)} as part of the reaction to use the feat on an ally in or adjacent to your cloud array.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,15 +86,16 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -115,12 +116,12 @@
     "source": "EN pg. 55",
     "target": {
       "type": "",
-      "value": ""
+      "value": "An ally within or adjacent to your cloud array"
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

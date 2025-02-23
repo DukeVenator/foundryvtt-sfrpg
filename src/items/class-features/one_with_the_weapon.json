@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Your nanites can fuse your melee weapons with your armor and shape them to best complement your fighting style. When you use your @UUID[Compendium.sfrpg.class-features.Item.LLNp1urkLncOxgsb]{Gear Array (Ex)} to form a melee weapon, the weapon gains the @UUID[Compendium.sfrpg.universal-creature-rules.Item.GmvuMSuK17HzJMgt]{Integrated Weapons (Ex)} special property. You can equip the weapon into an empty armor upgrade slot instead of wielding it. Additionally, you can give the weapon either the disarm or reach special weapon properties.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Your nanites can fuse your melee weapons with your armor and shape them to best complement your fighting style. When you use your @UUID[Compendium.sfrpg.class-features.Item.LLNp1urkLncOxgsb]{Gear Array (Ex)} to form a melee weapon, the weapon gains the @UUID[Compendium.sfrpg.universal-creature-rules.Item.GmvuMSuK17HzJMgt]{Integrated Weapons (Ex)} special property. You can equip the weapon into an empty armor upgrade slot instead of wielding it. Additionally, you can give the weapon either the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#disarm]{Disarm} or @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#reach]{Reach} special weapon properties.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,7 +86,7 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
       "units": "text",
@@ -95,6 +95,7 @@
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

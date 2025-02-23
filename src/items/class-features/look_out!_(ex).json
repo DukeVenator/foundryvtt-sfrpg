@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -19,7 +19,7 @@
     "activation": {
       "type": "move",
       "condition": "",
-      "cost": null
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>Whether you use smoke, holograms, or just a convincing lie, you can convince your enemy that they are surrounded, backing into a trap, or otherwise at risk from some unseen danger. As a move action, you can select a target within melee range. The target must succeed at a Will save or become @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} until the end of their turn. If they fail the save, you can spend a Resolve Point to make them flat-footed until the end of your next turn instead.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>Whether you use smoke, holograms, or just a convincing lie, you can convince your enemy that they are surrounded, backing into a trap, or otherwise at risk from some unseen danger. As a move action, you can select a target within melee range. The target must succeed at a Will save or become @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} until the end of their turn. If they fail the save, you can spend a Resolve Point to make them flat-footed until the end of your next turn instead.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -91,11 +91,12 @@
     },
     "duration": {
       "units": "text",
-      "value": ""
+      "value": "Varies"
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -120,12 +121,12 @@
     "source": "EN pg. 59",
     "target": {
       "type": "",
-      "value": "Within melee range"
+      "value": "One target within melee range"
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

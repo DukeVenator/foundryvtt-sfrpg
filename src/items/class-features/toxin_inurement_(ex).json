@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>Your body becomes resistant to poisons and toxins. If you have at least 1 MP, you gain a +1 enhancement bonus to saving throws against poison. If you have at least 4 MP, you instead gain a +2 enhancement bonus to saving throws against poison. Upon initial exposure to a poison, you can spend 1 Resolve Point to reduce the damage you take from initial exposure to that poison by an amount equal to your current MP, to a minimum of 1 damage.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>Your body becomes resistant to poisons and toxins. If you have at least 1 MP, you gain a +1 enhancement bonus to saving throws against poison. If you have at least 4 MP, you instead gain a +2 enhancement bonus to saving throws against poison. Upon initial exposure to a poison, you can spend 1 Resolve Point to reduce the damage you take from initial exposure to that poison by an amount equal to your current MP, to a minimum of 1 damage.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -95,7 +95,24 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "f88ad00e-85bb-4a0c-bb4c-d6a38f2979b1",
+        "name": "Toxin Inurement - Saves Against Poison",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 0,
+        "modifier": "lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 1, 1, 4, 2)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Toxin Inurement",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

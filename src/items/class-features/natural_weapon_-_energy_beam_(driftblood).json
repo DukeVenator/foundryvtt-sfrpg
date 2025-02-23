@@ -5,31 +5,31 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
-    "ability": "",
+    "ability": "dex",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
-      "type": "none",
+      "type": "",
       "condition": "",
       "cost": null
     },
     "ammunitionType": "",
     "area": {
-      "effect": "",
+      "effect": "burst",
       "shapable": false,
-      "shape": "",
+      "shape": "line",
       "units": "ft",
-      "value": ""
+      "value": "60"
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "attributes": {
       "ac": {
         "value": ""
@@ -102,9 +102,11 @@
     },
     "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": false,
     "level": 1,
     "modifiers": [],
     "price": 0,
@@ -210,8 +212,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "ft",
-      "value": "60"
+      "units": "none",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
@@ -250,9 +252,9 @@
       "value": 0
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     },
     "weaponCategory": "uncategorized",
     "weaponType": "special"

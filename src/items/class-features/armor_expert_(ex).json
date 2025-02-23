@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You are an expert in working with and adjusting armor of various types and sizes. You can don or remove armor in half the time normally required to do so. When adjusting armor for a different sized creature, you gain a +4 circumstance bonus to your Engineering check. Finally, at 5th level, you can spend 1 Resolve Point to gain temporary proficiency with a particular suit of heavy or powered armor. This proficiency lasts for a number of hours equal to your half your level.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You are an expert in working with and adjusting armor of various types and sizes. You can don or remove armor in half the time normally required to do so. When adjusting armor for a different sized creature, you gain a +4 circumstance bonus to your Engineering check. Finally, at 5th level, you can spend 1 Resolve Point to gain temporary proficiency with a particular suit of heavy or powered armor. This proficiency lasts for a number of hours equal to your half your level.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -94,7 +94,24 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "7a0236bb-a9e7-496c-855f-62c07f8ce7e6",
+        "name": "Adjusting Armor Size",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Armor Expert",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

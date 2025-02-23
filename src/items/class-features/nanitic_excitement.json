@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -22,9 +22,9 @@
       "cost": 1
     },
     "area": {
-      "effect": "",
+      "effect": "emanation",
       "shapable": false,
-      "shape": "",
+      "shape": "sphere",
       "units": "ft",
       "value": "floor(lookupRange(@details.level.value, 0, 9, 5, 12, 10, 18, 15)"
     },
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Your nanites can energize cellular material to the point of radioactivity. As a standard action, you can spend a @UUID[Compendium.sfrpg.class-features.Item.vh6n0Ad3lamOJXpV]{Nanite Surge (Ex)} to generate an aura of radiation around yourself and your nanites. Creatures within 5 feet of you or your cloud array are exposed to low-level radiation. At 12th level, this range increases to 10 feet and the radiation level increases to medium. At 18th level, this range increases to 15 feet and the radiation level increases to high.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Your nanites can energize cellular material to the point of radioactivity. As a standard action, you can spend a @UUID[Compendium.sfrpg.class-features.Item.vh6n0Ad3lamOJXpV]{Nanite Surge (Ex)} to generate an aura of radiation around yourself and your nanites. Creatures within 5 feet of you or your cloud array are exposed to low-level radiation. At 12th level, this range increases to 10 feet and the radiation level increases to medium. At 18th level, this range increases to 15 feet and the radiation level increases to high.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,7 +86,7 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
       "units": "text",
@@ -95,10 +95,11 @@
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "personal",
       "value": ""
     },
     "recharge": {
@@ -118,9 +119,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

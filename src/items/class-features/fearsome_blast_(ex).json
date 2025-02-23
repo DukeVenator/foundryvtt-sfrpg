@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -17,9 +17,9 @@
     "actionTarget": "",
     "actionType": "save",
     "activation": {
-      "type": "other",
+      "type": "none",
       "condition": "When you activate or attack with a grenade",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>You maximize the chaos caused by a mid-combat explosion. When you activate or attack with a grenade, you can use this improvisation to spread fear among anyone caught in the grenade’s area of effect. Each creature affected by the grenade must attempt a Will saving throw, in addition to saves against the grenade’s usual effects. This save DC equals either 10 + 1/2 your envoy level + your Charisma modifier, or the grenade’s saving throw DC + 2, whichever is lower. A creature who fails the saving throw is shaken for 1d4 rounds. A creature whose Will save result is a natural 1 is instead frightened for 1 round, after which they are shaken for 1 round. Once you use this improvisation, you cannot do so again until you take a 10-minute rest to recover Stamina Points. This is a fear effect.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>You maximize the chaos caused by a mid-combat explosion. When you activate or attack with a grenade, you can use this improvisation to spread fear among anyone caught in the grenade’s area of effect. Each creature affected by the grenade must attempt a Will saving throw, in addition to saves against the grenade’s usual effects. This save DC equals either 10 + 1/2 your envoy level + your Charisma modifier, or the grenade’s saving throw DC + 2, whichever is lower. A creature who fails the saving throw is shaken for 1d4 rounds. A creature whose Will save result is a natural 1 is instead frightened for 1 round, after which they are shaken for 1 round. Once you use this improvisation, you cannot do so again until you take a 10-minute rest to recover Stamina Points. This is a fear effect.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -71,13 +71,13 @@
       "language-dependent": false,
       "lawful": false,
       "light": false,
-      "mind-affecting": false,
+      "mind-affecting": true,
       "pain": false,
       "poison": false,
       "polymorph": false,
       "radiation": false,
       "scrying": false,
-      "sense-dependent": false,
+      "sense-dependent": true,
       "shadow": false,
       "sonic": false,
       "summoning": false,
@@ -91,11 +91,12 @@
     },
     "duration": {
       "units": "text",
-      "value": ""
+      "value": "Varies"
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -123,9 +124,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

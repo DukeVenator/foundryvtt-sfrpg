@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -21,9 +21,10 @@
       "condition": "",
       "cost": 1
     },
-    "ammunitionType": "charge",
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -56,6 +57,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -95,8 +98,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": ""
     },
@@ -105,10 +111,13 @@
       "units": "",
       "value": ""
     },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
+    "isActive": null,
+    "isEquipment": true,
     "level": 4,
     "modifiers": [],
     "price": 2450,
@@ -198,12 +207,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": null,
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -211,6 +222,7 @@
     },
     "source": "",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

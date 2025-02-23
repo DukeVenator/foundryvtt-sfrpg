@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -17,7 +17,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "other",
+      "type": "none",
       "condition": "Spend a nanite surge",
       "cost": null
     },
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>You can use your nanites on mechs you pilot, making them an extension of your own body. You can apply the effects of your @UUID[Compendium.sfrpg.class-features.Item.QoCQEVNtgMhsElwQ]{Sheath Array (Ex)} to any mechs that you are piloting. Once per combat, you can spend a @UUID[Compendium.sfrpg.class-features.Item.vh6n0Ad3lamOJXpV]{Nanite Surge (Ex)} to give the mech a number of temporary Hit Points equal to your @UUID[Compendium.sfrpg.classes.Item.MMyeA7kL5Vhcio05]{Nanocyte} level; the mech loses any such remaining temporary Hit Points when the sheath array ends.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>You can use your nanites on mechs you pilot, making them an extension of your own body. You can apply the effects of your @UUID[Compendium.sfrpg.class-features.Item.QoCQEVNtgMhsElwQ]{Sheath Array (Ex)} to any mechs that you are piloting. Once per combat, you can spend a @UUID[Compendium.sfrpg.class-features.Item.vh6n0Ad3lamOJXpV]{Nanite Surge (Ex)} to give the mech a number of temporary Hit Points equal to your @UUID[Compendium.sfrpg.classes.Item.MMyeA7kL5Vhcio05]{Nanocyte} level; the mech loses any such remaining temporary Hit Points when the sheath array ends.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,15 +86,16 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -118,9 +119,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -19,7 +19,7 @@
     "activation": {
       "type": "reaction",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>Allies are your greatest asset, and sometimes your greatest armor. As a reaction when you are attacked and have soft cover granted by a creature against the attacker, you can increase your cover bonus to AC to +5. If the attack roll’s result is a natural 1, you can choose for the attacker to reroll the attack against the creature closest to you who is granting you soft cover, as if they were the original target.</p>\n<p>At 10th level, when you use this improvisation and the triggering attack fails to hit you by 5 or less, you can spend 1 Resolve Point. When you do, the attacker rerolls the attack against the creature granting you soft cover as though their original attack roll result had been a natural 1.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>Allies are your greatest asset, and sometimes your greatest armor. As a reaction when you are attacked and have soft cover granted by a creature against the attacker, you can increase your cover bonus to AC to +5. If the attack roll’s result is a natural 1, you can choose for the attacker to reroll the attack against the creature closest to you who is granting you soft cover, as if they were the original target.</p>\n<p>At 10th level, when you use this improvisation and the triggering attack fails to hit you by 5 or less, you can spend 1 Resolve Point. When you do, the attacker rerolls the attack against the creature granting you soft cover as though their original attack roll result had been a natural 1.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -101,16 +101,17 @@
         "type": "untyped",
         "condition": "",
         "effectType": "ac",
-        "enabled": true,
-        "max": 5,
+        "enabled": false,
+        "max": 0,
         "modifier": "+5",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "As a reaction when you are attacked and have soft cover \ngranted by a creature against the attacker, you can increase \nyour cover bonus to AC to +5. If the attack roll’s result is a \nnatural 1, you can choose for the attacker to reroll the attack \nagainst the creature closest to you who is granting you soft \ncover, as if they were the original target.",
         "source": "Blocking Bodies (Ex), Envoy",
         "subtab": "misc",
         "valueAffected": "both"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -134,9 +135,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

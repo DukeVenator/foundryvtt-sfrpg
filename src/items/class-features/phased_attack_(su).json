@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -101,7 +101,7 @@
         "type": "circumstance",
         "condition": "",
         "effectType": "all-attacks",
-        "enabled": true,
+        "enabled": false,
         "max": 1,
         "modifier": "+1",
         "modifierType": "formula",
@@ -111,6 +111,7 @@
         "valueAffected": ""
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -134,9 +135,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
-      "per": "",
-      "value": 0
+      "max": "1",
+      "per": "charges",
+      "value": 1
     }
   }
 }

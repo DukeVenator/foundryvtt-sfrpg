@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -21,9 +21,10 @@
       "condition": "",
       "cost": null
     },
-    "ammunitionType": "charge",
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -56,6 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -106,8 +108,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>The vibrogarrote is similar to an analog garrote, but the handle contains a battery pack to power the weapon, and the garrote wire produces a coherent, cutting sound. When used, the vibrogarrote makes a distinctive pitch based on how long the&nbsp;wire has been extended. Basic, harmonic, and interference vibrogarrotes produce only audible frequencies, while infrasonic and ultrasonic vibrogarrotes also generate waves outside the typical auditory spectrum for additional damage.</p>"
     },
@@ -116,11 +121,13 @@
       "units": "",
       "value": ""
     },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 16,
     "modifiers": [],
     "price": 189000,
@@ -213,12 +220,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -226,6 +235,7 @@
     },
     "source": "AR pg. 13",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

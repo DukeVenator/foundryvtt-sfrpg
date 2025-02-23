@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/peacemaker.webp",
   "system": {
@@ -21,7 +21,7 @@
       "condition": "",
       "cost": 1
     },
-    "ammunitionType": "charge",
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
@@ -57,7 +57,7 @@
     "chatFlavor": "Burn [[2d4]]",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": true,
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -121,11 +121,13 @@
       "units": "text",
       "value": ""
     },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 2,
     "modifiers": [],
     "price": 400,
@@ -246,22 +248,7 @@
     },
     "source": "",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

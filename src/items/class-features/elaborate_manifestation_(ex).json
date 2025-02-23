@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -17,7 +17,7 @@
     "actionTarget": "",
     "actionType": "save",
     "activation": {
-      "type": "other",
+      "type": "none",
       "condition": "1 Resolve Point",
       "cost": null
     },
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>The first time you manifest your @UUID[Compendium.sfrpg.class-features.Item.I0pUeDcBsRz6jA7v]{Adaptive Strike (Ex)} during an encounter, you can spend 1 Resolve Point to perform an impressive display of combat prowess, acrobatic grace, or raw strength, intended to psych out or distract one of your foes. One target within 30 feet must attempt a Will save. On a failure, they become @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target} for 1 round. This is a sense-dependent effect.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>The first time you manifest your @UUID[Compendium.sfrpg.class-features.Item.I0pUeDcBsRz6jA7v]{Adaptive Strike (Ex)} during an encounter, you can spend 1 Resolve Point to perform an impressive display of combat prowess, acrobatic grace, or raw strength, intended to psych out or distract one of your foes. One target within 30 feet must attempt a Will save. On a failure, they become @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target} for 1 round. This is a sense-dependent effect.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -77,7 +77,7 @@
       "polymorph": false,
       "radiation": false,
       "scrying": false,
-      "sense-dependent": false,
+      "sense-dependent": true,
       "shadow": false,
       "sonic": false,
       "summoning": false,
@@ -96,11 +96,12 @@
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": "30"
     },
     "recharge": {
       "charged": false,
@@ -120,7 +121,7 @@
     "source": "EN pg. 43",
     "target": {
       "type": "",
-      "value": "One target within 30 feet"
+      "value": ""
     },
     "uses": {
       "max": "",

@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -100,9 +100,9 @@
         "name": "Chaoskin - Defensive Ability",
         "type": "circumstance",
         "condition": "",
-        "effectType": "ac",
+        "effectType": "cmd",
         "enabled": true,
-        "max": 3,
+        "max": 0,
         "modifier": "+3",
         "modifierType": "formula",
         "notes": "Bonus to KAC against bull rush, grapple, reposition, and trip combat maneuvers. As part of your move action to assume this form, you can attempt an Acrobatics check or grapple combat maneuver to escape the grappled or pinned condition.",
@@ -131,7 +131,7 @@
         "type": "enhancement",
         "condition": "",
         "effectType": "saves",
-        "enabled": true,
+        "enabled": false,
         "max": 2,
         "modifier": "+2",
         "modifierType": "formula",
@@ -141,6 +141,7 @@
         "valueAffected": ""
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

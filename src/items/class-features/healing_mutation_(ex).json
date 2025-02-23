@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -17,7 +17,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "other",
+      "type": "none",
       "condition": "At the beginning of your turn after gaining MP, you can spend 1 or more MP",
       "cost": null
     },
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>Rather than mutate your body, you can use your mutagenic potential to heal your own wounds. At the beginning of your turn after gaining MP, you can spend 1 or more MP. You recover 2 Hit Points for every 1 MP spent this way.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>Rather than mutate your body, you can use your mutagenic potential to heal your own wounds. At the beginning of your turn after gaining MP, you can spend 1 or more MP. You recover 2 Hit Points for every 1 MP spent this way.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,12 +90,13 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

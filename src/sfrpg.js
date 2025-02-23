@@ -421,6 +421,7 @@ Hooks.once("i18nInit", () => {
         "senses",
         "skillProficiencyLevels",
         "skills",
+        "controlSkills",
         "specialAbilityTypes",
         "specialMaterials",
         "speeds",
@@ -438,6 +439,7 @@ Hooks.once("i18nInit", () => {
         "starshipWeaponRanges",
         "starshipWeaponTypes",
         "turnEventTypes",
+        "droneArmTypes",
         "vehicleCoverTypes",
         "vehicleSizes",
         "vehicleTypes",
@@ -447,6 +449,7 @@ Hooks.once("i18nInit", () => {
         "weaponProficiencies",
         "weaponProperties",
         "weaponPropertiesTooltips",
+        "weaponAccessoriesSupportedTypes",
         "weaponTypes"
     ];
 

@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -15,11 +15,11 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "other",
+    "actionType": "save",
     "activation": {
       "type": "reaction",
-      "condition": "After you deal damage to a creature within 30 feet with an attack,  spend 2 Resolve Points",
-      "cost": null
+      "condition": "After you deal damage to a creature within 30 feet with an attack, spend 2 Resolve Points",
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You have honed your programming skills to enable you to capture spells cast by others for later use. As a reaction after you deal damage to a creature within 30 feet with an attack, you can spend 2 Resolve Points to drain a portion of that creature’s magical energy (Will negates) and store it within a crafted spell chip. If the creature fails its saving throw, it loses one spell slot of the highest level it knows as if it had expended it. If the creature has only spell-like abilities, it loses one daily use of the highest-level spell-like ability it can cast (determined randomly). If the creature can’t cast spells or use spell-like abilities, this ability has no effect, and you regain the Resolve Points expended.</p>\n<p>If you successfully trap a spell or spell-like ability, you gain a +1 enhancement bonus to AC until the end of your next turn. When you deal damage with a weapon attack, you can end this AC bonus to increase the damage dealt to one target by 1d6 per level of the drained spell or spell-like ability.</p>\n<p><em>The additional damage will need to be added manually if the player chooses to end the AC bonus.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You have honed your programming skills to enable you to capture spells cast by others for later use. As a reaction after you deal damage to a creature within 30 feet with an attack, you can spend 2 Resolve Points to drain a portion of that creature’s magical energy (Will negates) and store it within a crafted spell chip. If the creature fails its saving throw, it loses one spell slot of the highest level it knows as if it had expended it. If the creature has only spell-like abilities, it loses one daily use of the highest-level spell-like ability it can cast (determined randomly). If the creature can’t cast spells or use spell-like abilities, this ability has no effect, and you regain the Resolve Points expended.</p>\n<p>If you successfully trap a spell or spell-like ability, you gain a +1 enhancement bonus to AC until the end of your next turn. When you deal damage with a weapon attack, you can end this AC bonus to increase the damage dealt to one target by 1d6 per level of the drained spell or spell-like ability.</p>\n<p><em>The additional damage will need to be added manually if the player chooses to end the AC bonus.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -91,16 +91,33 @@
     },
     "duration": {
       "units": "text",
-      "value": ""
+      "value": "Until the end of your next turn"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "82bcf7bf-5975-49c4-a49b-3ff651a0b19d",
+        "name": "Spell Trap - AC Bonus",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Spell Trap",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": ""
+      "units": "ft",
+      "value": "30"
     },
     "recharge": {
       "charged": false,
@@ -120,7 +137,7 @@
     "source": "EN pg. 49",
     "target": {
       "type": "",
-      "value": "Creature within 30 feet"
+      "value": ""
     },
     "uses": {
       "max": "",

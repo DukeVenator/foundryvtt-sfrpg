@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -17,7 +17,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "other",
+      "type": "none",
       "condition": "When you hit an enemy with a trick attack",
       "cost": null
     },
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you hit an enemy with a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack (Ex)}, you can forgo your trick attack damage to apply three @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick (Ex)} effects instead of two. If you spend a Resolve Point and have the extended debilitation exploit, you can use that exploit to increase the duration of all three debilitating tricks. You must have the @UUID[Compendium.sfrpg.class-features.Item.jd4qWJS9qElePrhf]{Double Debilitation (Ex)} class feature to learn this exploit.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you hit an enemy with a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack (Ex)}, you can forgo your trick attack damage to apply three @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick (Ex)} effects instead of two. If you spend a Resolve Point and have the extended debilitation exploit, you can use that exploit to increase the duration of all three debilitating tricks. You must have the @UUID[Compendium.sfrpg.class-features.Item.jd4qWJS9qElePrhf]{Double Debilitation (Ex)} class feature to learn this exploit.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,12 +89,13 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -118,9 +119,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

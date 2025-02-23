@@ -5,17 +5,17 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "save",
     "activation": {
       "type": "action",
       "condition": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.unJ8E4IikZUxT7x3]{Temporal Anomalies (Su)}</p>\n<p>With a bit of focus and a gesture, you can seize an image of yourself in another time and pull that image over your body, magically altering your age. As a standard action, you can use a paradox to change your apparent age, overlaying an image of yourself from the past or the future over your current body for a number of minutes up to your precog level. This changes your visible age to an age of your choice. As part of this change, you can appear up to 1 foot taller or shorter, and can make yourself seem lighter or heavier, scarred or wrinkled, or otherwise altered by time. This doesn’t change your clothes, equipment, or mannerisms. If you use this ability to create a disguise appropriate to your new appearance, you gain a +10 circumstance bonus to the Disguise check. A creature that interacts with you directly can attempt a Will saving throw to recognize your appearance as an illusion. You can dismiss this effect.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.unJ8E4IikZUxT7x3]{Temporal Anomalies (Su)}</p>\n<p>With a bit of focus and a gesture, you can seize an image of yourself in another time and pull that image over your body, magically altering your age. As a standard action, you can use a paradox to change your apparent age, overlaying an image of yourself from the past or the future over your current body for a number of minutes up to your precog level. This changes your visible age to an age of your choice. As part of this change, you can appear up to 1 foot taller or shorter, and can make yourself seem lighter or heavier, scarred or wrinkled, or otherwise altered by time. This doesn’t change your clothes, equipment, or mannerisms. If you use this ability to create a disguise appropriate to your new appearance, you gain a +10 circumstance bonus to the Disguise check. A creature that interacts with you directly can attempt a Will saving throw to recognize your appearance as an illusion. You can dismiss this effect.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -94,7 +95,24 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "2ce601b1-6aa1-44cf-a26e-f2a79ee77027",
+        "name": "Disguise of Ages",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "10",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -108,9 +126,13 @@
     "requirements": "2nd Level (Precog)",
     "rollNotes": "",
     "save": {
+      "type": "will",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": ""
     },
     "source": "EN pg. 62",
     "target": {
@@ -118,9 +140,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

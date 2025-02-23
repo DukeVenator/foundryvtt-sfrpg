@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
   "img": "icons/weapons/staves/staff-simple-blue.webp",
   "system": {
@@ -21,7 +21,7 @@
       "condition": "",
       "cost": null
     },
-    "ammunitionType": "charge",
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
@@ -57,7 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": true,
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -141,18 +141,20 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>An icestar staff is an homage to the planet of @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}, where shirren immigrants making their first Pact Worlds home developed the weapon. One end of this staff glows with heat, while the other end shimmers with frost, offering the wielder the choice of which to use for each strike—a particular treat for its shirren creators. Icestar staves come in defender, seeker, warrior, drifter, and leader models.</p>"
+      "value": "<p>An icestar staff is an homage to the planet of @UUID[Compendium.sfrpg.setting.Item.f24qKgU5Wh5LLJyh]{Verces}, where shirren immigrants making their first Pact Worlds home developed the weapon. One end of this staff glows with heat, while the other end shimmers with frost, offering the wielder the choice of which to use for each strike—a particular treat for its shirren creators. Icestar staves come in defender, seeker, warrior, drifter, and leader models.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 17,
     "modifiers": [],
     "price": 251000,
@@ -273,22 +275,7 @@
     },
     "source": "AR pg. 35",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

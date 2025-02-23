@@ -5,28 +5,28 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "skill",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You can attempt an Engineering check to determine whether, why, and how a technological device or construct is malfunctioning, up to a range equal to 10 feet × your Intelligence modifier. You must have line of sight to the device or construct. This mechanic trick only enables you to make the diagnosis; it does not allow you to attempt to repair the device or construct at this range.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You can attempt an Engineering check to determine whether, why, and how a technological device or construct is malfunctioning, up to a range equal to 10 feet × your Intelligence modifier. You must have line of sight to the device or construct. This mechanic trick only enables you to make the diagnosis; it does not allow you to attempt to repair the device or construct at this range.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,16 +91,17 @@
     },
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": "10 * @abilities.int.mod"
     },
     "recharge": {
       "charged": false,
@@ -109,18 +111,22 @@
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "eng",
+      "dc": ""
     },
     "source": "EN pg. 47",
     "target": {
       "type": "",
-      "value": null
+      "value": "A device or construct"
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "",
+      "per": "",
+      "value": null
     }
   }
 }

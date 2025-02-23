@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
   "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
   "system": {
@@ -21,6 +21,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
@@ -56,7 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": true,
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -114,18 +115,20 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Quite common on @UUID[Compendium.sfrpg.setting.0VTtBYDJC5vUC434]{Eox}, void staves are designed using extensive necromancy-derived technologies, resulting in nonreflective black coloration and a range of morbid effects. A target struck&nbsp;by a void staff suffers effects similar to frostbite, as the weapon&nbsp;drains the life energy out of the target on a cellular level and, in some cases, causes complications with breathing and other essential functions. Grave-class, crypt-class, tomb-class, and ossuary-class void staves are relatively common throughout the Pact Worlds, while barrow-class void staves are almost never&nbsp;seen anywhere except @UUID[Compendium.sfrpg.setting.0VTtBYDJC5vUC434]{Eox}.</p>"
+      "value": "<p>Quite common on @UUID[Compendium.sfrpg.setting.Item.0VTtBYDJC5vUC434]{Eox}, void staves are designed using extensive necromancy-derived technologies, resulting in nonreflective black coloration and a range of morbid effects. A target struck&nbsp;by a void staff suffers effects similar to frostbite, as the weapon&nbsp;drains the life energy out of the target on a cellular level and, in some cases, causes complications with breathing and other essential functions. Grave-class, crypt-class, tomb-class, and ossuary-class void staves are relatively common throughout the Pact Worlds, while barrow-class void staves are almost never&nbsp;seen anywhere except @UUID[Compendium.sfrpg.setting.Item.0VTtBYDJC5vUC434]{Eox}.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 2,
     "modifiers": [],
     "price": 1080,
@@ -246,22 +249,7 @@
     },
     "source": "AR pg. 36",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

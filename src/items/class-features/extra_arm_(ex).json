@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -19,7 +19,7 @@
     "activation": {
       "type": "move",
       "condition": "Spend 1 MP",
-      "cost": null
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>You can rapidly grow an additional arm, although its existence is temporary, and it lacks the strength of your other limbs. As a move action, you can spend 1 MP to grow an additional arm. You can use this arm to hold and wield equipment and weapons of up to 1 Bulk in weight. This doesn’t increase the number of attacks you can make during combat. This arm remains for the duration of the combat, up to a maximum of 1 minute.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>You can rapidly grow an additional arm, although its existence is temporary, and it lacks the strength of your other limbs. As a move action, you can spend 1 MP to grow an additional arm. You can use this arm to hold and wield equipment and weapons of up to 1 Bulk in weight. This doesn’t increase the number of attacks you can make during combat. This arm remains for the duration of the combat, up to a maximum of 1 minute.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -91,11 +91,12 @@
     },
     "duration": {
       "units": "text",
-      "value": "Duration of the combat, up to a maximum of 1 minute"
+      "value": "Until end of combat or 1 Minute"
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

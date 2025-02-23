@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/wraith-sting-rifle-hornet.webp",
   "system": {
@@ -21,11 +21,7 @@
       "condition": "",
       "cost": null
     },
-    "altRange": {
-      "units": "ft",
-      "value": "250"
-    },
-    "ammunitionType": "roundL",
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
@@ -61,7 +57,7 @@
     "chatFlavor": "Sniper (250 ft.)",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": true,
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -141,11 +137,13 @@
       "units": "text",
       "value": ""
     },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 1,
     "modifiers": [],
     "price": 390,
@@ -266,22 +264,7 @@
     },
     "source": "AR",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

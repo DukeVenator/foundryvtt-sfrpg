@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -17,9 +17,9 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "other",
+      "type": "special",
       "condition": "Self, no action; adjacent ally, as a reaction and spend 5 Resolve Points",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -89,12 +89,13 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -118,9 +119,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

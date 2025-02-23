@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -17,16 +17,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>When you’re bolstered by your evolutionary potential, your blows are particularly powerful. When you have 5 MP or higher and would increase the damage dealt to one target using your evolution track, you increase the damage by an amount equal to your evolutionist level, rather than half your evolutionist level.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>When you’re bolstered by your evolutionary potential, your blows are particularly powerful. When you have 5 MP or higher and would increase the damage dealt to one target using your evolution track, you increase the damage by an amount equal to your evolutionist level, rather than half your evolutionist level.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -84,22 +84,39 @@
       "water": false
     },
     "details": {
-      "category": "feat",
+      "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "fee1db61-e566-4aa4-b868-4d06aed636f7",
+        "name": "Bonus Damage (5MP or greater)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "floor(@classes.evolutionist.levels/2)",
+        "modifierType": "damageSection",
+        "notes": "Applies when you have 5 MP or higher and would increase the damage dealt to one target using your evolution track.",
+        "source": "Empowered Strike",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
@@ -115,12 +132,12 @@
     "source": "EN pg. 45",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "",
+      "per": "",
+      "value": null
     }
   }
 }

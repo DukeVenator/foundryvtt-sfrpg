@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/incendiary-grenade.webp",
   "system": {
@@ -57,7 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": true,
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -94,9 +94,11 @@
     },
     "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 14,
     "modifiers": [],
     "price": 9500,
@@ -238,7 +240,7 @@
       "value": 1
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },

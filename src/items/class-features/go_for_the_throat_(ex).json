@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -17,8 +17,8 @@
     "actionTarget": "",
     "actionType": "save",
     "activation": {
-      "type": "other",
-      "condition": "",
+      "type": "none",
+      "condition": "Optional: Spend 1 Resolve Point",
       "cost": null
     },
     "area": {
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>For your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick (Ex)}, you can attempt to silence your target. The target must succeed at a Fortitude save or become unable to speak; they are unable to use any language-dependent abilities until the end of your next turn. If the target fails this save while silenced by this trick, or if you spend 1 Resolve Point when you use this trick, the target instead becomes unable to speak or use any language-dependent abilities for 1 minute.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>For your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick (Ex)}, you can attempt to silence your target. The target must succeed at a Fortitude save or become unable to speak; they are unable to use any language-dependent abilities until the end of your next turn. If the target fails this save while silenced by this trick, or if you spend 1 Resolve Point when you use this trick, the target instead becomes unable to speak or use any language-dependent abilities for 1 minute.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -91,11 +91,12 @@
     },
     "duration": {
       "units": "text",
-      "value": "Until the end of your next turn or 1 minute"
+      "value": "Until the end of your next turn (1 minute if 1 RP spent)"
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -123,9 +124,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

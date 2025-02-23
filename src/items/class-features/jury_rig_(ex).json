@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -19,7 +19,7 @@
     "activation": {
       "type": "move",
       "condition": "The item has a 100 - (@abilities.int.mod * 10) chance to fail on each use.",
-      "cost": 0
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>Sometimes it’s imperative to get a device working again as quickly as possible. With this mechanic trick, you can attempt to repair an item as a move action. The item has a chance to fail on each usage equal to 100 – ten times your Intelligence modifier. If a jury-rigged item fails, it takes twice as long as normal to repair it, and you can’t use this mechanic trick on it again.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>Sometimes it’s imperative to get a device working again as quickly as possible. With this mechanic trick, you can attempt to repair an item as a move action. The item has a chance to fail on each usage equal to 100 – ten times your Intelligence modifier. If a jury-rigged item fails, it takes twice as long as normal to repair it, and you can’t use this mechanic trick on it again.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -96,6 +96,7 @@
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -123,9 +124,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

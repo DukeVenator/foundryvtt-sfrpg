@@ -5,17 +5,17 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
-    "actionType": "",
+    "actionTarget": "other",
+    "actionType": "skill",
     "activation": {
       "type": "min",
       "condition": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You are adept at making weapons look like devices of a different type. With 10 minutes of work, you can attempt an Engineering check versus a DC equal to 10 + 1-1/2 × the weapon’s level to disguise it as something mundane. If you are successful, you gain a +10 circumstance bonus to Disguise checks versus attempts to detect the true nature of the weapon.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You are adept at making weapons look like devices of a different type. With 10 minutes of work, you can attempt an Engineering check versus a DC equal to 10 + 1-1/2 × the weapon’s level to disguise it as something mundane. If you are successful, you gain a +10 circumstance bonus to Disguise checks versus attempts to detect the true nature of the weapon.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -95,7 +95,24 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "2649c5ea-35fe-4cd3-8a0b-5f82520ab5b5",
+        "name": "Disguise Weapon",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "10",
+        "modifierType": "formula",
+        "notes": "Applies to checks made versus attempts to detect the nature of a disguised weapon",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -123,9 +140,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

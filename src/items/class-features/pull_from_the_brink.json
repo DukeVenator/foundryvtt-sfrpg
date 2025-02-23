@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -18,8 +18,8 @@
     "actionType": "heal",
     "activation": {
       "type": "reaction",
-      "condition": "",
-      "cost": null
+      "condition": "An ally within the first range increment of an injection weapon you’re wielding would fall unconscious from damage",
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -62,7 +62,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>As a reaction, when an ally within the first range increment of an injection weapon you’re wielding would fall unconscious from damage, you can spend 2 Resolve Points to render instant emergency medical aid to that ally, preventing any excess damage that would reduce them below 0 and restoring Hit Points to them equal to your level. A creature can’t be affected by this ability more than once per 24 hours.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>As a reaction, when an ally within the first range increment of an injection weapon you’re wielding would fall unconscious from damage, you can spend 2 Resolve Points to render instant emergency medical aid to that ally, preventing any excess damage that would reduce them below 0 and restoring Hit Points to them equal to your level. A creature can’t be affected by this ability more than once per 24 hours.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -108,12 +108,13 @@
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -138,7 +139,7 @@
     "source": "EN pg. 34",
     "target": {
       "type": "",
-      "value": "Once per 24 hours"
+      "value": "An ally within the first range increment of an injection weapon"
     },
     "uses": {
       "max": "",

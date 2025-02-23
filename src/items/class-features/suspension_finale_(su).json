@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -94,28 +94,13 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [
-      {
-        "_id": "a44ef7c7-0392-47e4-8ab7-0cae2a2e1dcb",
-        "name": "Distortion Insight (Su)",
-        "type": "insight",
-        "condition": "",
-        "effectType": "skill",
-        "enabled": true,
-        "max": 2,
-        "modifier": "+2",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "lsc"
-      }
-    ],
+    "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": ""
+      "units": "ft",
+      "value": "30"
     },
     "recharge": {
       "charged": false,
@@ -134,9 +119,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

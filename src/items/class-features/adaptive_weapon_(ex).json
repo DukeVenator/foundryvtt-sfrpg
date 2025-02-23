@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -19,7 +19,7 @@
     "activation": {
       "type": "move",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>As a move action, you can touch a technological weapon wielded by an ally and change one type of energy damage to another type of energy damage of your choosing. This change lasts for a number of rounds equal to your Intelligence modifier.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>As a move action, you can touch a technological weapon wielded by an ally and change one type of energy damage to another type of energy damage of your choosing. This change lasts for a number of rounds equal to your Intelligence modifier.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -95,6 +95,7 @@
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

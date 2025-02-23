@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -19,7 +19,7 @@
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -101,16 +101,17 @@
         "type": "morale",
         "condition": "",
         "effectType": "saves",
-        "enabled": true,
-        "max": 2,
+        "enabled": false,
+        "max": 0,
         "modifier": "+2",
         "modifierType": "formula",
-        "notes": "",
+        "notes": "Applies to fear andd mind-affecting effects when immediately adjacent to walls, floors, or cielings on 3 sides.",
         "source": "",
         "subtab": "misc",
         "valueAffected": ""
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

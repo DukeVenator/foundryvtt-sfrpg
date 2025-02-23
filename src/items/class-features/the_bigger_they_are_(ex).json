@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -37,10 +37,44 @@
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Base Damaage",
           "formula": "5d6",
-          "group": null,
+          "group": 0,
           "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Enemy larger by 1 size (extra damage)",
+          "formula": "5",
+          "group": 1,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Enemy larger by 2 sizes (bonus damage)",
+          "formula": "10",
+          "group": 1,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -108,12 +142,13 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -141,9 +176,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

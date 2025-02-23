@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
   "img": "icons/skills/social/diplomacy-handshake.webp",
   "system": {
@@ -126,6 +126,7 @@
         "valueAffected": "sen"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

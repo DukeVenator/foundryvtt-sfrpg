@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Q2xyE1ba2vCOMJt6]{Transmutation}</p>\n<p>Your nanites make your body a bastion of density and stability. While your @UUID[Compendium.sfrpg.class-features.Item.58zPVi7ejjc6ggof]{Body Array (Ex)} is active, you gain a +1 bonus to EAC and KAC and an additional +2 bonus to KAC against bull rush and trip combat maneuvers. Additionally, while your body array is active, treat your level as 3 higher when calculating the bonus of your @UUID[Compendium.sfrpg.class-features.Item.7QqHaQgX7cW4ftdP]{Cyto-Conversion (Ex)} ability.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Q2xyE1ba2vCOMJt6]{Transmutation}</p>\n<p>Your nanites make your body a bastion of density and stability. While your @UUID[Compendium.sfrpg.class-features.Item.58zPVi7ejjc6ggof]{Body Array (Ex)} is active, you gain a +1 bonus to EAC and KAC and an additional +2 bonus to KAC against bull rush and trip combat maneuvers. Additionally, while your body array is active, treat your level as 3 higher when calculating the bonus of your @UUID[Compendium.sfrpg.class-features.Item.7QqHaQgX7cW4ftdP]{Cyto-Conversion (Ex)} ability.</p>\n<p><em>You must manually edit the Cyto-Conversion ability for the final effect.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -126,6 +126,7 @@
         "valueAffected": ""
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

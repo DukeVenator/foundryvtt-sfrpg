@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -90,7 +90,7 @@
     },
     "duration": {
       "units": "text",
-      "value": ""
+      "value": "While you make a full attack"
     },
     "formula": "",
     "isActive": null,
@@ -111,6 +111,7 @@
         "valueAffected": ""
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -134,9 +135,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
