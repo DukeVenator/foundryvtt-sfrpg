@@ -128,7 +128,7 @@
         "name": "Weapon Specialization Evolutionist",
         "type": "untyped",
         "condition": "",
-        "effectType": "weapon-property-damage",
+        "effectType": "specific-weapon-property-damage",
         "enabled": true,
         "max": 0,
         "modifier": "-ceil(@details.level.value / 2)",
@@ -136,7 +136,7 @@
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "operative"
+        "valueAffected": "basicM,operative"
       }
     ],
     "properties": {},

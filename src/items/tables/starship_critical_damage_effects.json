@@ -51,7 +51,10 @@
         31,
         60
       ],
-      "text": "<b> Weapons Array </b> <br /> Randomly determine one arc containing weapons; condition applies to all gunner actions using weapons in that arc (a turret counts as being in all arcs) @Compendium[sfrpg.macros.rv3zsqWTPofWFwe0]{Random Weapon Arc}",
+      "rangeH": 60,
+      "rangeL": 31,
+      "resultId": null,
+      "text": "<b> Weapons Array </b> <br> Randomly determine one arc containing weapons; condition applies to all gunner actions using weapons in that arc (a turret counts as being in all arcs) @Compendium[sfrpg.macros.rv3zsqWTPofWFwe0]{Random Weapon Arc}",
       "weight": 1
     },
     {

@@ -245,6 +245,7 @@
             "Modifiers": {
                 "EffectTypes": {
                     "ActorResource": "Actor Resource",
+                    "AmmoUsageMultiplier": "Ammo Usage Multiplier",
                     "AllAttackDamage": "全ての攻撃ダメージ",
                     "AllAttackRolls": "全ての攻撃ロール",
                     "AllSpeeds": "All Speeds",
@@ -266,14 +267,23 @@
                     "SkillRanks": "Skill ranks",
                     "Skillpoints": "Skillpoints",
                     "SpecificSpeed": "Specific Speed",
+                    "SpecificWeaponAmmoUsageMultiplier": "Specific Weapon Ammo Usage Multiplier",
                     "SpecificWeaponAttackDamage": "特殊武器ダメージ",
                     "SpecificWeaponAttackRolls": "特殊武器攻撃ロール",
+                    "SpecificWeaponCategoryAmmoUsageMultiplier": "Specific Weapon + Category Ammo Usage Multiplier",
+                    "SpecificWeaponCategoryAttackRolls": "Specific Weapon + Category Attack Rolls",
+                    "SpecificWeaponCategoryDamage": "Specific Weapon + Category Damage",
+                    "SpecificWeaponPropertyAmmoUsageMultiplier": "Specific Weapon + Property Ammo Usage Multiplier",
+                    "SpecificWeaponPropertyAttackRolls": "Specific Weapon + Property Attack Rolls",
+                    "SpecificWeaponPropertyDamage": "Specific Weapon + Property Damage",
                     "SpellAttackDamage": "呪文ダメージ",
                     "SpellAttackRolls": "呪文攻撃ロール",
                     "SpellSaveDC": "Spell Save DC",
                     "Stamina": "ＳＰ",
+                    "WeaponCategoryAmmoUsageMultiplier": "Weapon Category Ammo Usage Multiplier",
                     "WeaponCategoryAttackRolls": "Weapon Category Attack Rolls",
                     "WeaponCategoryDamage": "Weapon Category Damage",
+                    "WeaponPropertyAmmoUsageMultiplier": "Weapon Property Ammo Usage Multiplier",
                     "WeaponPropertyAttackRolls": "Weapon Property Attack Rolls",
                     "WeaponPropertyDamage": "武器属性ダメージ"
                 },
@@ -2331,6 +2341,10 @@
                 "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
                 "Name": "Automatically roll starship critical damage effects"
             },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },            
             "CombatCards": {
                 "NormalHint": "Change which combat chat cards should be displayed during normal combat.",
                 "NormalName": "Normal combat",

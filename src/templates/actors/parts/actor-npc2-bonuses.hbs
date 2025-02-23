@@ -5,6 +5,7 @@
 			<p>{{ localize "SFRPG.ActorSheet.Bonuses.Desc1" }}</p>
 			<p>{{ localize "SFRPG.ActorSheet.Bonuses.Desc2" }}</p>
 			<p>{{ localize "SFRPG.ActorSheet.Bonuses.Desc3" }}</p>
+			<p>{{ localize "SFRPG.ActorSheet.Bonuses.Desc4" }}</p>
 			<div class="form-group npc-bonuses-header">
 				<label style="flex:4">
 				</label>
@@ -29,6 +30,31 @@
 				</div>
 			</div>
 			<hr/>
+			<div class="form-group">
+				<label style="flex:4">
+					{{ localize "SFRPG.ActorSheet.Bonuses.Standard" }}
+				</label>
+				<div class="form-fields">
+					<input type="text" name="system.npcBonus.standard.attack.value" value="{{system.npcBonus.standard.attack.value}}" data-tooltip="@npcBonus.standard.attack.value" data-dtype="Number" />
+					<p data-tooltip="@npcBonus.standard.attack.mod">{{numberFormat system.npcBonus.standard.attack.mod decimals=0 sign=true}}</p>
+				</div>
+				<div class="form-fields">
+					<input type="text" name="system.npcBonus.standard.damage.value" value="{{system.npcBonus.standard.damage.value}}" data-tooltip="@npcBonus.standard.damage.value" data-dtype="Number" />
+					<p data-tooltip="@npcBonus.standard.damage.mod">{{numberFormat system.npcBonus.standard.damage.mod decimals=0 sign=true}}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label style="flex:4">
+					{{ localize "SFRPG.ActorSheet.Bonuses.Gunnery" }}
+				</label>
+				<div class="form-fields">
+					<input type="text" name="system.npcBonus.gunnery.attack.value" value="{{system.npcBonus.gunnery.attack.value}}" data-tooltip="@npcBonus.gunnery.attack.value" data-dtype="Number" />
+					<p data-tooltip="@npcBonus.gunnery.attack.mod">{{numberFormat system.npcBonus.gunnery.attack.mod decimals=0 sign=true}}</p>
+				</div>
+				<div class="form-fields">
+				</div>
+			</div>
+			<hr/>
 			{{#each npcBonus as |bonus type|}}
 			<div class="form-group">
 				<label style="flex:4">
@@ -39,8 +65,10 @@
 					<p data-tooltip="@npcBonus.{{type}}.attack.mod">{{numberFormat bonus.attack.mod decimals=0 sign=true}}</p>
 				</div>
 				<div class="form-fields">
+					{{#if (ne type "grenade")}}
 					<input type="text" name="system.npcBonus.{{type}}.damage.value" value="{{bonus.damage.value}}" data-tooltip="@npcBonus.{{type}}.damage.value" data-dtype="Number" />
 					<p data-tooltip="@npcBonus.{{type}}.damage.mod">{{numberFormat bonus.damage.mod decimals=0 sign=true}}</p>
+					{{/if}}
 				</div>
 			</div>
 			{{/each}}

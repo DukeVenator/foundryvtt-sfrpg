@@ -59,13 +59,35 @@
                     {{else if (eq modifier.effectType "weapon-attacks")}}
                         {{sfrpg "weaponTypes" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-property-attacks")}}
-                        {{sfrpg "weaponProperties" modifier.valueAffected}}
+                        {{lookup ../config.weaponProperties modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-category-attacks")}}
+                        {{lookup ../config.weaponCategories modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "specific-weapon-property-attacks")}}
+                        {{lookup ../config.weaponTypes (splitByCommaGetLeft modifier.valueAffected)}} + {{lookup ../config.weaponProperties (splitByCommaGetRight modifier.valueAffected)}}
+                    {{else if (eq modifier.effectType "specific-weapon-category-attacks")}}
+                        {{lookup ../config.weaponTypes (splitByCommaGetLeft modifier.valueAffected)}} + {{lookup ../config.weaponCategories (splitByCommaGetRight modifier.valueAffected)}}
                     {{else if (eq modifier.effectType "weapon-damage")}}
                         {{sfrpg "weaponTypes" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-property-damage")}}
-                        {{sfrpg "weaponProperties" modifier.valueAffected}}
+                        {{lookup ../config.weaponProperties modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-category-damage")}}
+                        {{lookup ../config.weaponCategories modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "specific-weapon-property-damage")}}
+                        {{lookup ../config.weaponTypes (splitByCommaGetLeft modifier.valueAffected)}} + {{lookup ../config.weaponProperties (splitByCommaGetRight modifier.valueAffected)}}
+                    {{else if (eq modifier.effectType "specific-weapon-category-damage")}}
+                        {{lookup ../config.weaponTypes (splitByCommaGetLeft modifier.valueAffected)}} + {{lookup ../config.weaponCategories (splitByCommaGetRight modifier.valueAffected)}}
+                    {{else if (eq modifier.effectType "weapon-ammo-usage-multiplier")}}
+                        {{lookup ../config.weaponTypes modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-property-ammo-usage-multiplier")}}
+                        {{lookup ../config.weaponProperties modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-category-ammo-usage-multiplier")}}
+                        {{lookup ../config.weaponCategories modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "specific-weapon-property-ammo-usage-multiplier")}}
+                        {{lookup ../config.weaponTypes (splitByCommaGetLeft modifier.valueAffected)}} + {{lookup ../config.weaponProperties (splitByCommaGetRight modifier.valueAffected)}}
+                    {{else if (eq modifier.effectType "specific-weapon-category-ammo-usage-multiplier")}}
+                        {{lookup ../config.weaponTypes (splitByCommaGetLeft modifier.valueAffected)}} + {{lookup ../config.weaponCategories (splitByCommaGetRight modifier.valueAffected)}}
                     {{else if (eq modifier.effectType "specific-speed")}}
-                        {{sfrpg "speeds" modifier.valueAffected}}
+                        {{lookup ../config.speeds modifier.valueAffected}}
                     {{else if (eq modifier.effectType "actor-resource")}}
                         <h4>{{~modifier.valueAffected~}}</h4>
                     {{else}}

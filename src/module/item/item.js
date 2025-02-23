@@ -905,9 +905,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
-        if (this.actor.type === "npc2" && this.type === "weapon") {
+        if (this.actor.type === "npc2" && ["weapon", "equipment"].includes(this.type)) {
           let npcAttackBonusType = itemData.weaponType;
-          if (!npcAttackBonusType) npcAttackBonusType = "base";
+          if (!npcAttackBonusType) npcAttackBonusType = this.type == "equipment" ? "equipment" : "standard";
           parts.push(`@npcBonus.${npcAttackBonusType}.attack.mod`);
         }
         if (isWeapon) {
@@ -1033,6 +1033,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.SPECIFIC_WEAPON_PROPERTY_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.SPECIFIC_WEAPON_CATEGORY_ATTACKS);
         }
 
         let modifiers = this.actor.getAllModifiers();
@@ -1058,6 +1060,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 if (this.system?.weaponCategory !== mod.valueAffected) {
                     return false;
                 }
+            } else if (mod.effectType === SFRPGEffectType.SPECIFIC_WEAPON_PROPERTY_ATTACKS) {
+                let values = mod.valueAffected.split(",");
+                let valuesType = values[0];
+                let valuesProp = values[1];
+                if (values.length !== 2 || valuesType !== this.system.weaponType || !this.system.properties[valuesProp]) {
+                  return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.SPECIFIC_WEAPON_CATEGORY_ATTACKS) {
+                let values = mod.valueAffected.split(",");
+                let valuesType = values[0];
+                let valuesCat = values[1];
+                if (values.length !== 2 || valuesType !== this.system.weaponType || this.system.weaponCategory !== valuesCat) {
+                  return false;
+                }
             }
 
             return acceptedModifiers.includes(mod.effectType);
@@ -1066,19 +1082,104 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return modifiers;
     }
 
+    getAppropriateAmmoValueModifiers() {
+        const acceptedModifiers = [
+          SFRPGEffectType.AMMO_USAGE_MULTIPLIER,
+          SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER,
+          SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER,
+          SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER,
+          SFRPGEffectType.SPECIFIC_WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER,
+          SFRPGEffectType.SPECIFIC_WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER
+        ];
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            // Remove inactive mods and mods that aren't constant (this is only supporting constant mods right now)
+            if (!mod.enabled || mod.modifierType !== SFRPGModifierType.CONSTANT) return false;
+
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, mod.item);
+                if (parentItem?.id !== this.id) return false;
+            }
+
+            if (mod.effectType === SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER) {
+                if (mod.valueAffected !== this.system?.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER) {
+                if (!this.system?.properties?.[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER) {
+                if (this.system?.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.SPECIFIC_WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER) {
+                let values = mod.valueAffected.split(",");
+                let valuesType = values[0];
+                let valuesProp = values[1];
+                if (values.length !== 2 || valuesType !== this.system.weaponType || !this.system.properties[valuesProp]) {
+                  return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.SPECIFIC_WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER) {
+                let values = mod.valueAffected.split(",");
+                let valuesType = values[0];
+                let valuesCat = values[1];
+                if (values.length !== 2 || valuesType !== this.system.weaponType || this.system.weaponCategory !== valuesCat) {
+                  return false;
+                }
+            }
+
+            return acceptedModifiers.includes(mod.effectType);
+        });
+
+        return modifiers;
+    }
+
+    getAdjustedAmmoUsage(value) {
+      let modifiers = this.getAppropriateAmmoValueModifiers();
+      const stackModifiers = new StackModifiers();
+      modifiers = stackModifiers.process(modifiers, null, {actor: this.actor});
+      let multiplier = 1.0;
+      let modsToProcess = [];
+      for (const [modType, modValue] of Object.entries(modifiers)) {
+        if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(modType)) {
+          for (const bonus of modValue) {
+            modsToProcess.push(bonus);
+          }
+        }
+        else if (modValue !== null) {
+          modsToProcess.push(modValue);
+        }
+      }
+      let data = this.actor.getRollData() ?? {};
+      for (const mod of modsToProcess) {
+        let computedBonus = 1;
+        try {
+            const roll = Roll.create(mod.modifier.toString(), data).evaluateSync({strict: false});
+            computedBonus = roll.total;
+        } catch {}
+        multiplier = multiplier * computedBonus;
+      }
+      let computedValue = Math.round(value * multiplier);
+      return computedValue < 0 ? 0 : computedValue;
+    }
+
     consumeCapacityFromUsage() {
         const itemData = foundry.utils.deepClone(this.system);
         if (itemData.hasOwnProperty("usage")) {
             const usage = itemData.usage;
             if (usage.per) {
+                const value = this.getAdjustedAmmoUsage(usage.value);
                 if (["round", "shot"].includes(usage.per)) {
-                    this.consumeCapacity(usage.value);
+                    this.consumeCapacity(value);
                 } else if (['minute'].includes(usage.per)) {
                     if (game.combat) {
                         Hooks.callAll("consumeCapacityMinute", {
                             actor: this.actor,
                             item: this,
-                            value: usage.value
+                            value: value
                         })
                     } else {
                         ui.notifications.info("You currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
@@ -1131,7 +1232,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         } else if (this.system.weaponType === "ecm") { // If the weapon is an ECM weapon and not an NPC, use Computers ranks + Int (NPC ECM weapons still use gunnery)
             parts = ["@scienceOfficer.skills.com.ranks", "@scienceOfficer.abilities.int.mod"];
         } else { // If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
-            parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
+            parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.npcBonus.gunnery.attack.mod, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
         }
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
@@ -1292,11 +1393,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         // Add NPC damage bonus to primary damage section
-        if (this.actor.type === "npc2" && this.type === "weapon" && ["mwak", "rwak"].includes(itemData.actionType)) {
+        if (this.actor.type === "npc2" && ["equipment", "weapon"].includes(this.type) && ["mwak", "rwak"].includes(itemData.actionType)) {
           for (const part of parts) {
             if (part.isPrimarySection) {
               let npcDamageBonusType = itemData.weaponType;
-              if (!npcDamageBonusType) npcDamageBonusType = "base";
+              if (!npcDamageBonusType) npcDamageBonusType = this.type == "equipment" ? "equipment" : "standard";
               part.formula = part.formula + ` + @npcBonus.${npcDamageBonusType}.damage.mod`;
             }
           }
@@ -1429,6 +1530,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.SPECIFIC_WEAPON_PROPERTY_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.SPECIFIC_WEAPON_CATEGORY_DAMAGE);
         }
 
         let modifiers = this.actor.getAllModifiers();
@@ -1454,6 +1557,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
                 if (this.system.weaponCategory !== mod.valueAffected) {
                     return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.SPECIFIC_WEAPON_PROPERTY_DAMAGE) {
+                let values = mod.valueAffected.split(",");
+                let valuesType = values[0];
+                let valuesProp = values[1];
+                if (values.length !== 2 || valuesType !== this.system.weaponType || !this.system.properties[valuesProp]) {
+                  return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.SPECIFIC_WEAPON_CATEGORY_DAMAGE) {
+                let values = mod.valueAffected.split(",");
+                let valuesType = values[0];
+                let valuesCat = values[1];
+                if (values.length !== 2 || valuesType !== this.system.weaponType || this.system.weaponCategory !== valuesCat) {
+                  return false;
                 }
             }
             return (mod.enabled || ["formula", "damageSection"].includes(mod.modifierType));
@@ -1954,9 +2071,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     static async _onScalingCantripsSettingChanges() {
         const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-        const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0))";
+        const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
+        const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
 
         const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;

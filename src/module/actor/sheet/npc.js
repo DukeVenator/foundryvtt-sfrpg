@@ -62,11 +62,12 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         data.combatRoleImage = CONFIG.SFRPG.combatRoleImages[this.actor.system?.details?.combatRole];
 
         data.npcBonus = {}
-        //data.npcBonus.base = foundry.utils.deepClone(data.system.npcBonus.base)
         for (const weaponType in CONFIG.SFRPG.weaponTypes) {
           data.npcBonus[weaponType] = foundry.utils.deepClone(data.system.npcBonus[weaponType])
           data.npcBonus[weaponType].label = CONFIG.SFRPG.weaponTypes[weaponType];
         }
+        data.npcBonus.equipment = foundry.utils.deepClone(data.system.npcBonus.equipment);
+        data.npcBonus.equipment.label = game.i18n.localize("SFRPG.ActorSheet.Bonuses.Equipment");
 
         return data;
     }
