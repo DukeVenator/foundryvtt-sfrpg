@@ -764,7 +764,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>This system allows a starship to rapidly accelerate to a speed that makes combat between starships no longer possible. A starship that successfully engages an emergency accelerator escapes any battle it is in. To accomplish this, the emergency accelerator draws on power from across the starship's many systems, making the starship highly vulnerable for a short period before the acceleration takes effect. An emergency accelerator cannot be activated if the power core or engines have any critical damage conditions; if these systems gain such a condition while the accelerator is active, the accelerator shuts off.</p>\n<p>The engineer can activate an emergency accelerator as a crew action during the engineering phase. For the rest of the round, the ship has no shields and cannot fire weapons. If the emergency accelerator is still active at the end of the gunnery phase, the ship immediately moves 100 hexes in a straight line in any direction, which ends the starship combat and allows the vessel to escape. After using an emergency accelerator, the ship's power core gains the glitching critical damage condition and must be repaired before the accelerator can be used again.</p>"
+=======
+          "value": "<p>This system allows a starship to rapidly accelerate to a speed that makes combat between starships no longer possible. A starship that successfully engages an emergency accelerator escapes any battle it is in. To accomplish this, the emergency accelerator draws on power from across the starship’s many systems, making the starship highly vulnerable for a short period before the acceleration takes effect. An emergency accelerator cannot be activated if the power core or engines have any critical damage conditions; if these systems gain such a condition while the accelerator is active, the accelerator shuts off.</p>\n<p>The engineer can activate an emergency accelerator as a crew action during the engineering phase. For the rest of the round, the ship has no shields and cannot fire weapons. If the emergency accelerator is still active at the end of the gunnery phase, the ship immediately moves 100 hexes in a straight line in any direction, which ends the starship combat and allows the vessel to escape. After using an emergency accelerator, the ship’s power core gains the glitching critical damage condition and must be repaired before the accelerator can be used again.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],
@@ -800,7 +804,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.</p>"
+=======
+          "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM’s discretion.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],
@@ -836,7 +844,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.</p>"
+=======
+          "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM’s discretion.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],
@@ -872,7 +884,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.</p>"
+=======
+          "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM’s discretion.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],
@@ -908,7 +924,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.</p>"
+=======
+          "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM’s discretion.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],
@@ -944,7 +964,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.</p>"
+=======
+          "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM’s discretion.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],
@@ -980,7 +1004,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.</p>"
+=======
+          "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM’s discretion.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],

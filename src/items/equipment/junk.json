@@ -5,29 +5,76 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
+<<<<<<< HEAD
     "systemVersion": "0.27.0"
+=======
+    "systemVersion": "0.28.0"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
   },
   "img": "icons/commodities/tech/metal-barrel.webp",
   "system": {
     "type": "",
     "ammunitionType": "junk",
+<<<<<<< HEAD
     "attuned": false,
     "bulk": "1",
+=======
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 6
+      },
+      "size": "medium",
+      "sturdy": false
+    },
+    "attuned": false,
+    "bulk": "1",
+    "capacity": {
+      "max": 0,
+      "value": 0
+    },
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     "damage": {
       "parts": []
     },
     "description": {
       "chat": "",
+<<<<<<< HEAD
       "unidentified": "",
       "value": "<p>1 bulk of junk - useless trash found in most urban environments.</p>"
     },
     "equipped": false,
+=======
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>1 bulk of junk - useless trash found in most urban environments.</p>"
+    },
+    "equippable": false,
+    "equipped": false,
+    "equippedBulkMultiplier": 1,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     "identified": true,
     "level": 1,
     "price": 0,
     "quantity": 1,
     "quantityPerPack": 1,
+<<<<<<< HEAD
     "source": "Junker's Delight",
+=======
+    "source": "SA:JD",
+    "specialMaterials": {},
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     "useCapacity": false
   }
 }

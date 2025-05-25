@@ -21,7 +21,7 @@
       "condition": "",
       "cost": null
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shapable": false,
@@ -51,7 +51,11 @@
     "attuned": false,
     "bulk": "2",
     "capacity": {
+<<<<<<< HEAD
       "max": 40,
+=======
+      "max": 20,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "value": 0
     },
     "chatFlavor": "",
@@ -121,7 +125,7 @@
       "units": "",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
@@ -242,7 +246,11 @@
     },
     "usage": {
       "per": "shot",
+<<<<<<< HEAD
       "value": 2
+=======
+      "value": 1
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     },
     "uses": {
       "max": null,

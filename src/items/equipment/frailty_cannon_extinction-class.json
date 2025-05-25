@@ -51,7 +51,11 @@
     "attuned": false,
     "bulk": "2",
     "capacity": {
+<<<<<<< HEAD
       "max": 80,
+=======
+      "max": 50,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "value": 0
     },
     "chatFlavor": "Line, necrotic",
@@ -234,7 +238,11 @@
     },
     "usage": {
       "per": "shot",
+<<<<<<< HEAD
       "value": 8
+=======
+      "value": 5
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     },
     "uses": {
       "max": 0,

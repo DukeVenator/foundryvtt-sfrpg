@@ -1,20 +1,40 @@
 {
+<<<<<<< HEAD
   "_id": "rmbAib1eKQU6uald",
   "name": "Shadow pistol, umbral",
+=======
+<<<<<<< HEAD:src/items/equipment/plasma_kukri_blue_star.json
+  "_id": "44BfyiSZxYfIETQA",
+  "name": "Plasma Kukri, Blue Star",
+=======
+  "_id": "rmbAib1eKQU6uald",
+  "name": "Shadow pistol, umbral",
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983:src/items/equipment/shadow_pistol_umbral.json
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
   "type": "weapon",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
+<<<<<<< HEAD
     "systemVersion": "0.27.0"
   },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
     "ability": "dex",
+=======
+    "systemVersion": "0.28.0"
+  },
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
+  "system": {
+    "type": "",
+    "ability": "str",
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "eac",
+<<<<<<< HEAD
     "actionType": "rwak",
     "activation": {
       "type": "none",
@@ -22,12 +42,26 @@
       "cost": null
     },
     "ammunitionType": "charge",
+=======
+    "actionType": "mwak",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "ammunitionType": "",
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
+<<<<<<< HEAD
       "units": "ft",
       "value": ""
+=======
+      "units": null,
+      "value": null
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,21 +77,40 @@
       },
       "hp": {
         "max": "",
+<<<<<<< HEAD
         "value": 105
       },
       "size": "medium",
       "sturdy": true
+=======
+        "value": null
+      },
+      "size": "medium",
+      "sturdy": false
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     },
     "attuned": false,
     "bulk": "L",
     "capacity": {
+<<<<<<< HEAD
       "max": 40,
+=======
+<<<<<<< HEAD:src/items/equipment/plasma_kukri_blue_star.json
+      "max": 20,
+=======
+      "max": 40,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983:src/items/equipment/shadow_pistol_umbral.json
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "value": 0
     },
     "chatFlavor": "",
     "container": {
       "contents": [],
+<<<<<<< HEAD
       "includeContentsInWealthCalculation": true,
+=======
+      "includeContentsInWealthCalculation": 1,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "isOpen": true,
       "storage": [
         {
@@ -66,7 +119,11 @@
             "fusion"
           ],
           "affectsEncumbrance": true,
+<<<<<<< HEAD
           "amount": 20,
+=======
+          "amount": 16,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
           "subtype": "fusion",
           "weightProperty": "level"
         },
@@ -79,6 +136,7 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+<<<<<<< HEAD
         },
         {
           "type": "slot",
@@ -90,16 +148,23 @@
           "subtype": "",
           "weightMultiplier": 1,
           "weightProperty": ""
+=======
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         }
       ]
     },
     "critical": {
+<<<<<<< HEAD
       "effect": "Blind",
+=======
+      "effect": "Wound",
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "parts": []
     },
     "damage": {
       "parts": [
         {
+<<<<<<< HEAD
           "name": "",
           "formula": "5d10",
           "group": null,
@@ -114,6 +179,13 @@
             "piercing": false,
             "slashing": false,
             "sonic": false
+=======
+          "formula": "5d6",
+          "operator": "and",
+          "types": {
+            "electricity": true,
+            "fire": true
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
           }
         }
       ]
@@ -124,15 +196,24 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
+<<<<<<< HEAD
       "value": "<p>Inspired by the Shadow Plane—or, some say, followers of Zon-Kuthon—a shadow pistol replicates the energy of the Plane of Shadow to momentarily separate the target from the thermodynamic energy of the universe, damaging it with the instantaneous change in temperature. With their shadowy appearance, the caliginous and sable models resemble guns cut from polished obsidian, while the more advanced tenebrous and umbral models look more like they were cut from the blackness of space.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "text",
+=======
+      "value": ""
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "value": ""
     },
     "equippable": true,
     "equipped": false,
+<<<<<<< HEAD
     "formula": "",
     "identified": true,
     "isActive": null,
@@ -140,6 +221,17 @@
     "modifiers": [],
     "price": 855000,
     "proficient": false,
+=======
+    "equippedBulkMultiplier": 1,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "isEquipment": true,
+    "level": 4,
+    "modifiers": [],
+    "price": 144000,
+    "proficient": true,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     "properties": {
       "aeon": false,
       "amm": false,
@@ -154,7 +246,10 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+<<<<<<< HEAD
       "buttressing": false,
+=======
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -173,11 +268,15 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+<<<<<<< HEAD
       "gearArray": false,
+=======
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+<<<<<<< HEAD
       "healing": false,
       "holyWater": false,
       "hybrid": false,
@@ -186,6 +285,12 @@
       "indirect": false,
       "injection": false,
       "instrumental": false,
+=======
+      "holyWater": false,
+      "ignite": false,
+      "indirect": false,
+      "injection": false,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "integrated": false,
       "line": false,
       "living": false,
@@ -197,6 +302,7 @@
       "necrotic": false,
       "nonlethal": false,
       "one": true,
+<<<<<<< HEAD
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -204,17 +310,31 @@
       "powered": false,
       "professional": false,
       "propel": false,
+=======
+      "operative": true,
+      "penetrating": false,
+      "polarize": false,
+      "polymorphic": false,
+      "powered": true,
+      "professional": false,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+<<<<<<< HEAD
       "regrowth": false,
       "relic": false,
       "reposition": false,
       "scramble": false,
       "shape": false,
       "shatter": false,
+=======
+      "relic": false,
+      "reposition": false,
+      "shape": false,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -227,10 +347,15 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+<<<<<<< HEAD
       "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
+=======
+      "trip": false,
+      "two": false,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
@@ -241,12 +366,18 @@
     "range": {
       "additional": "",
       "per": "",
+<<<<<<< HEAD
       "units": "ft",
       "value": "60"
+=======
+      "units": null,
+      "value": null
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     },
     "rollNotes": "",
     "save": {
       "type": "",
+<<<<<<< HEAD
       "dc": "",
       "descriptor": "negate"
     },
@@ -272,11 +403,20 @@
       "silver": false,
       "voidglass": false
     },
+=======
+      "dc": null,
+      "descriptor": "negate"
+    },
+    "source": "",
+    "special": "",
+    "specialMaterials": {},
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
+<<<<<<< HEAD
       "per": "shot",
       "value": 4
     },
@@ -287,5 +427,22 @@
     },
     "weaponCategory": "cryo",
     "weaponType": "smallA"
+=======
+<<<<<<< HEAD:src/items/equipment/plasma_kukri_blue_star.json
+      "per": "minute",
+      "value": 1
+=======
+      "per": "shot",
+      "value": 4
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983:src/items/equipment/shadow_pistol_umbral.json
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    },
+    "weaponCategory": "plasma",
+    "weaponType": "basicM"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
   }
 }

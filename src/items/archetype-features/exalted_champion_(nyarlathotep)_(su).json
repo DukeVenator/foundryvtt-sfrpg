@@ -7,7 +7,11 @@
     "systemId": "sfrpg",
     "systemVersion": "0.28.0"
   },
+<<<<<<< HEAD
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
+=======
+  "img": "systems/sfrpg/icons/default/achievement.svg",
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
   "system": {
     "type": "",
     "ability": "",

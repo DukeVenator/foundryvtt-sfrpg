@@ -61,7 +61,7 @@
       {
         "_id": "1f5aa774-bf32-40cc-8621-c685b4ed5b30",
         "name": "Weapon Specialization Operative",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -75,11 +75,11 @@
       {
         "_id": "c8df914d-9f1f-4c48-95a7-44629c4c9b48",
         "name": "Weapon Specialization Operative",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -87,6 +87,7 @@
         "valueAffected": "basicM"
       },
       {
+<<<<<<< HEAD
         "_id": "beeef42f-ad98-483f-a4a0-cdf714f68a77",
         "name": "Weapon Specialization Operative",
         "type": "untyped",
@@ -101,9 +102,11 @@
         "valueAffected": "basicM,operative"
       },
       {
+=======
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         "_id": "2cc1f298-b481-4f2b-aa42-ce280f0192b1",
         "name": "Weapon Specialization Operative",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,

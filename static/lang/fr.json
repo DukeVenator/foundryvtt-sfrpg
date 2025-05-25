@@ -1577,7 +1577,11 @@
                     "Flechettes": "Flechettes",
                     "Fuel": "Combustible",
                     "HeavyRounds": "Balles pour armes lourdes",
+<<<<<<< HEAD
                     "Junk": "Junk / Useless Trash",
+=======
+                    "Junk": "Junk",
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
                     "LongarmAndSniperRounds": "Balles pour armes longues et de précisions",
                     "Missiles": "Missiles",
                     "MoodGoo": "Mood Goo",
@@ -2065,6 +2069,7 @@
         "ModifierTypeResistance": "Résistance",
         "ModifierTypeTooltip": "Le type des modificateurs. Utilisé pour déterminer quel modificateur utiliser lorsque plusieurs modificateurs sont du même type (généralement le plus élevé)",
         "ModifierTypeUntyped": "Sans type",
+        "ModifierTypeWeaponSpecialization": "Weapon Specialization",
         "ModifierValueAffectedHeaderLabel": "Valeur affectée",
         "ModifierValueAffectedLabel": "Valeur spécifique affectée",
         "ModifierValueAffectedTooltip": "Ceci identifie une valeur spécifique affectée si l'attribut général a plusieurs valeurs possibles",
@@ -2333,6 +2338,10 @@
             "AutoRollCritEffect": {
                 "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
                 "Name": "Automatically roll starship critical damage effects"
+            },            
+            "ChatNotificationDuration": {
+                "Hint": "How long (in MS) to display chat notifications before they are dismissed.",
+                "Name": "Chat Notification Duration"
             },
             "CombatCards": {
                 "NormalHint": "Modifier les cartes de chat de combat qui doivent être affichées pendant les combat normaux.",

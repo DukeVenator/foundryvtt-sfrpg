@@ -61,7 +61,7 @@
       {
         "_id": "02ae5b7c-492f-4f98-94d9-ae15d6656084",
         "name": "Weapon Specialization Technomancer",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -75,16 +75,17 @@
       {
         "_id": "4100ca86-eef1-4d66-a8f5-56a1deebd8ce",
         "name": "Weapon Specialization Technomancer",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "basicM"
+<<<<<<< HEAD
       },
       {
         "_id": "3ae5b0a0-a7ab-425a-b2f7-5f55740c069c",
@@ -99,6 +100,8 @@
         "source": "",
         "subtab": "misc",
         "valueAffected": "basicM,operative"
+=======
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
       }
     ],
     "properties": {},

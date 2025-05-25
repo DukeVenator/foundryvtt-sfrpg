@@ -1,8 +1,8 @@
-<div class="sfrpg dice-roll"
+<div class="sfrpg dice-roll flexrow"
      data-sfrpg-dice-total="{{total}}"
      {{#each htmlData}}
      data-sfrpg-{{this.name}}="{{this.value}}"
-     {{/each}}>
+     {{/each}} data-action="expandRoll">
     {{#if flavor}}
     <div class="dice-flavor">{{flavor}}</div>
     {{/if}}
@@ -30,7 +30,7 @@
                 </section>
             {{/each}}
         </div>
-        <h4 class="dice-total">{{total}}</h4>
+        <h3 class="dice-total">{{total}}</h3>
     </div>
     <footer class="dice-footer">
         {{#each tags as |tag|}}

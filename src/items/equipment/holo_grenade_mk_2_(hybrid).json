@@ -142,7 +142,7 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
-      "hybrid": false,
+      "hybrid": true,
       "ignite": false,
       "indirect": false,
       "injection": false,
