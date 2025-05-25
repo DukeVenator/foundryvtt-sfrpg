@@ -29,10 +29,8 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
-/**
- * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
- */
-export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
+/** @extends {foundry.documents.Actor} */
+export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
         // Set module art if available. This applies art to actors viewed or created from compendiums.
@@ -579,15 +577,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const skl = this.system.skills[skillId];
 
         if (!this.hasPlayerOwner) {
-            return await this.rollSkillCheck(skillId, skl, options);
-        }
-
-        if (skl.isTrainedOnly && !(skl.ranks > 0)) {
+            await this.rollSkillCheck(skillId, skl, options);
+        } else if (skl.isTrainedOnly && !(skl.ranks > 0)) {
             const content = game.i18n.format(
                 "SFRPG.SkillTrainedOnlyDialog.Content", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], name: this.name }
             );
 
-            return new Promise(resolve => {
+            await new Promise(resolve => {
                 new Dialog({
                     title: game.i18n.format(
                         "SFRPG.SkillTrainedOnlyDialog.Title", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] }
@@ -596,7 +592,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     buttons: {
                         yes: {
                             label: game.i18n.localize("Yes"),
-                            callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
+                            callback: () => {
+                                this.rollSkillCheck(skillId, skl, options)
+                                    .then(() => resolve());
+                            }
                         },
                         cancel: {
                             label: game.i18n.localize("No")
@@ -606,7 +605,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 }).render(true);
             });
         } else {
-            return await this.rollSkillCheck(skillId, skl, options);
+            await this.rollSkillCheck(skillId, skl, options);
         }
     }
 
@@ -627,7 +626,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
 
-        return await DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -639,7 +638,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
-            }
+            },
+            difficulty: options.dc,
+            displayDifficulty: options.displayDC
         });
     }
 
@@ -649,14 +650,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {String} saveId The save id (e.g. "will")
      * @param {Object} options Options which configure how saves are rolled
      */
-    rollSave(saveId, options = {}) {
+    async rollSave(saveId, options = {}) {
         const label = CONFIG.SFRPG.saves[saveId];
 
         const rollContext = RollContext.createActorRollContext(this);
 
         const parts = [`@attributes.${saveId}.bonus`];
 
-        return DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -668,7 +669,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
-            }
+            },
+            difficulty: options.dc,
+            displayDifficulty: options.displayDC
         });
     }
 
@@ -680,7 +683,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 
-        return await DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -695,7 +698,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
-            }
+            },
+            difficulty: options.dc,
+            displayDifficulty: options.displayDC
         });
     }
 
@@ -740,7 +745,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         this.setupRollContexts(rollContext);
 
-        return await DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -853,12 +858,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} }
+            {bonus: {_id: "ComputerBonus", name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
+            {bonus: {_id: "CaptainDemand", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
+            {bonus: {_id: "CaptainEncouragement", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} }
         ];
         if (actionEntry.system.role === "gunner") {
-            additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} });
+            additionalModifiers.push({bonus: {_id: "ScienceOfficerLockOn", name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} });
         }
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
 

@@ -695,7 +695,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>The systems of a starship with biometric locks can only be used by certain creatures, designated when the locks are installed; this list can be updated by any creature who can gain access to the ship's computer systems. A successful Computers check (DC = 20 + 1-1/2 Ã— the tier of the starship) can bypass these locks.</p>"
+=======
+          "value": "<p>The systems of a starship with biometric locks can only be used by certain creatures, designated when the locks are installed; this list can be updated by any creature who can gain access to the ship’s computer systems. A successful Computers check (DC = 20 + 1-1/2 Ã— the tier of the starship) can bypass these locks.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": false,
         "modifiers": [],
@@ -731,7 +735,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>When a foe attempts to hack a starship's computers and fails, a set of countermeasures can punish the would-be hacker. The crew can install one of the countermeasures listed on page 216, following the normal rules for countermeasures. Each countermeasure costs a number of Build Points equal to the starship's computer's tier (half the starship's tier; see page 297).</p>"
+=======
+          "value": "<p>When a foe attempts to hack a starship’s computers and fails, a set of countermeasures can punish the would-be hacker. The crew can install one of the countermeasures listed on page 216, following the normal rules for countermeasures. Each countermeasure costs a number of Build Points equal to the starship’s computer’s tier (half the starship’s tier; see page 297).</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": false,
         "modifiers": [],

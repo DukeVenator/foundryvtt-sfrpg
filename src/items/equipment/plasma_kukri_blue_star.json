@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD:src/items/equipment/plasma_kukri_blue_star.json
   "_id": "44BfyiSZxYfIETQA",
   "name": "Plasma Kukri, Blue Star",
+=======
+  "_id": "rmbAib1eKQU6uald",
+  "name": "Shadow pistol, umbral",
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983:src/items/equipment/shadow_pistol_umbral.json
   "type": "weapon",
   "_stats": {
     "coreVersion": 12,
@@ -51,7 +56,11 @@
     "attuned": false,
     "bulk": "L",
     "capacity": {
+<<<<<<< HEAD:src/items/equipment/plasma_kukri_blue_star.json
       "max": 20,
+=======
+      "max": 40,
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983:src/items/equipment/shadow_pistol_umbral.json
       "value": 0
     },
     "chatFlavor": "",
@@ -111,7 +120,7 @@
       "units": "",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
@@ -228,8 +237,13 @@
       "value": ""
     },
     "usage": {
+<<<<<<< HEAD:src/items/equipment/plasma_kukri_blue_star.json
       "per": "minute",
       "value": 1
+=======
+      "per": "shot",
+      "value": 4
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983:src/items/equipment/shadow_pistol_umbral.json
     },
     "uses": {
       "max": 0,

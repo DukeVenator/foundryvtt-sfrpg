@@ -881,7 +881,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.</p>"
+=======
+          "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM’s discretion.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],
@@ -917,7 +921,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
+<<<<<<< HEAD
           "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.</p>"
+=======
+          "value": "<p>Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM’s discretion.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
         },
         "isPowered": true,
         "modifiers": [],

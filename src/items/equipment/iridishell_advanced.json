@@ -94,7 +94,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
+<<<<<<< HEAD
       "value": "<p>These gleaming metal plates lock together to form a suit of heavy armor reminiscent of an insect's shell. Although the iridishell was initially designed for shirrens, its beauty combined and functionality makes it a popular choice for many. More expensive suits of iridishell not only offer more protection but feature elaborate designs with gold or silver trim and embedded jewels.</p>"
+=======
+      "value": "<p>These gleaming metal plates lock together to form a suit of heavy armor reminiscent of an insect’s shell. Although the iridishell was initially designed for shirrens, its beauty combined and functionality makes it a popular choice for many. More expensive suits of iridishell not only offer more protection but feature elaborate designs with gold or silver trim and embedded jewels.</p>"
+>>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
     },
     "descriptors": [],
     "duration": {
