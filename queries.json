@@ -1,0 +1,10 @@
+[
+  {
+    "name": "All Definitions",
+    "query": "query {\n  definitions {\n    id\n    name\n    type\n    description\n  }\n}"
+  },
+  {
+    "name": "Sample Starships",
+    "query": "query {\n  starships(limit: 5) {\n    id\n    name\n    frame { id name }\n    source\n    tier { id name }\n  }\n}"
+  }
+]
