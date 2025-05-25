@@ -85,7 +85,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
           this.system.npcBonus[weaponType].attack = this.system.npcBonus[weaponType].attack ?? {}
           this.system.npcBonus[weaponType].attack.value = this.system.npcBonus[weaponType].attack.value ?? 0
           this.system.npcBonus[weaponType].damage = this.system.npcBonus[weaponType].damage ?? {}
-          console.log(this.system.npcBonus);
           if (weaponType == "base") {
             // straight copies
             this.system.npcBonus[weaponType].attack.mod = this.system.npcBonus[weaponType].attack.value;
