@@ -454,7 +454,6 @@
                 "WeaponType": "Weapon Type"
             }
         },
-        "Check": "Check",
         "CMDBaseTooltip": "Base: 4",
         "CMDKACModTooltip": "KAC: {kac}",
         "CMDModiferTooltip": "{type} Bonus: {mod} ({source})",
@@ -1596,11 +1595,7 @@
                     "Flechettes": "Flechettes",
                     "Fuel": "Petrol",
                     "HeavyRounds": "Heavy Rounds",
-<<<<<<< HEAD
-                    "Junk": "Junk / Useless Trash",
-=======
                     "Junk": "Junk",
->>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
                     "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
                     "Missiles": "Missiles",
                     "MoodGoo": "Mood Goo",
