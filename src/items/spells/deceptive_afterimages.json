@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/spells/discern-lies.webp",
   "system": {
@@ -111,6 +111,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
