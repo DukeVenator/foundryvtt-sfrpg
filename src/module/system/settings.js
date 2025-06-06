@@ -16,7 +16,7 @@ export const registerSystemSettings = function() {
             max: 60000,
             step: 1000
         },
-        requiresReload: true
+        onChange: (value) => CONFIG.ui.chat.NOTIFY_DURATION = value
     });
 
     game.settings.register("sfrpg", "disableExperienceTracking", {
@@ -66,15 +66,6 @@ export const registerSystemSettings = function() {
         type: Number
     });
 
-    game.settings.register("sfrpg", "useCustomChatCards", {
-        name: "SFRPG.Settings.UseCustomChatCard.Name",
-        hint: "SFRPG.Settings.UseCustomChatCard.Hint",
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean
-    });
-
     game.settings.register("sfrpg", "autoAddUnarmedStrike", {
         name: "SFRPG.Settings.AutoAddUnarmedStrike.Name",
         hint: "SFRPG.Settings.AutoAddUnarmedStrike.Hint",
@@ -109,9 +100,7 @@ export const registerSystemSettings = function() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => {
-            ItemSFRPG._onScalingCantripsSettingChanges();
-        }
+        onChange: (value) => ItemSFRPG._onScalingCantripsSettingChanges(value)
     });
 
     game.settings.register("sfrpg", "autoRollCritEffect", {
@@ -222,9 +211,7 @@ export const registerSystemSettings = function() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => {
-            rerenderApps();
-        }
+        onChange: () => rerenderApps()
     });
 
     game.settings.register("sfrpg", "warnInvalidRollData", {

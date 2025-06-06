@@ -76,6 +76,7 @@ import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js"
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
 import { getStarshipBrowser } from "./module/packs/starship-browser.js";
+import { SFRPGTokenHUD } from './module/token/token-hud.js';
 import isObject from './module/utils/is-object.js';
 
 const { Actors, Items } = foundry.documents.collections;
@@ -244,6 +245,9 @@ Hooks.once('init', async function() {
         align: "center",
         wordWrap: false
     });
+
+    console.log("Starfinder | [INIT] Overriding token HUD");
+    CONFIG.Token.hudClass = SFRPGTokenHUD;
 
     console.log("Starfinder | [INIT] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
@@ -464,6 +468,7 @@ Hooks.once("i18nInit", () => {
         "damageReductionTypes",
         "damageTypeOperators",
         "damageTypes",
+        "damageAndHealingTypes",
         "difficultyLevels",
         "distanceUnits",
         "constantDistanceUnits",
@@ -487,6 +492,7 @@ Hooks.once("i18nInit", () => {
         "modifierEffectTypes",
         "modifierType",
         "modifierTypes",
+        "otherDamageTypes",
         "saveDescriptors",
         "saveProgression",
         "saves",
@@ -543,7 +549,7 @@ Hooks.once("i18nInit", () => {
         obj.label = game.i18n.localize(obj.label);
     }
 
-    CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
+    CONFIG.SFRPG.statusEffects.forEach(e => e.name = game.i18n.localize(e.name));
 });
 
 Hooks.once("setup", function() {
@@ -577,9 +583,6 @@ Hooks.once("setup", function() {
 Hooks.once("ready", async () => {
     console.log(`Starfinder | [READY] Preparing system for operation`);
     const readyTime = (new Date()).getTime();
-
-    console.log("Starfinder | [READY] Overriding token HUD");
-    //  canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
@@ -673,10 +676,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
         if (cardContent) {
             cardContent.style.display = "none";
         }
-        const diceTooltip = html.querySelector('.dice-tooltip');
-        if (diceTooltip) {
-            diceTooltip.style.display = "none";
-        }
+
     }
 });
 
