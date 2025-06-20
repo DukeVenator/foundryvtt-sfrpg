@@ -3,9 +3,9 @@
   "name": "Drake (Tier 6)",
   "type": "starship",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/default/starfighter.svg",
   "items": [
@@ -14,9 +14,9 @@
       "name": "Signal Basic",
       "type": "starshipDriftEngine",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/star-gate.svg",
       "system": {
@@ -52,9 +52,9 @@
       "name": "Good crew quarters",
       "type": "starshipCrewQuarter",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bunk-beds.svg",
       "system": {
@@ -88,9 +88,9 @@
       "name": "Cargo hold",
       "type": "starshipExpansionBay",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
@@ -128,9 +128,9 @@
       "name": "Escape pods",
       "type": "starshipExpansionBay",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
@@ -164,9 +164,9 @@
       "name": "Transport",
       "type": "starshipFrame",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
@@ -246,9 +246,9 @@
       "name": "M8 thrusters",
       "type": "starshipThruster",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
@@ -288,9 +288,9 @@
       "name": "Coilgun",
       "type": "starshipWeapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
@@ -399,9 +399,9 @@
       "name": "Coilgun",
       "type": "starshipWeapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
@@ -510,9 +510,9 @@
       "name": "Particle beam",
       "type": "starshipWeapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
@@ -621,9 +621,9 @@
       "name": "Heavy plasma torpedo launcher",
       "type": "starshipWeapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
@@ -732,9 +732,9 @@
       "name": "Pulse Blue",
       "type": "starshipPowerCore",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
@@ -774,9 +774,9 @@
       "name": "Basic medium-range sensors",
       "type": "starshipSensor",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/radar-dish.svg",
       "system": {
@@ -813,9 +813,9 @@
       "name": "Mk 2 trinode",
       "type": "starshipComputer",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/server-rack.svg",
       "system": {
@@ -851,9 +851,9 @@
       "name": "Medium Shields 100",
       "type": "starshipShield",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
@@ -893,9 +893,9 @@
       "name": "Mk 5 armor",
       "type": "starshipArmor",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/metal-scales.svg",
       "system": {
@@ -933,9 +933,9 @@
       "name": "Mk 5 defenses",
       "type": "starshipDefensiveCountermeasure",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bubble-field.svg",
       "system": {
@@ -983,7 +983,6 @@
     "displayName": 20,
     "disposition": 0,
     "height": 1,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1010,6 +1009,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -1051,6 +1051,12 @@
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/starfighter.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },

@@ -3,9 +3,9 @@
   "name": "Dragon pistol, drake",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/plasma-pistol-red-star.webp",
   "system": {
@@ -86,7 +86,11 @@
             "weaponAccessory"
           ],
           "affectsEncumbrance": true,
+<<<<<<< HEAD
           "amount": 0,
+=======
+          "amount": 1,
+>>>>>>> upstream/development
           "subtype": "",
           "weightMultiplier": 1,
           "weightProperty": ""
@@ -103,7 +107,10 @@
           "name": "",
           "formula": "3d4",
           "group": null,
+<<<<<<< HEAD
           "isPrimarySection": true,
+=======
+>>>>>>> upstream/development
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -257,7 +264,11 @@
       "type": "",
       "dc": ""
     },
+<<<<<<< HEAD
     "source": "AR pg. 37",
+=======
+    "source": "AR pg. 14",
+>>>>>>> upstream/development
     "special": "",
     "specialMaterials": {
       "abysium": false,

@@ -809,6 +809,7 @@
         "Descriptors": {
             "Acid": "Acid",
             "Air": "Air",
+            "Auditory": "Auditory",
             "Calling": "Calling",
             "CallingDescription": "A calling effect transports a creature from another plane to the plane you are on. The effect grants the creature the one-time ability to return to its plane of origin, although the effect might limit the circumstances under which this is possible. Creatures who are called die if they are killed on the new plane. A called creature can’t be dispelled, even if it was called by magical means.",
             "Chaotic": "Chaotic",
@@ -834,6 +835,7 @@
             "ForceDescription": "A force effect deals full damage to incorporeal creatures and blocks their movement. It also blocks the sense through ability.",
             "Good": "Good",
             "Healing": "Healing",
+            "Illusion": "Illusion",
             "LanguageDependent": "Language Dependent",
             "LanguageDependentDescription": "A language-dependent effect uses intelligible language (either audible, visual, or telepathic) as a medium for communication. If you cannot communicate with the target or the target cannot understand what you are communicating, the effect fails to affect that target.",
             "Lawful": "Lawful",
@@ -1583,11 +1585,7 @@
                     "Flechettes": "Flechettes",
                     "Fuel": "Fuel",
                     "HeavyRounds": "Heavy Rounds",
-<<<<<<< HEAD
-                    "Junk": "Junk / Useless Trash",
-=======
                     "Junk": "Junk",
->>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
                     "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
                     "Missiles": "Missiles",
                     "MoodGoo": "Mood Goo",
@@ -1878,11 +1876,13 @@
         "LanguagesFirstSpeech": "First Speech",
         "LanguagesFrujai": "Frujai",
         "LanguagesGaraggakal": "Garaggakal",
+        "LanguagesGathol": "Gathol",
         "LanguagesGhibran": "Ghibran",
         "LanguagesGhoran": "Ghoran",
         "LanguagesGiant": "Giant",
         "LanguagesGnome": "Gnomesco",
         "LanguagesGoblin": "Goblin",
+        "LanguagesGosclaw": "Gosclaw",
         "LanguagesGrioth": "Grioth",
         "LanguagesGytchean": "Gytchean",
         "LanguagesHadrogaan": "Hadrogaan",
@@ -1920,12 +1920,14 @@
         "LanguagesParalithi": "Paralithi",
         "LanguagesPerani": "Perani",
         "LanguagesProtean": "Protean",
+        "LanguagesPsacynoa": "Psacynoa",
         "LanguagesQuorlu": "Quorlu",
         "LanguagesRaxi": "Raxi",
         "LanguagesReptoid": "Reptoid",
         "LanguagesRequian": "Requian",
         "LanguagesSarcesian": "Sarcesiano",
         "LanguagesSazaron": "Sazaron",
+        "LanguagesScreedreep": "Screedreep",
         "LanguagesScyphozoan": "Scyphozoan",
         "LanguagesSelamidian": "Selamidian",
         "LanguagesSeprevoi": "Seprevoi",
@@ -1942,6 +1944,7 @@
         "LanguagesTerran": "Terrestre",
         "LanguagesTriaxian": "Triaxiano",
         "LanguagesTrinir": "Trinir",
+        "LanguagesTromlin": "Tromlin",
         "LanguagesUrog": "Urog",
         "LanguagesVarratana": "Varratana",
         "LanguagesVercite": "Vercite",
@@ -1949,6 +1952,8 @@
         "LanguagesVlakan": "Vlakan (signed, spoken, and tactile)",
         "LanguagesVulgarKishaleen": "Vulgar Kishaleen",
         "LanguagesWoiokan": "Woiokan",
+        "LanguagesWorlanisi": "Worlanisi",
+        "LanguagesWorlansi": "Worlansi",
         "LanguagesWrikreechee": "Wrikreechee",
         "LanguagesXaarb": "Xaarb",
         "LanguagesYsoki": "Ysoki",
@@ -2347,7 +2352,7 @@
             "AutoRollCritEffect": {
                 "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
                 "Name": "Automatically roll starship critical damage effects"
-            },            
+            },
             "ChatNotificationDuration": {
                 "Hint": "How long (in MS) to display chat notifications before they are dismissed.",
                 "Name": "Chat Notification Duration"
@@ -2671,11 +2676,13 @@
         "SkillTooltipSkillRanks": "Gradi: {ranks}",
         "SkillTooltipThemeMod": "Modificatore del Tema: {mod}",
         "SkillTooltipTrainedClassSkill": "Modificatore di competenza di Classe Addestrata : {mod}",
+        "SkillTrained": "Trained",
         "SkillTrainedOnly": "Solo con Addestramento",
         "SkillTrainedOnlyDialog": {
             "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
             "Title": "{skill} is trained only"
         },
+        "SkillUntrained": "Untrained",
         "SkillsHeaderAbility": "Abilità",
         "SkillsHeaderModifier": "Mod",
         "SkillsHeaderName": "Nome",

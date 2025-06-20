@@ -3,9 +3,15 @@
   "name": "Stop Heart",
   "type": "spell",
   "_stats": {
+<<<<<<< HEAD
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.28.0"
+=======
+    "coreVersion": 13,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.1"
+>>>>>>> upstream/development
   },
   "img": "systems/sfrpg/icons/spells/akashic_revival.webp",
   "system": {

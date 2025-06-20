@@ -3,13 +3,17 @@
   "name": "Junk",
   "type": "ammunition",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
+<<<<<<< HEAD
 <<<<<<< HEAD
     "systemVersion": "0.27.0"
 =======
     "systemVersion": "0.28.0"
 >>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
+=======
+    "systemVersion": "0.28.1"
+>>>>>>> upstream/development
   },
   "img": "icons/commodities/tech/metal-barrel.webp",
   "system": {

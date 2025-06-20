@@ -807,6 +807,7 @@
         "Descriptors": {
             "Acid": "Acide",
             "Air": "Air",
+            "Auditory": "Auditory",
             "Calling": "Appel",
             "CallingDescription": "Un effet d'appel transporte une créature d'un autre plan vers le plan sur lequel vous vous trouvez. L'effet accorde à la créature la capacité unique de retourner à son plan d'origine, bien que l'effet puisse limiter les circonstances dans lesquelles cela est possible. Les créatures appelées meurent si elles sont tuées sur le nouveau plan. Une créature appelée ne peut pas être dissipée, même si elle a été appelée par des moyens magiques.",
             "Chaotic": "Chaotique",
@@ -832,6 +833,7 @@
             "ForceDescription": "Un effet de force inflige des dégâts complets aux créatures incorporelles et bloque leur mouvement. Il bloque également le sens par la capacité.",
             "Good": "Bon",
             "Healing": "Guérison",
+            "Illusion": "Illusion",
             "LanguageDependent": "Dépendant du langage",
             "LanguageDependentDescription": "Un effet dépendant du langage utilise un langage intelligible (audible, visuel ou télépathique) comme moyen de communication. Si vous ne pouvez pas communiquer avec la cible ou si la cible ne comprend pas ce que vous communiquez, l'effet n'affecte pas cette cible.",
             "Lawful": "Loyal",
@@ -1577,11 +1579,7 @@
                     "Flechettes": "Flechettes",
                     "Fuel": "Combustible",
                     "HeavyRounds": "Balles pour armes lourdes",
-<<<<<<< HEAD
-                    "Junk": "Junk / Useless Trash",
-=======
                     "Junk": "Junk",
->>>>>>> f8e6d4c88cd1fd8e5cf5fd86eb68e77b922c7983
                     "LongarmAndSniperRounds": "Balles pour armes longues et de précisions",
                     "Missiles": "Missiles",
                     "MoodGoo": "Mood Goo",
@@ -1871,11 +1869,13 @@
         "LanguagesFirstSpeech": "Permier Dicours",
         "LanguagesFrujai": "Frujai",
         "LanguagesGaraggakal": "Garaggakal",
+        "LanguagesGathol": "Gathol",
         "LanguagesGhibran": "Ghibrien",
         "LanguagesGhoran": "Ghorien",
         "LanguagesGiant": "Giant",
         "LanguagesGnome": "Gnome",
         "LanguagesGoblin": "Gobelin",
+        "LanguagesGosclaw": "Gosclaw",
         "LanguagesGrioth": "Grioth",
         "LanguagesGytchean": "Gytcheien",
         "LanguagesHadrogaan": "Hadrogaien",
@@ -1913,12 +1913,14 @@
         "LanguagesParalithi": "Paralithi",
         "LanguagesPerani": "Perani",
         "LanguagesProtean": "Proteien",
+        "LanguagesPsacynoa": "Psacynoa",
         "LanguagesQuorlu": "Quorlu",
         "LanguagesRaxi": "Raxi",
         "LanguagesReptoid": "Reptoid",
         "LanguagesRequian": "Requien",
         "LanguagesSarcesian": "Sarcésien",
         "LanguagesSazaron": "Sazaron",
+        "LanguagesScreedreep": "Screedreep",
         "LanguagesScyphozoan": "Scyphozoien",
         "LanguagesSelamidian": "Selamidien",
         "LanguagesSeprevoi": "Seprevoi",
@@ -1935,6 +1937,7 @@
         "LanguagesTerran": "Terrien",
         "LanguagesTriaxian": "Triaxien",
         "LanguagesTrinir": "Trinir",
+        "LanguagesTromlin": "Tromlin",
         "LanguagesUrog": "Urog",
         "LanguagesVarratana": "Varratana",
         "LanguagesVercite": "Vercite",
@@ -1942,6 +1945,7 @@
         "LanguagesVlakan": "Vlakien (signé, parlé, et tactile)",
         "LanguagesVulgarKishaleen": "Kishaleen Vulgaire",
         "LanguagesWoiokan": "Woiokien",
+        "LanguagesWorlanisi": "Worlanisi",
         "LanguagesWrikreechee": "Wrikreechee",
         "LanguagesXaarb": "Xaarb",
         "LanguagesYsoki": "Ysoki",
@@ -2340,7 +2344,7 @@
             "AutoRollCritEffect": {
                 "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
                 "Name": "Automatically roll starship critical damage effects"
-            },            
+            },
             "ChatNotificationDuration": {
                 "Hint": "How long (in MS) to display chat notifications before they are dismissed.",
                 "Name": "Chat Notification Duration"
@@ -2664,11 +2668,13 @@
         "SkillTooltipSkillRanks": "Rang de compétence: {ranks}",
         "SkillTooltipThemeMod": "Modificateur de thème: {mod}",
         "SkillTooltipTrainedClassSkill": "Modificateur de compétence de classe formée : {mod}",
+        "SkillTrained": "Trained",
         "SkillTrainedOnly": "Formé uniquement",
         "SkillTrainedOnlyDialog": {
             "Content": "{skill} est une compétence formé uniquement, mais {name} n'est pas formé dans cette compétence. Voulez-vous effectuer le jets quand-même?",
             "Title": "{skill} est Formé uniquement"
         },
+        "SkillUntrained": "Untrained",
         "SkillsHeaderAbility": "Cap",
         "SkillsHeaderModifier": "Mod",
         "SkillsHeaderName": "Nom",

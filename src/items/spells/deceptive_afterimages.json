@@ -3,9 +3,15 @@
   "name": "Deceptive Afterimages",
   "type": "spell",
   "_stats": {
+<<<<<<< HEAD
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.28.0"
+=======
+    "coreVersion": 13,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.1"
+>>>>>>> upstream/development
   },
   "img": "systems/sfrpg/icons/spells/discern-lies.webp",
   "system": {

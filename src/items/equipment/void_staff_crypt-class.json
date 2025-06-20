@@ -3,9 +3,9 @@
   "name": "Void staff, crypt-class",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.1"
   },
   "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
   "system": {
@@ -57,7 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -93,7 +93,10 @@
           "name": "",
           "formula": "1d10 + @abilities.str.mod",
           "group": null,
+<<<<<<< HEAD
           "isPrimarySection": true,
+=======
+>>>>>>> upstream/development
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -249,7 +252,22 @@
     },
     "source": "AR pg. 36",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
