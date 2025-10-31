@@ -266,6 +266,7 @@ export class DiceSFRPG {
                     tags: tags
                 };
 
+                let useCustomCard;
                 try {
                     useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
                 } catch (error) {
