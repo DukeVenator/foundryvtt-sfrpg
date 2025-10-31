@@ -251,6 +251,8 @@ export class DiceSFRPG {
             const itemContext = rollContext.allContexts['item'];
             const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
 
+            let useCustomCard
+            
             if (chatMessage) {
                 // Push the roll to the ChatBox
                 const customData = {
@@ -266,7 +268,6 @@ export class DiceSFRPG {
                     tags: tags
                 };
 
-                let useCustomCard;
                 try {
                     useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
                 } catch (error) {
