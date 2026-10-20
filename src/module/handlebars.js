@@ -167,11 +167,6 @@ export function setupHandlebars() {
         return false;
     });
 
-    Handlebars.registerHelper('console', function(...args) {
-        args.pop();
-        console.log(...args);
-    });
-
     Handlebars.registerHelper('indexOf', function(array, value, options) {
         const index = array.indexOf(value);
         if (index < 0) return index;
@@ -285,7 +280,7 @@ export function setupHandlebars() {
     function configHelper(root, hbsOpts, ...props) {
         let result = root;
         for (const prop of props) {
-            result = foundry.utils.getProperty(result, prop);
+            result = foundry.utils.getProperty(result, prop) ?? foundry.utils.getProperty(result, prop.toString());
         }
         return result;
     }
@@ -308,5 +303,18 @@ export function setupHandlebars() {
     Handlebars.registerHelper('sfrpg', function(...args) {
         const options = args.pop();
         return configHelper(CONFIG.SFRPG, options, ...args);
+    });
+
+    /**
+     * Block helper which attempts to lookup the provided UUID, then uses that
+     * as the context for the block.
+     *
+     * Supports the `{{else}}` block for when the UUID is not found. The
+     * context will be `null`, so use `..` to access the prior context. This
+     * was done to provide a uniform interface with the success case.
+     */
+    Handlebars.registerHelper('fromUuid', function(uuid, props) {
+        const item = fromUuidSync(uuid);
+        return item ? props.fn(item) : props.inverse(null);
     });
 }

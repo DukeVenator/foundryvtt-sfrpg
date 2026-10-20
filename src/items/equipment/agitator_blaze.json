@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -38,18 +34,17 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 33
       },
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 40,
       "value": 0
     },
-    "chatFlavor": "Boost 1d6",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -74,6 +69,17 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -81,8 +87,10 @@
       "effect": "Burn",
       "parts": [
         {
+          "name": "",
           "formula": "2d4",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -102,6 +110,8 @@
         {
           "name": "",
           "formula": "2d6",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -109,12 +119,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -122,11 +135,10 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>An agitator is a portable generator of microwave radiation that rapidly heats up targets to create internal bubbles of steam or makes targets burst into flames. The longer the weapon is focused, the more intense the agitation becomes, making it a favored by the defenders of bunkers, guard posts, and other emplacements. Ember agitators and blaze agitators rely on individual generators, taking the form of a bulky cylinder in the middle of the gun that hums ominously as the weapon fires, but miniaturization technology allows inferno agitators and solar flare agitators to include multiple smaller generators for increased effect.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
@@ -134,112 +146,48 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 6,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "f51ca2e0-a407-49fe-b8ca-6e873ccdb8f8",
+        "name": "Boost",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "limitTo": "parent",
+        "max": 6,
+        "modifier": "1d6",
+        "modifierType": "formula",
+        "notes": "You can charge up a weapon with this special property as a move action. When you do, you increase the weapon’s damage by the listed amount on the next attack you make with the weapon. Boosting expends charges from the weapon equal to its usage value. This increases the weapon’s damage and is multiplied on a critical hit. Boosting a weapon more than once before firing it doesn’t have any extra effect, and the extra charge dissipates if the weapon is not fired by the end of your next turn.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 4300,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": true,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": true,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "holyWater": false,
-      "hybrid": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "integrated": false,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": false,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": false,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": true,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": false,
-      "variantBoost": false,
-      "wideLine": false
+      "amm": {
+        "extension": "",
+        "value": true
+      },
+      "boost": {
+        "extension": "1d6",
+        "value": true
+      },
+      "two": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 80
+      "value": "80"
     },
     "rollNotes": "",
     "save": {
@@ -247,26 +195,16 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "AR",
-    "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
-    "target": {
+    "skillCheck": {
       "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
+    "source": "AR pg. 37",
+    "special": "",
+    "specialMaterials": {},
+    "target": {
       "value": ""
     },
     "usage": {
@@ -274,9 +212,9 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 1
+      "value": null
     },
     "weaponCategory": "flame",
     "weaponType": "heavy"

@@ -10,6 +10,7 @@
         "ACTooltipShieldACMod": "Modificateur de bouclier: {shield} ({name})",
         "ACvsCombatManeuversLabel": "CAC + 4",
         "ACvsCombatManeuversTitle": "AC VS Manoeuvres de combat",
+        "Ability": "Ability",
         "AbilityActivationButton": {
             "Activate": "Activer",
             "Use": "Utiliser"
@@ -96,6 +97,7 @@
                 "DateOfBirthPlaceholder": "ex: 6 Gozran 300 AF",
                 "Deity": "Dieu",
                 "DeityPlaceholder": "ex: Pharasma",
+                "FullBodyImage": "Full Body Image",
                 "GenderPronouns": "Gender/Pronouns",
                 "GenderPronounsPlaceholder": "e.g. They/Them",
                 "Height": "Taille",
@@ -198,7 +200,8 @@
                 "Encumbrance": {
                     "Encumbrance": "Encombrement",
                     "EncumbranceBaseTooltip": "Encombrement de base: {base} (Strength)",
-                    "EncumbranceModifierTooltip": "{type} Bonus: {mod} ({source})"
+                    "EncumbranceModifierTooltip": "{type} Bonus: {mod} ({source})",
+                    "ItemsAndUPBs": "Items and UPBs"
                 },
                 "Interface": {
                     "AmountToTransferInfo": "Minimum 1, maximum {max}",
@@ -228,7 +231,8 @@
                     "Install": "Installer une Augmentation",
                     "LevelUp": "Montée de niveau",
                     "Unequip": "Déséquiper",
-                    "Uninstall": "Désinstaller une Augmentation"
+                    "Uninstall": "Désinstaller une Augmentation",
+                    "UseItemTooltip": "<strong>Use Item</strong></br>Use the item, consuming the listed capacity. Shift+Click to not post to chat, Ctrl+Click to not consume capacity, Alt+Click to add capacity."
                 },
                 "ItemValue": {
                     "Label": "Richesse:",
@@ -281,9 +285,11 @@
                     "Stamina": "Endurance",
                     "StarshipAftAC": "Starship Aft AC",
                     "StarshipAllAC": "Starship All AC",
+                    "StarshipBuildPoints": "Starship Build Points",
                     "StarshipForwardAC": "Starship Forward AC",
                     "StarshipHullPoints": "Starship Hull Points",
                     "StarshipHullPointsIncrement": "Starship Hull Points Increment",
+                    "StarshipMultiplyBuildPoints": "Starship Build Point Multiplier",
                     "StarshipPilotingSkill": "Starship Piloting Skill",
                     "StarshipPortAC": "Starship Port AC",
                     "StarshipSpeed": "Starship Speed",
@@ -448,6 +454,7 @@
         "CMDBaseTooltip": "Base: 4",
         "CMDKACModTooltip": "CAC: {kac}",
         "CMDModiferTooltip": "{type} Rebonds: {mod} ({source})",
+        "CR": "Challenge Rating",
         "CancelButtonLabel": "Annuler",
         "Canvas": {
             "Interface": {
@@ -470,6 +477,7 @@
             }
         },
         "CapacityUsage": "Capacité & utilisation",
+        "CasterLevel": "Caster Level",
         "CharacterFlagsSectionClassFeatures": "Spécificités de classe",
         "CharacterFlagsSectionFeats": "Dons",
         "CharacterFlagsSectionRacialTraits": "Traits raciaux",
@@ -507,12 +515,14 @@
             },
             "ItemActivation": {
                 "Activates": "Active",
+                "AddCapacity": "Added Capacity",
                 "Cost": "Coûte: {cost}",
                 "Deactivates": "Désactive",
                 "Duration": "Durée: {duration}",
                 "NoCharges": "Pas de Charge",
                 "Reloads": "Recharge",
-                "Use": "Utiliser"
+                "Use": "Utiliser",
+                "UseCapacity": "Used Capacity"
             },
             "PlaceAbilityTemplate": "Placer {label}"
         },
@@ -669,6 +679,7 @@
         },
         "ComingSoon": "A venir !",
         "ConImm": "Immunités aux états",
+        "Condition": "Condition",
         "ConditionTooltips": {
             "Asleep": "Vous subissez une pénalité de -10 aux tests de Perception pour remarquer les choses.",
             "Bleeding": "Vous subissez les dégâts indiqués au début de votre tour.",
@@ -771,12 +782,14 @@
             "UPBs": "BPUs"
         },
         "Cybernetic": "Cybernétique",
+        "DC": "DC",
         "Damage": {
             "DamageOperator": "Damage Operator",
             "EnergyDamage": "Energy Damage",
             "Immunities": "Imm. aux dégâts",
             "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Dégâts Minimum",
+            "MultipleDR": "Multiple DR (see tooltip)",
             "PartIndex": "Pièce {partIndex} sur {partCount}",
             "Reduction": "Réduction des dégâts",
             "Resistances": "Résistances aux energies",
@@ -906,6 +919,7 @@
                         "Will": "Progression de la volonté"
                     }
                 },
+                "Levels": "Levels",
                 "Missing": "Châssis manquant",
                 "Name": {
                     "Placeholder": "Nom du châssis"
@@ -935,6 +949,7 @@
                     "Repair": "Réparer"
                 },
                 "Defense": "Défense",
+                "DropToSetOwner": "Drop an actor here to set the drone's owner.<br>Click to open the owner's sheet, right-click to clear owner.",
                 "Owner": "Propriétaire"
             },
             "Inventory": {
@@ -1012,7 +1027,9 @@
             "ExpiryModeInit": "Nombre d'Initiatives",
             "ExpiryModeLabel": "Mode d'expiration",
             "ExpiryModeTooltip": "<br><strong>Tour du combattant</strong><p>L'effet expirera au début/à la fin du tour spécifié.</p><strong>Nombre d'Initiatives</strong><p>L'effet prend fin lorsque le combat en cours atteint le nombre d'Initiative spécifié.</p>",
-            "ExpiryModeTurn": "Tour du combattant"
+            "ExpiryModeTurn": "Tour du combattant",
+            "OriginActorUUID": "Origin Actor UUID",
+            "OriginItemUUID": "Origin Item UUID"
         },
         "Enabled": "Activé",
         "EnergyArmorClass": "Classe d'Armure Energétique",
@@ -1189,6 +1206,7 @@
         },
         "ItemMacro": {
             "Activate": "Activer",
+            "AdjustResource": "Adjust Actor Resource",
             "Attack": "Attaquer",
             "Cast": "Lancer",
             "Damage": "Dégâts",
@@ -1503,9 +1521,21 @@
                 "SpeedTooltip": "Nombre d'hexagones que le vaisseau peut parcourir par tour grâce à ce propulseur."
             },
             "StarshipWeapon": {
+                "Arc": "Starship Weapon Arc",
+                "ArcTooltip": "The arc that the starship weapon is mounted in.",
+                "Class": "Starship Weapon Class",
+                "ClassTooltip": "The class of the starship weapon; light, heavy, capital, or spinal.",
                 "Header": "Propriétés de l'arme de vaisseau",
+                "Mounted": "Mounted",
+                "MountedTooltip": "Is the weapon mounted to the starship?",
                 "Placeholder": "ex: 5",
-                "Unmounted": "Non installé"
+                "Range": "Range",
+                "RangeTooltip": "Range increment of the weapon, short is 5, medium is 10, and long is 15 hexes.",
+                "Speed": "Weapon Speed",
+                "SpeedTooltip": "The speed of a tracking weapon.",
+                "Unmounted": "Non installé",
+                "WeaponType": "Weapon Type",
+                "WeaponTypeTooltip": "The type of the starship weapon; Direct, ECM, Melee, or Tracking."
             },
             "WeaponAccessory": {
                 "SupportedTypes": "Types d'armes supportés"
@@ -1531,6 +1561,7 @@
                     "StarshipAC": "CA",
                     "StarshipTL": "TL",
                     "Tag": "Cibles: {actionTarget}",
+                    "TagFull": "Targets: {actionTarget}<span class='gm-only'> {targetValue}</span> - {actionResult}",
                     "Title": "Action de ciblage",
                     "Tooltip": "Si cette action cible une propriété spécifique, vous pouvez la configurer ici."
                 },
@@ -1674,6 +1705,12 @@
                 "WeaponFusions": "Fusions d'armes",
                 "Weapons": "Armes"
             },
+            "Chassis": {
+                "AbilityIncreaseStats": {
+                    "First": "First Ability Increase",
+                    "Second": "Second Ability Increase"
+                }
+            },
             "Consumable": {
                 "Action": "Action de consomable",
                 "DestroyWhenEmpty": "Détruire si vide",
@@ -1700,6 +1737,7 @@
                 "EAC": "Classe d'Armure Énergétique",
                 "KAC": "Classe d'Armure Cinétique",
                 "PowerArmorDetails": "Détails de l'armure assistée",
+                "PowerArmorSpeeds": "Power Armor Speeds",
                 "SpeedAdjustment": "Modificateur de vitesse"
             },
             "EquipmentStatus": "Status d'équipement",
@@ -1713,6 +1751,10 @@
                 "FeatureAttack": "Attaque du trait",
                 "FeatureCategory": "Feature Category",
                 "FeatureDetails": "Feature Details",
+                "FeatureMacro": "Feature Macro Triggers",
+                "FeatureMacroAfterActivate": "On Activate",
+                "FeatureMacroAfterDeactivate": "On Deactivate",
+                "FeatureMacroHint": "Script macros can use <code>scope.item</code> to access this item or <code>scope.item.parent</code> to access its parent actor.",
                 "FeatureUsage": "Utilisation du trait",
                 "RechargeOn": "Recharge",
                 "Requirements": "Prérequis",
@@ -1838,10 +1880,17 @@
                     "RailedWeapon": "Arme choc",
                     "RailedWeaponSA": "Arme choc & arme légère",
                     "SmallArm": "arme légère"
-                }
+                },
+                "WeaponTypeLabel": "Supported Weapon Type(s)"
             }
         },
         "KeyAbilityScore": "Caractéristique essentielle",
+        "Keybindings": {
+            "CloseAllItemSummaries": {
+                "Hint": "Closes all opened item summaries on the character sheet.",
+                "Name": "Close All Item Summaries"
+            }
+        },
         "KineticArmorClass": "Classe d'Armure Cinétique",
         "KineticArmorClassShort": "CAC",
         "Languages": "Langages",
@@ -2014,6 +2063,7 @@
                 "5": "Niveau 5",
                 "6": "Niveau 6"
             },
+            "Magic": "Magic",
             "Schools": {
                 "Abjuration": "Abjuration",
                 "Conjuration": "Invocation",
@@ -2027,6 +2077,7 @@
             }
         },
         "Magitech": "Magitech",
+        "Maximum": "Maximum",
         "Medium": "Moyen",
         "Meter": "Mètre",
         "Mi": "Miles",
@@ -2035,12 +2086,32 @@
         "MigrationErrorMessage": "Une erreur est survenue lors de la migration de vos données ",
         "MigrationSuccessfulMessage": "Vos données Starfinder ont été migrées avec succès vers la version actuelle.",
         "MigrationSuccessfulRefreshMessage": "Your Starfinder data was successfully migrated to the current version.<br/><br/>Please refresh your game to finalize migration.",
+        "Minimum": "Minimum",
         "ModifierACPEffectingArmorTypeAll": "Toutes les armures",
         "ModifierACPEffectingArmorTypeHeavy": "Seulement Les armures lourdes",
         "ModifierACPEffectingArmorTypeLight": "Seulement Les armures légères",
         "ModifierACPEffectingArmorTypePower": "Seulement Les armures assistéés",
         "ModifierAppTitle": "Editer le modificateur : {name}",
         "ModifierArmorClassBoth": "Les deux",
+        "ModifierCustomValueLabel": "Custom Affected Value",
+        "ModifierCustomValueTooltip": "Write a custom modifier value that can be parsed by the system here.",
+        "ModifierDRNote": "To indicate multiple things bypass DR, select Custom. Enter the damage types, properties, or descriptor <i>tags</i> in the custom field separated by <code>||</code> for <b>or</b>, <code>&&</code> for <b>and</b>. Hover for tag options.<br><i>Example for '<b>Bludgeoning or Cold Iron</b>':</i> <code>bludgeoning || coldiron</code>.",
+        "ModifierDRNoteLabel": "Multiple DR Note:",
+        "ModifierDRNoteTooltip": "<span><strong>Damage Types</strong><br><code>bludgeoning</code>, <code>piercing</code>, <code>slashing</code><br><strong>Descriptors</strong><br><code>force</code>, <code>magic</code>, <code>radiation</code><br><strong>Alignments</strong><br><code>chaotic</code>, <code>lawful</code>, <code>good</code>, <code>evil</code><br><strong>Materials</strong><br><code>abysium</code>, <code>adamantine</code>, <code>coldiron</code>, <code>diatha</code>, <code>djezet</code>, <code>horacalcum</code>, <code>inubrix</code>, <code>khefak</code>, <code>noqual</code>, <code>nyblantine</code>, <code>purplecores</code>, <code>siccatite</code>, <code>silver</code>, <code>voidglass</code></span>",
+        "ModifierEffectLabels": {
+            "Ability": "Ability",
+            "Ammunition": "Ammunition",
+            "Attack": "Attack",
+            "DC": "DC",
+            "Damage": "Damage",
+            "Defence": "Defence",
+            "Misc": "Miscellaneous",
+            "Resource": "Resource",
+            "Save": "Save",
+            "Skill": "Skill",
+            "Speed": "Speed",
+            "Starship": "Starship"
+        },
         "ModifierEffectTypeAC": "Classe d'armure",
         "ModifierEffectTypeACP": "Pénalité d'armure",
         "ModifierEffectTypeAbilityCheck": "Test de caractéristique",
@@ -2159,6 +2230,11 @@
         "Necrograft": "Nécrogreffe",
         "None": "Aucun",
         "Notes": "Notes",
+        "Notification": {
+            "Bugs": "<strong>Support & Issues</strong><p>For support, visit the <code>#sf1e</code> channel on the <a href=\"https://discord.com/invite/foundryvtt\">Foundry VTT Discord Server</a>. To view full change notes, file an issue, or contribute to development, please visit our <a href=\"https://github.com/foundryvtt-starfinder/foundryvtt-starfinder\">Github page</a>.</p>",
+            "Button": "Hide Until Next Update",
+            "Title": "System Update Information"
+        },
         "NpcToggleSkillsDialogTitle": "Ajout de compétences aux PNJ",
         "NumberOfArms": "Nombre de bras",
         "Organization": "Organisation",
@@ -2220,6 +2296,8 @@
             }
         },
         "Rolls": {
+            "AbilityCheck": "Ability Check",
+            "AbilityCheckFull": "Ability Check - {name}",
             "AttackRoll": "Jet d'attaque",
             "AttackRollFull": "Jet d'attaque - {name}",
             "Character": {
@@ -2236,6 +2314,10 @@
                 "Nonlethal": "Non létal",
                 "NonlethalTooltip": "Vous pouvez utiliser une arme qui inflige des dégâts létaux pour infliger des dégâts non létaux à la place, mais vous subissez une pénalité à votre jet d'attaque."
             },
+            "CriticalHit": "Critical Hit",
+            "CriticalHitCaps": "CRITICAL HIT",
+            "CriticalSuccess": "Critical Success",
+            "CriticalSuccessCaps": "CRITICAL SUCCESS",
             "DamageRoll": "Jet de dégâts",
             "DamageRollFull": "Jet de dégâts - {name}",
             "Dialog": {
@@ -2277,9 +2359,26 @@
                 "SkillCheckTitle": "Test de compétence - {skill}",
                 "SkillCheckTitleWithProfession": "Test de Compétence - {skill} ({profession})"
             },
+            "Failure": "Failure",
+            "FailureCaps": "FAILURE",
+            "Fumble": "Fumble",
+            "FumbleCaps": "FUMBLE",
+            "GunneryCheck": "Gunnery Check",
+            "GunneryCheckFull": "Gunnery Check - {name}",
             "HealingRoll": "Jet de soin",
             "HealingRollFull": "Jet de soin - {name}",
+            "Hit": "Hit",
+            "HitCaps": "HIT",
+            "InitiativeRoll": "Initiative Roll",
             "InitiativeRollFull": "Jet d'initiative - {name}",
+            "Miss": "Miss",
+            "MissCaps": "MISS",
+            "Roll": "Roll",
+            "RollTarget": "Roll Target",
+            "SavingThrow": "Saving Throw",
+            "SavingThrowFull": "Saving Throw - {name}",
+            "SkillCheck": "Skill Check",
+            "SkillCheckFull": "Ability Check - {name}",
             "Starship": {
                 "Broadside": "Bordée",
                 "CaptainDemand": "Instruction du capitaine",
@@ -2314,12 +2413,15 @@
                     "Starboard": "Tribord",
                     "Title": "{name} - Sélectionner le quadrant d'arme utilisé"
                 }
-            }
+            },
+            "Success": "Success",
+            "SuccessCaps": "SUCCESS"
         },
         "Save": "Sauvegarde",
         "SaveAbilityModTooltip": "Modificateur de caractéristique: {mod} ({ability})",
         "SaveBaseModifier": "Base au jet de sauvegarde : {base}",
         "SaveClassModTooltip": "Modificateur de classe: {mod} ({class})",
+        "SaveDescriptor": "Save Descriptor",
         "SaveDescriptorDisbelieve": "Ne pas croire",
         "SaveDescriptorHalf": "Moitié",
         "SaveDescriptorHarmless": "Sans défense",
@@ -2364,6 +2466,10 @@
             "ChatNotificationDuration": {
                 "Hint": "How long (in MS) to display chat notifications before they are dismissed.",
                 "Name": "Chat Notification Duration"
+            },
+            "CloseAllItemSummaries": {
+                "Hint": "Close all item summaries automatically when an actor sheet is closed.",
+                "Name": "Automatically Close Item Summaries"
             },
             "CombatCards": {
                 "NormalHint": "Modifier les cartes de chat de combat qui doivent être affichées pendant les combat normaux.",
@@ -2464,6 +2570,10 @@
                 "Hint": "When enabled, enables Lock Artwork Rotation on character scale actors by default (Characters/NPC/Drones/Hazards). This can be overridden by the actor's prototype token settings.",
                 "Name": "Lock Artwork Rotation by Default"
             },
+            "NotificationSchema": {
+                "Hint": "DON'T CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING.\nControls whether & which system update message(s) should be shown.",
+                "Name": "Update Notification Schema"
+            },
             "SFRPGTheme": {
                 "Hint": "Lorsqu'il est activé, quelques ajustements mineurs aux couleurs de Foundry seront apportés pour correspondre au schéma de couleurs de Starfinder.",
                 "Name": "Thème SFRPG personnalisé"
@@ -2563,9 +2673,6 @@
                 "Compcounter": "Contre-mesures informatiques",
                 "Selfdestruct": "Dispositif d'autodestruction"
             },
-            "Size": {
-                "Supercolossal": "Supercolossal"
-            },
             "StarshipArcs": {
                 "Aft": "Poupe",
                 "Forward": "Proue",
@@ -2659,7 +2766,9 @@
         "SizeLarge": "Grand",
         "SizeMedium": "Moyen",
         "SizeSmall": "Petit",
+        "SizeSupercolossal": "Supercolossal",
         "SizeTiny": "Très Petit",
+        "Skill": "Skill",
         "SkillAcr": "Acrobaties",
         "SkillAth": "Athlétisme",
         "SkillBlu": "Bluff",
@@ -2678,11 +2787,12 @@
         "SkillMys": "Mysticisme",
         "SkillNotes": "Notes de compétence",
         "SkillPer": "Perception",
+        "SkillPhs": "Sciences physiques",
         "SkillPil": "Pilotage",
+        "SkillPoints": "Skill Points",
         "SkillPro": "Profession",
         "SkillProfessionName": "Nom de Profession",
         "SkillProficiencyLevelClassSkill": "Compétences de classe",
-        "SkillPsc": "Sciences physiques",
         "SkillSen": "Psychologie",
         "SkillSle": "Escamotage",
         "SkillSte": "Discrétion",
@@ -2704,8 +2814,11 @@
         "SkillsHeaderName": "Nom",
         "SkillsHeaderRanks": "Rangs",
         "SkillsToggleHeader": "Compétences",
+        "Slug": "Slug",
+        "SlugTooltip": "A slug (string) used to universally identify items, independent of their names. Should only contain lower-case letters, numbers, and/or hyphens.",
         "SortByFilterLevel": "Niveau",
         "SortByFilterName": "Nom",
+        "SourceBook": "Source Book",
         "Space": "Espace",
         "Special": "Spécial",
         "SpecialAbilityTypes": {
@@ -2730,6 +2843,7 @@
             "Voidglass": "Verre du vide"
         },
         "SpecialTraits": "Traits spéciaux",
+        "SpeciesAbilityModifier": "Species Ability Modifier",
         "SpeciesGraft": "Trait de Race",
         "Speed": "Vitesse",
         "SpeedSpecial": "Mouv. spécial",
@@ -2795,6 +2909,7 @@
             },
             "Attributes": {
                 "BuildPoints": "Points de Construction",
+                "BuildPointsMax": "Max",
                 "BuildPointsUsage": "Utilisation",
                 "Complement": "Équipage (Min / Max)",
                 "ComplementMax": "Nombre maximum de membres d'équipage pouvant être affectés à un rôle sur le vaisseau (et non le nombre maximum de créatures pouvant être à bord).",
@@ -2808,6 +2923,8 @@
             },
             "Crew": {
                 "ActionsPerRound": "Actions par tour",
+                "ActorIDs": "Actor IDs",
+                "ActorIDsTooltip": "Actor IDs of the crew members in this role",
                 "AddSkill": "Ajouter compétence",
                 "AssignedCount": "({current} / {max})",
                 "Captain": "Capitaine",
@@ -2820,15 +2937,19 @@
                 "IsNPCCrew": "Le PNJ est-il membre d'équipage ?",
                 "MagicOfficers": "Officiers magiques",
                 "NPCGunnerRanksMessage": "Bien que les rangs ne soient pas pertinents pour le modificateur de tir d'un PNJ, certains blocs de statut peuvent inclure le niveau de l'artilleur, que vous pouvez stocker ici. Sinon, vous pouvez laisser cette case vide.",
+                "NumberOfUses": "Number of Uses",
                 "Passengers": "Passagers",
                 "Pilot": "Pilote",
                 "RemoveCrewMember": "Supprimer un membre d'équipage",
+                "RoleLimit": "Role Limit",
+                "RoleLimitTooltip": "Maximum number of crew members in this role.",
                 "ScienceOfficers": "Officiers scientifiques",
                 "SkillModifier": "Modificateur",
                 "SkillRanks": "Rang",
                 "UnlimitedMax": "Pas de limite"
             },
             "Critical": {
+                "AffectedRoles": "Affected Roles",
                 "Edit": "Editer les rôles affectés",
                 "EditMessage": "Sélectionnez les rôles qui sont affectés par les dégâts causés à ce système.",
                 "EditTitle": "Sélectionner les rôles affectés",
@@ -2839,12 +2960,14 @@
                     "Robust": "Patched Robustly",
                     "Unpatched": "―"
                 },
+                "PatchState": "Patch State",
                 "Status": {
                     "Glitching": "Dysfonctionnement",
                     "Malfunctioning": "Défaillant",
                     "Nominal": "Nominal",
                     "Wrecked": "Détruit"
                 },
+                "SystemStatus": "System Status",
                 "Systems": {
                     "Engines": "Propulseurs",
                     "LifeSupport": "Systèmes vitaux",
@@ -2861,13 +2984,6 @@
                 "Message": "Les dégâts à un vaisseau spatial proviennent toujours d'une direction spécifique, veuillez sélectionner le quadrant auquel les dégâts entrants doivent être appliqués.",
                 "Nat20": "Critical damage! {name} takes a critical damage effect.",
                 "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
-                "Quadrant": {
-                    "Aft": "Poupe",
-                    "Forward": "Proue",
-                    "Port": "Bâbord",
-                    "Quadrant": "Quadrant",
-                    "Starboard": "Tribord"
-                },
                 "Title": "{name} - Sélectionner le quadrant endommagé."
             },
             "Details": {
@@ -2964,13 +3080,19 @@
             },
             "Quadrants": {
                 "AblativeHeader": "Blindage ablatif",
+                "Aft": "Poupe",
                 "ArmorClass": "Classe d'Armure",
                 "EvenDistribution": "Distribution uniforme",
+                "Forward": "Proue",
                 "Header": "Défenses du quadrant",
                 "NotAvailable": "Indisponible",
+                "Port": "Bâbord",
+                "Quadrant": "Quadrant",
                 "QuadrantLimit": "Limite de Quadrant",
                 "ShieldHeader": "Boucliers",
-                "TargetLock": "Verrouillage de cible"
+                "Starboard": "Tribord",
+                "TargetLock": "Verrouillage de cible",
+                "TargetQuadrant": "Target Quadrant"
             },
             "RandomQuadrantMacro": {
                 "NoToken": "Select the recipient of the critical effect before proceeding.",
@@ -3016,6 +3138,7 @@
         },
         "SubmitButtonLabel": "Valider",
         "SystemWide": "À l'échelle du système",
+        "Target": "Target",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
         "Text": "Text",
@@ -3027,6 +3150,11 @@
         "ToggleSkillsButtonLabel": "Ajouter une compétence",
         "Touch": "Toucher",
         "TraitArmorProf": "M. des armures",
+        "TraitSelector": {
+            "AvailableOptions": "Available Options",
+            "SelectedOptions": "Selected Options",
+            "Update": "Update"
+        },
         "TraitWeaponProf": "M. des armes",
         "TurnEvent": {
             "AddTurnEvent": "Add Turn Event",
@@ -3084,6 +3212,7 @@
                     "AttackMoving": "Attaque (déplacement)",
                     "AttackStopped": "Attaque (arrêté)",
                     "AttackTooltip": "Les modificateurs d'attaque sont appliqués aux attaques du personnage lorsqu'il est à bord du véhicule ou avec les armes montées sur le véhicule.",
+                    "ControlSkill": "Control Skill",
                     "Title": "Modificateurs"
                 },
                 "Movement": {
@@ -3417,7 +3546,8 @@
         "WeaponTypesSpecial": "Armes spéciales",
         "WeaponsPropertiesConceal": "Discrète",
         "WeaponsPropertiesConcealTooltip": "Une arme discrète est considérée comme particulièrement petite ou facile à dissimuler pour la tâche cacher un objet de la compétence Escamotage et octroie un bonus de circonstance de +4 aux tests de compétence pour cacher un objet.",
-        "WillSave": "Volonté"
+        "WillSave": "Volonté",
+        "XP": "Experience Points"
     },
     "TYPES": {
         "Actor": {

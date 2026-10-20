@@ -1,8 +1,9 @@
 import { DiceSFRPG } from "../../../dice.js";
+import { SFRPGEffectType } from "../../../modifiers/types.js";
 import RollContext from "../../../rolls/rollcontext.js";
 
 export default function(engine) {
-    engine.closures.add("calculateSaveDC", (fact) => {
+    engine.closures.add("calculateSaveDC", (fact, context) => {
         const item = fact.item;
         const itemData = item;
         const data = itemData.system;
@@ -24,7 +25,13 @@ export default function(engine) {
                     const spellbookSpellAbility = actorData?.attributes.spellcasting;
                     const classSpellAbility = classes[0]?.system.spellAbility;
 
-                    const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
+                    const spellPrepMode = data.preparation?.mode ?? null;
+                    let spellAbilityId = "";
+                    if (itemData.type === "spell") {
+                        spellAbilityId = (spellPrepMode === "innate" || spellPrepMode === "always") ? spellbookSpellAbility || classSpellAbility : classSpellAbility || spellbookSpellAbility;
+                    }
+
+                    const abilityKey = itemKeyAbilityId || spellAbilityId || ownerKeyAbilityId;
 
                     if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
@@ -45,9 +52,10 @@ export default function(engine) {
 
                 if (itemData.type === "spell") {
                     // Get owner spell save dc modifiers and append to roll
-                    const allModifiers = actor?.getAllModifiers();
-                    if (allModifiers) {
-                        for (const modifier of allModifiers.filter(x => x.enabled && x.effectType === "spell-save-dc")) {
+                    const dcModifiers = actor.getAllModifiers().filter(x => x.enabled && x.effectType === SFRPGEffectType.SPELL_SAVE_DC);
+                    const stackedModifiers = context.parameters.stackModifiers.process(dcModifiers, context, {actor: fact.owner.actor});
+                    for (const modifiers of Object.values(stackedModifiers)) {
+                        for (const modifier of modifiers) {
                             dcFormula += ` + ${modifier.modifier}[${modifier.name}]`;
                         }
                     }
@@ -64,7 +72,8 @@ export default function(engine) {
 
                     const rollResult = DiceSFRPG.resolveFormulaWithoutDice(dcFormula, rollContext, {logErrors: false});
                     if (!rollResult.hadError) {
-                        item.labels.save = `DC ${rollResult.total >= 0 ? rollResult.total : ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+                        item.labels.dcValue = rollResult.total >= 0 ? rollResult.total : "";
+                        item.labels.save = `DC ${item.labels.dcValue} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
                         item.labels.saveFormula = dcFormula;
                         computedSave = true;
                     } else {
@@ -89,5 +98,5 @@ export default function(engine) {
         }
 
         return fact;
-    });
+    }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }

@@ -46,6 +46,7 @@ import { preloadHandlebarsTemplates, setupHandlebars } from "./module/handlebars
 import { ItemSFRPG } from "./module/item/item.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
 import migrateWorld from './module/migration.js';
+import { updateNotification } from './module/apps/update-notification';
 import SFRPGModifier from "./module/modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
 import { RPC } from "./module/rpc.js";
@@ -68,7 +69,6 @@ import SFRPGRoll from "./module/rolls/roll.js";
 import RollContext from "./module/rolls/rollcontext.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
-import registerCompendiumArt from "./module/system/compendium-art.js";
 import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import SFRPGTokenRuler from "./module/token/token-ruler.js";
@@ -80,6 +80,9 @@ import { getSpellBrowser } from "./module/packs/spell-browser.js";
 import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 import { SFRPGTokenHUD } from './module/token/token-hud.js';
 import isObject from './module/utils/is-object.js';
+
+// Import DataModel classes
+import * as models from './module/data/_module.mjs';
 
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
@@ -121,7 +124,6 @@ const moduleStructure = {
         SFRPGModifierApplication,
         TraitSelectorSFRPG
     },
-    compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
     config: SFRPG,
     dice: DiceSFRPG,
     documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
@@ -220,6 +222,66 @@ Hooks.once('init', async function() {
     CONFIG.Canvas.layers.templates.layerClass = TemplateLayerSFRPG;
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
+
+    // DataModels definition
+    CONFIG.Actor.dataModels = {
+        character: models.SFRPGActorCharacter,
+        drone: models.SFRPGActorDrone,
+        hazard: models.SFRPGActorHazard,
+        npc2: models.SFRPGActorNPC,
+        starship: models.SFRPGActorStarship,
+        vehicle: models.SFRPGActorVehicle
+    };
+
+    CONFIG.Item.dataModels = {
+        actorResource: models.SFRPGItemActorResource,
+        ammunition: models.SFRPGItemAmmunition,
+        archetypes: models.SFRPGItemArchetypes,
+        asi: models.SFRPGItemASI,
+        augmentation: models.SFRPGItemAugmentation,
+        chassis: models.SFRPGItemChassis,
+        class: models.SFRPGItemClass,
+        consumable: models.SFRPGItemConsumable,
+        container: models.SFRPGItemContainer,
+        effect: models.SFRPGItemEffect,
+        equipment: models.SFRPGItemEquipment,
+        feat: models.SFRPGItemFeat,
+        fusion: models.SFRPGItemFusion,
+        goods: models.SFRPGItemGoods,
+        hybrid: models.SFRPGItemHybrid,
+        magic: models.SFRPGItemMagic,
+        mod: models.SFRPGItemMod,
+        quest: models.SFRPGItemQuest,
+        race: models.SFRPGItemRace,
+        shield: models.SFRPGItemShield,
+        spell: models.SFRPGItemSpell,
+        starshipAblativeArmor: models.SFRPGItemStarshipAblativeArmor,
+        starshipAction: models.SFRPGItemStarshipAction,
+        starshipArmor: models.SFRPGItemStarshipArmor,
+        starshipComputer: models.SFRPGItemStarshipComputer,
+        starshipCrewQuarter: models.SFRPGItemStarshipCrewQuarter,
+        starshipDefensiveCountermeasure: models.SFRPGItemStarshipDefensiveCountermeasure,
+        starshipDriftEngine: models.SFRPGItemStarshipDriftEngine,
+        starshipExpansionBay: models.SFRPGItemStarshipExpansionBay,
+        starshipFortifiedHull: models.SFRPGItemStarshipFortifiedHull,
+        starshipFrame: models.SFRPGItemStarshipFrame,
+        starshipOtherSystem: models.SFRPGItemStarshipOtherSystem,
+        starshipPowerCore: models.SFRPGItemStarshipPowerCore,
+        starshipReinforcedBulkhead: models.SFRPGItemStarshipReinforcedBulkhead,
+        starshipSecuritySystem: models.SFRPGItemStarshipSecuritySystem,
+        starshipSensor: models.SFRPGItemStarshipSensor,
+        starshipShield: models.SFRPGItemStarshipShield,
+        starshipSpecialAbility: models.SFRPGItemStarshipSpecialAbility,
+        starshipThruster: models.SFRPGItemStarshipThruster,
+        starshipWeapon: models.SFRPGItemStarshipWeapon,
+        technological: models.SFRPGItemTechnological,
+        theme: models.SFRPGItemTheme,
+        upgrade: models.SFRPGItemUpgrade,
+        vehicleAttack: models.SFRPGItemVehicleAttack,
+        vehicleSystem: models.SFRPGItemVehicleSystem,
+        weapon: models.SFRPGItemWeapon,
+        weaponAccessory: models.SFRPGItemWeaponAccessory
+    };
 
     CONFIG.ui.hotbar = HotbarSFRPG;
 
@@ -445,6 +507,8 @@ Hooks.once('init', async function() {
         });
     }
 
+    registerKeybinds();
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
@@ -469,6 +533,7 @@ Hooks.once("i18nInit", () => {
         "augmentationSystems",
         "augmentationTypes",
         "babProgression",
+        "calculationStages",
         "capacityUsagePer",
         "combatRoles",
         "combatRolesDescriptions",
@@ -488,6 +553,8 @@ Hooks.once("i18nInit", () => {
         "effectDurationTypes",
         "descriptors",
         "descriptorsTooltips",
+        "droneArmTypes",
+        "effectTypes",
         "energyDamageTypes",
         "energyResistanceTypes",
         "featTypes",
@@ -499,17 +566,30 @@ Hooks.once("i18nInit", () => {
         "languages",
         "limitedUsePeriods",
         "maneuverability",
+        "mathComparators",
         "modifierArmorClassAffectedValues",
+        "modifierEffectTypesAttack",
+        "modifierEffectTypesDamage",
+        "modifierEffectTypesAmmunition",
+        "modifierEffectTypesDefence",
+        "modifierEffectTypesResource",
+        "modifierEffectTypesAbility",
+        "modifierEffectTypesSkill",
+        "modifierEffectTypesSave",
+        "modifierEffectTypesDC",
+        "modifierEffectTypesSpeed",
+        "modifierEffectTypesMisc",
+        "modifierEffectTypesStarship",
         "modifierEffectTypes",
         "modifierType",
         "modifierTypes",
+        "rangeModes",
         "saveDescriptors",
         "saveProgression",
         "saves",
         "senses",
         "skillProficiencyLevels",
         "skills",
-        "controlSkills",
         "specialAbilityTypes",
         "specialMaterials",
         "speeds",
@@ -519,6 +599,7 @@ Hooks.once("i18nInit", () => {
         "spellLevels",
         "spellPreparationModes",
         "starshipArcs",
+        "starshipQuadrants",
         "starshipRoles",
         "starshipSizes",
         "starshipSystemPatch",
@@ -528,7 +609,7 @@ Hooks.once("i18nInit", () => {
         "starshipWeaponRanges",
         "starshipWeaponTypes",
         "turnEventTypes",
-        "droneArmTypes",
+        "vehicleControlSkills",
         "vehicleCoverTypes",
         "vehicleSizes",
         "vehicleTypes",
@@ -601,9 +682,6 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Setting up Vision Modes");
     setupVision();
 
-    console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
-    registerCompendiumArt();
-
     console.log("Starfinder | [READY] Setting up event listeners");
     BaseEnricher.addListeners();
     ItemSFRPG.chatListeners($("body"));
@@ -614,6 +692,7 @@ Hooks.once("ready", async () => {
         connectToDocument(macro);
     }
 
+    // Migration system
     if (game.users.activeGM?.isSelf) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
@@ -642,6 +721,9 @@ Hooks.once("ready", async () => {
 
     }
 
+    // System Update Information Notifications
+    updateNotification();
+
     Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
 
     const finishTime = (new Date()).getTime();
@@ -650,6 +732,37 @@ Hooks.once("ready", async () => {
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
+
+export function registerKeybinds() {
+    const { SHIFT, CONTROL } = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS;
+
+    game.keybindings.register('sfrpg', 'summaries', {
+        name: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Name'),
+        hint: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Hint'),
+        editable: [
+            {
+                key: 'KeyC',
+                modifiers: [CONTROL, SHIFT]
+            }
+        ],
+        onDown: () => {
+            const app = Object.values(ui.windows).find(app => app instanceof ActorSheetSFRPG && app.actor);
+            if (app) {
+                app._closeAllItemSummaries();
+            }
+            return true;
+        },
+        restricted: false,
+        precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY
+    });
+}
+
+/**
+ * Migrates containers from an old format (not sure what version) to a modern version.
+ * This should probably be removed at some point, since Data Model migration is preferable.
+ *
+ * @returns {[Promise]} An array of promises to resolve
+ */
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
@@ -681,6 +794,11 @@ async function migrateOldContainers() {
 Hooks.on("renderChatMessageHTML", (app, html, data) => {
     DiceSFRPG.highlightCriticalSuccessFailure(app, $(html), data);
     DiceSFRPG.addDamageTypes(app, $(html), data);
+
+    const gmOnlyText = html.querySelector('.gm-only');
+    if (!game.user.isGM && gmOnlyText) {
+        gmOnlyText.style.display = "none";
+    }
 
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) {
         const cardContent = html.querySelector('.card-content');

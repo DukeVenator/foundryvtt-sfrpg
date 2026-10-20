@@ -15,7 +15,8 @@
     "bar2": {
       "attribute": ""
     },
-    "detectionModes": [],
+    "depth": 1,
+    "detectionModes": {},
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -81,9 +82,6 @@
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
-      "offsetX": 0,
-      "offsetY": 0,
-      "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/mantrap.svg",
@@ -100,7 +98,7 @@
   "system": {
     "attributes": {
       "baseAttackBonus": {
-        "value": ""
+        "value": 0
       },
       "bypass": {
         "value": ""
@@ -109,32 +107,32 @@
         "value": "2d6"
       },
       "duration": {
-        "value": ""
+        "value": null
       },
       "eac": {
-        "value": ""
+        "value": 0
       },
       "effect": {
         "value": "20-ft.-deep pit (2d6 falling damage); Reflex DC 11 avoids; multiple targets (all targets in a 10-ft.-square area)"
       },
       "fort": {
-        "value": ""
+        "value": 0
       },
       "hardness": {
-        "value": ""
+        "value": 0
       },
       "hp": {
-        "max": null,
-        "value": null
+        "max": 10,
+        "value": 10
       },
       "init": {
         "value": "manual"
       },
       "kac": {
-        "value": ""
+        "value": 0
       },
       "reflex": {
-        "value": ""
+        "value": 0
       },
       "reset": {
         "value": ""
@@ -143,7 +141,7 @@
         "value": "location"
       },
       "will": {
-        "value": ""
+        "value": 0
       }
     },
     "dcs": {
@@ -162,10 +160,9 @@
       "description": {
         "value": "<p>A 10-foot-square trapdoor opens when a creature walks on top of it, dumping victims into a 20-foot-deep pit.</p>"
       },
-      "source": "Analog",
-      "xp": {
-        "value": 10
-      }
-    }
+      "source": "Analog"
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

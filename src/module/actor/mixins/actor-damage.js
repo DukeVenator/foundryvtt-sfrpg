@@ -68,14 +68,33 @@ export class SFRPGDamage {
         return this.healSettings !== null;
     }
 
-    negatesDamageReduction(damageReductionNegation) {
-        if (this.properties.includes(damageReductionNegation)) {
+    negatesDamageReduction(damageReductionNegation, damageType) {
+        // Change the damage match condition if multiple kinetic damage types are included in an && operator
+        const damageMatch = (drNegationArray, drNegation, damageType) => {
+            const b = drNegationArray.includes('bludgeoning') ? 1 : 0;
+            const p = drNegationArray.includes('piercing') ? 1 : 0;
+            const s = drNegationArray.includes('slashing') ? 1 : 0;
+            if (b + p + s >= 2) {
+                return this.damageTypes.includes(drNegation);
+            } else {
+                return damageType === drNegation;
+            }
+        };
+
+        // For && separator, return true if all values match; for || separator, return true if any values match
+        if (damageReductionNegation.includes('&&')) {
+            const drNegationArray = damageReductionNegation.split('&&').map(type => type.trim().toLowerCase());
+            for (const drNegation of drNegationArray) {
+                if (!(this.properties.includes(drNegation) || damageMatch(drNegationArray, drNegation, damageType))) return false;
+            }
             return true;
+        } else {
+            const drNegationArray = damageReductionNegation.split('||').map(type => type.trim().toLowerCase());
+            for (const drNegation of drNegationArray) {
+                if (this.properties.includes(drNegation) || damageType === drNegation) return true;
+            }
+            return false;
         }
-        if (this.damageTypes.includes(damageReductionNegation)) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -220,9 +239,9 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                             icon: "<i class='fas fa-check'></i>",
                             label: game.i18n.localize("SFRPG.ChatCard.ContextMenu.Accept"),
                             callback: (html) => {
-                                modifier = parseInt(html.querySelector("#modifier").value) || 0;
-                                healingTarget = html.querySelector("#apply-healing")?.value || "hp";
-                                bypassStamina = html.querySelector("#bypass-stamina")?.checked;
+                                modifier = parseInt(html[0].querySelector("#modifier").value) || 0;
+                                healingTarget = html[0].querySelector("#apply-healing")?.value || "hp";
+                                bypassStamina = html[0].querySelector("#bypass-stamina")?.checked;
                                 if (!modifier && (healingTarget === "hp" || bypassStamina === false)) ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
                             }
                         }
@@ -247,19 +266,33 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const chatMessageId = html.dataset?.messageId;
         const chatMessage = game.messages.get(chatMessageId);
         if (chatMessage) {
-            const chatDamageData = chatMessage.flags.damage;
+            const chatDamageData = chatMessage.flags.sfrpg?.damage;
             if (chatDamageData) {
                 rolledAmount = chatDamageData.amount;
                 damageTypes = chatDamageData.types;
             }
 
-            const chatSpecialMaterials = chatMessage.flags.specialMaterials;
+            const chatSpecialMaterials = chatMessage.flags.sfrpg?.specialMaterials;
             if (chatSpecialMaterials) {
                 for (const [material, enabled] of Object.entries(chatSpecialMaterials)) {
                     if (enabled) {
                         properties.push(material);
                     }
                 }
+            }
+
+            const chatDescriptors = chatMessage.flags.sfrpg?.descriptors;
+            if (chatDescriptors) {
+                for (const [descriptor, enabled] of Object.entries(chatDescriptors)) {
+                    if (enabled) {
+                        properties.push(descriptor);
+                    }
+                }
+            }
+
+            const chatHasMagicDamage = chatMessage.flags.sfrpg?.hasMagicDamage?.value;
+            if (chatHasMagicDamage) {
+                properties.push("magic");
             }
         }
 
@@ -339,7 +372,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const dealtDamages = {};
 
         const actorUpdate = {};
-        const actorData = foundry.utils.deepClone(this.system);
+        const actorData = this.system;
 
         const damagesPerType = [];
         if (damage.damageTypes.length > 0) {
@@ -506,7 +539,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const kineticDamageTypes = ['bludgeoning', 'piercing', 'slashing'];
         if (kineticDamageTypes.includes(damageType)) {
             for (const drEntry of damageMitigation.damageReduction) {
-                const isNegated = (!damage || damage.negatesDamageReduction(drEntry.negatedBy));
+                const isNegated = (!damage || damage.negatesDamageReduction(drEntry.negatedBy, damageType));
                 if (!isNegated) {
                     return drEntry.value;
                 }
@@ -557,17 +590,17 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         /** Ask for quadrant */
         const options = [
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Forward"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Port"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Starboard"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Aft")
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Forward"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Port"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Starboard"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Aft")
         ];
         const results = await ChoiceDialog.show(
             game.i18n.format("SFRPG.StarshipSheet.Damage.Title", {name: this.name}),
             game.i18n.format("SFRPG.StarshipSheet.Damage.Message"),
             {
                 quadrant: {
-                    name: game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Quadrant"),
+                    name: game.i18n.format("SFRPG.StarshipSheet.Quadrants.Quadrant"),
                     options: options,
                     default: options[0]
                 }
@@ -701,7 +734,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: warningMessage,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             };
             ChatMessage.applyRollMode(chatData, rollMode);
             ChatMessage.create(chatData);
@@ -715,7 +748,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: warningMessage,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             };
             ChatMessage.applyRollMode(chatData, rollMode);
             ChatMessage.create(chatData);

@@ -147,15 +147,40 @@
                 </div>
             {{/unless}}
 
-            {{!-- Conditional Weapon Properties --}}
+            {{!-- Conditional Weapon Information --}}
             {{#unless (leftOrRight (eq item.type "weapon") (eq item.type "shield"))}}
-                {{#if (leftOrRight (eq itemData.actionType "mwak") (eq itemData.actionType "rwak"))}}
+                {{#if (leftOrRight (leftOrRight (eq itemData.actionType "mwak") (eq itemData.actionType "rwak")) (leftOrRight (eq itemData.actionType "msak") (eq itemData.actionType "rsak")))}}
+                    {{!-- Weapon Type --}}
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
+                        <select name="system.weaponType">
+                            {{selectOptions (sfrpg "weaponTypes") selected=itemData.weaponType}}
+                        </select>
+                    </div>
+
+                    {{!-- Weapon Category --}}
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
+                        <select name="system.weaponCategory">
+                            {{selectOption "" "Unspecified" selected=itemData.weaponCategory}}
+                            {{selectOptions (sfrpg "weaponCategories") selected=itemData.weaponCategory}}
+                        </select>
+                    </div>
+
+                    {{!-- Weapon Properties --}}
                     {{> "systems/sfrpg/templates/items/parts/weapon-properties.hbs"}}
                 {{/if}}
+            {{/unless}}
+
+            {{!-- Conditional Descriptors --}}
+            {{#unless (leftOrRight (leftOrRight (eq item.type "weapon") (eq item.type "shield")) (leftOrRight (eq item.type "spell") (eq item.type "feat")))}}
+                {{> "systems/sfrpg/templates/items/parts/item-descriptors.hbs"}}
             {{/unless}}
         {{/if}}
     </div>
 </div>
+
+
 
 {{#if itemData.actionType}}
     {{!-- Damage Sections --}}
@@ -221,14 +246,6 @@
                                         <input type="checkbox" name="system.critical.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
                                     </label>
                                 </div>
-                            </div>
-                            <div class="damage-part-operator form-group flexrow" data-tooltip="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
-                                <label>{{localize "Damage Operator"}}</label>
-                                <select name="system.critical.parts.{{i}}.operator">
-                                    {{selectOption "" "" selected=part.operator}}
-                                    {{selectOption "and" "And" selected=part.operator localize=true}}
-                                    {{selectOption "or" "Or" selected=part.operator localize=true}}
-                                </select>
                             </div>
                         </div>
                     </li>

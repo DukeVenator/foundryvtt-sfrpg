@@ -1,9 +1,24 @@
 # SFRPG
-This is my personal fork of the Starfinder system definition for Foundry Virtual Tabletop, as used in roleplaying sessions at The Ruby Palace. This version is forked from a development build of [foundryvtt-starfinder](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/) somewhere just after version 0.28.3.
+This is my personal fork of the Starfinder system definition for Foundry Virtual Tabletop, as used in roleplaying sessions at The Ruby Palace. It includes the official [foundryvtt-starfinder](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/) development branch through version 14.0.2, plus this fork's house rules and sheet features.
 
 ## Compatibility
 
-Foundry v13. This is tested to work correctly on v13.347.
+Foundry v14. The merged system manifest is version 14.0.2, verified against Foundry 14.363.
+
+## Version support table
+
+Official Starfinder releases for older Foundry versions:
+
+- FoundryVTT v0.5.5 or earlier: The latest supported Starfinder system version is [v0.2.2](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.2.2)
+- FoundryVTT v0.5.6 to v0.6.6: The latest supported Starfinder system version is [v0.5.1](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.5.1.0)
+- FoundryVTT v0.7.0 to v0.7.10: The latest supported Starfinder system version is [v0.10.0](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.10.0.0)
+- FoundryVTT v0.8.0 to v9.269: The latest supported Starfinder system version is [v0.18.3](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.18.3)
+- FoundryVTT v9.269 to v9.280: The latest supported Starfinder system version is [v0.19.2](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.19.2)
+- FoundryVTT v10 (10.282 to 10.291): The latest supported Starfinder system version is [v0.23.0](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.23.0)
+- FoundryVTT v11 (11.299 to 11.315): The latest supported Starfinder system version is [v0.25.3](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.25.3)
+- FoundryVTT v12 (12.324 to 12.343): The latest supported Starfinder system version is [v0.27.3](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/0.27.3)
+- FoundryVTT v13 (13.341 to 13.351): The latest supported Starfinder system version is [v0.30.1](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/0.30.1).
+- FoundryVTT v14 (14.360+): This fork, based on official [14.0.2](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/14.0.2).
 
 ## Objectives of the fork
 

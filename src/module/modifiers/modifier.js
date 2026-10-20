@@ -4,6 +4,8 @@ import { ItemSFRPG } from "../item/item.js";
 import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
 
+const { fields } = foundry.data;
+
 /**
  * A data object that hold information about a specific modifier.
  *
@@ -14,6 +16,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.
  * @param {String}        data.modifierType  Determines if this modifier is a constant value (+2) or a roll formula (1d4).
  * @param {String}        data.effectType    The category of things that might be modified by this value.
  * @param {String}        data.valueAffected The specific statistic being affected.
+ * @param {String}        data.customValue   A string that can be parsed by the system into a custom value to be affected
  * @param {Boolean}       data.enabled       Is this modifier enabled or not.
  * @param {String}        data.source        Where does this modifier come from? An item, or an ability?
  * @param {String}        data.notes         Any notes that are useful for this modifier.
@@ -45,7 +48,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
             if (!obj.limitTo) delete obj.limitTo;
             return obj;
         }
-        return this.schema.toObject(this);
+        return this.constructor.schema.toObject(this);
     }
 
     // Remove empty optional data
@@ -60,11 +63,11 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         super._initialize(options);
 
         // _id is not a document ID, so we should be able to write to it.
-        Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: true });
+        // Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: true });
 
         // Calculate max, if not already
         try {
-            const roll = Roll.create(this.modifier.toString(), this.parent.system);
+            const roll = Roll.create(this.modifier.toString(), this.owner.system);
             this.max = roll.evaluateSync({strict: false}).total;
         } catch {
             this.max = 0;
@@ -72,7 +75,6 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     }
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         return {
             _id: new fields.StringField({ initial: "", required: true, readonly: false }),
             name: new fields.StringField({
@@ -116,6 +118,13 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
                 blank: true,
                 label: "SFRPG.ModifierValueAffectedLabel",
                 hint: "SFRPG.ModifierValueAffectedTooltip"
+            }),
+            customValue: new fields.StringField({
+                initial: "",
+                required: false,
+                blank: true,
+                label: "SFRPG.ModifierCustomValueLabel",
+                hint: "SFRPG.ModifierCustomValueTooltip"
             }),
             enabled: new fields.BooleanField({
                 initial: false,
@@ -176,12 +185,20 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
     /** @type {ActorSFRPG} */
     get actor() {
-        return this.parent instanceof ActorSFRPG ? this.parent : this.parent.actor;
+        return this.parent.parent instanceof ActorSFRPG ? this.parent.parent : this.parent.parent.actor;
     }
 
     /** @type {?ItemSFRPG} */
     get item() {
-        return this.parent instanceof ItemSFRPG ? this.parent : null;
+        return this.parent.parent instanceof ItemSFRPG ? this.parent.parent : null;
+    }
+
+    /**
+     * A quick way to get the direct parent document of this modifier
+     * @type {ActorSFRPG|ItemSFRPG}
+     */
+    get owner() {
+        return this.item ?? this.actor;
     }
 
     get token() {
@@ -202,37 +219,37 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     }
 
     /**
-     * A helper method to directly update this modifier within its parent, instead of having to find it in the modifiers array every time.
+     * A helper method to directly update this modifier within its owner, instead of having to find it in the modifiers array every time.
      * @param {Object} data Update data to be applied to this modifier
      * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
      */
     async parentUpdate(data, options = {}) {
-        if (!this.parent) throw new Error("SFRPG | This modifier has no parent, which is required to perform an update via the parent.");
+        if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to perform an update via the parent.");
 
-        const modifiers = this.parent.toObject().system.modifiers;
+        const modifiers = this.owner.toObject().system.modifiers;
         const modInParent = modifiers.find(mod => mod._id === this._id);
 
         foundry.utils.mergeObject(modInParent, data);
 
-        return this.parent.update({ "system.modifiers": modifiers }, options);
+        return this.owner.update({ "system.modifiers": modifiers }, options);
     }
 
     /**
-     * A helper method to delete this modifier from its parent
+     * A helper method to delete this modifier from its owner
      * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
      */
     async parentDelete(options = {}) {
-        if (!this.parent) throw new Error("SFRPG | This modifier has no parent, which is required to delete via the parent.");
+        if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to delete via the parent.");
 
-        const modifiers = this.parent.toObject().system.modifiers.filter(mod => mod._id !== this._id);
+        const modifiers = this.owner.toObject().system.modifiers.filter(mod => mod._id !== this._id);
 
-        return this.parent.update({"system.modifiers": modifiers}, options);
+        return this.owner.update({"system.modifiers": modifiers}, options);
     }
 
     /**
      * Open the Modifier editor App for this modifier
      */
     async edit() {
-        return new SFRPGModifierApplication(this, this.parent).render(true);
+        return new SFRPGModifierApplication(this, this.owner).render(true);
     }
 }

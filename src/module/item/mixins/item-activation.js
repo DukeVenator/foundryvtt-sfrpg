@@ -130,7 +130,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             };
         }
 
-        const updatePromise = this.update(updateData);
+        const updatePromise = this.update(updateData)
+            .then(() => this._afterSetActive(active));
 
         { // (active || duration.value || this.system.uses.max > 0) {
             updatePromise.then(() => {
@@ -164,7 +165,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {
-                        type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                        style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html,
                         flags: {
@@ -186,5 +187,12 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         }
 
         return updatePromise;
+    }
+
+    async _afterSetActive(active) {
+        const macro = await fromUuid(active ? this.system.activation.macroAfterActivate : this.system.activation.macroAfterDeactivate);
+        if (macro?.canExecute) {
+            await this.executeMacroWithContext(macro);
+        }
     }
 };

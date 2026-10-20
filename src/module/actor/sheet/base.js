@@ -1,6 +1,5 @@
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
-import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { SFRPGModifierType } from "../../modifiers/types.js";
 import StackModifiers from "../../rules/closures/stack-modifiers.js";
 
@@ -16,6 +15,9 @@ import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 import { getStarshipBrowser } from "../../packs/starship-browser.js";
 import RollContext from "../../rolls/rollcontext.js";
+
+import { ActorTraitSelectorSFRPG } from "../../apps/trait-selectors/actor-trait-selector.js";
+
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -56,6 +58,25 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         });
     }
 
+    /** @inheritdoc */
+    async close(options) {
+        const closeAllSetting = game.settings.get("sfrpg", "closeAllItemSummaries");
+        if (closeAllSetting) {
+            await this._closeAllItemSummaries();
+        }
+        return super.close(options);
+    }
+
+    /**
+     * Close all expanded item summaries for the current user.
+     */
+    async _closeAllItemSummaries() {
+        if (this.actor.compendium || !this.actor.isOwner) return;
+        for (const item of this.actor.items) {
+            item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
+        }
+    }
+
     /**
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
@@ -63,7 +84,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: foundry.utils.deepClone(this.actor.system),
+            system: this.actor.system,
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -128,7 +149,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (data.system.skills) {
             // Update skill labels
             for (const [s, skl] of Object.entries(data.system.skills)) {
-                skl.ability = data.system.abilities[skl.ability].label.substring(0, 3);
+                skl.abilityLabel = data.system.abilities[skl.ability]?.label.substring(0, 3) ?? "Err";
                 skl.icon = this._getClassSkillIcon(skl.value);
 
                 let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
@@ -139,13 +160,6 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 skl.label = skillLabel;
                 skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
             }
-
-            data.system.skills = Object.keys(data.system.skills).sort()
-                .reduce((skills, key) => {
-                    skills[key] = data.system.skills[key];
-
-                    return skills;
-                }, {});
 
             data.system.hasSkills = Object.values(data.system.skills).filter(x => x.enabled).length > 0;
         }
@@ -161,6 +175,15 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         }
 
         this._prepareItems(data);
+
+        if (!this.actor.compendium && this.actor.isOwner) {
+            for (const item of data.items) {
+                item.expanded = item.getFlag('sfrpg', `expanded.${game.user.id}`) || false;
+                if (item.expanded) {
+                    await this._prepareItemSummary(item);
+                }
+            }
+        }
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
         const secrets = this.actor.isOwner;
@@ -212,6 +235,17 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      */
     async activateListeners(html) {
         super.activateListeners(html);
+
+        // Add summary divs for initially expanded items
+        html.find('.item').each((i, el) => {
+            const li = $(el);
+            const itemId = li.data('item-id');
+            const item = this.actor.items.find(x => x.id === itemId);
+            if (item && item.expanded) {
+                li.addClass('expanded');
+                li.append(item.summaryHTML);
+            }
+        });
 
         html.find('[data-wpad]').each((i, e) => {
             const text = e.tagName === "INPUT" ? e.value : e.innerText,
@@ -410,6 +444,28 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         app?.render(true);
     }
 
+    /**
+     * Prepares drop-down summary HTML for expanded items on character sheets
+     * @param {ItemSFRPG} item      An item to prepare the summary for
+     */
+    async _prepareItemSummary(item) {
+        const chatData = await item.getChatData();
+        const desiredDescription = chatData.description.enrichedShort || chatData.description.enrichedValue;
+        const div = $(`<div class="item-summary">${desiredDescription}</div>`);
+        const props = $(`<div class="item-properties"></div>`);
+        chatData.chatProperties.forEach(p => {
+            let tooltipValue = p.tooltip || p.title || "";
+            if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
+            props.append(
+                `<span class="tag" ${tooltipValue}><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+            );
+        });
+        div.append(props);
+        item.summaryHTML = div[0].outerHTML;
+        Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
+        return div;
+    }
+
     _prepareTraits(traits) {
         const map = {
             "dr": CONFIG.SFRPG.energyDamageTypes,
@@ -485,7 +541,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 } else {
                     abl = actorData.attributes.spellcasting || "int";
                 }
-            } else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) {
+            } else if (itemData.properties?.operative?.value && actorData.abilities.dex.value > actorData.abilities.str.value) {
                 abl = "dex";
             } else if (!abl) {
                 if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
@@ -688,7 +744,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         let options = null;
         if (this.actor.system.options) {
-            options = duplicate(this.actor.system.options);
+            options = foundry.utils.duplicate(this.actor.system.options);
         }
         if (!options) {
             options = new Map();
@@ -855,8 +911,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-
-        return item.rollConsumable({event: event});
+        return item.useItem({event:event});
     }
 
     _onItemRollAttack(event) {
@@ -1082,7 +1137,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     }
 
     /**
-     * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
+     * Handle creation and display of a short summary for an item when it is clicked on in the character sheet
      *
      * @param {Event} event The html event
      */
@@ -1090,33 +1145,27 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const li = $(event.currentTarget).parents('.item');
         const item = this.actor.items.get(li.data('item-id'));
-        const chatData = await item.getChatData();
 
-        if (li.hasClass('expanded')) {
+        if (item.expanded || false) {
             const summary = li.children('.item-summary');
-            summary.slideUp(200, () => summary.remove());
+            li.removeClass('expanded');
+            item.expanded = false;
+            summary.slideUp(200, () => {
+                if (this.actor.isOwner && !this.actor.compendium) {
+                    item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
+                }
+            });
         } else {
-            const desiredDescription = chatData.description.short || chatData.description.value;
-            const div = $(`<div class="item-summary">${desiredDescription}</div>`);
-            Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
-
-            const props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => {
-                let tooltipValue = p.tooltip || p.title || "";
-                if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
-                props.append(
-                    `<span class="tag" ${tooltipValue}><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
-                );
-            }
-            );
-
-            div.append(props);
-            li.append(div.hide());
-
-            div.slideDown(200, function() { /* noop */ });
+            const summary = await this._prepareItemSummary(item);
+            li.append(summary.hide());
+            li.addClass('expanded');
+            item.expanded = true;
+            summary.slideDown(200, () => {
+                if (this.actor.isOwner && !this.actor.compendium) {
+                    item.setFlag('sfrpg', `expanded.${game.user.id}`, true);
+                }
+            });
         }
-        li.toggleClass('expanded');
-
     }
 
     async _onItemSplit(event) {
@@ -1207,22 +1256,26 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     }
 
     /**
-     * Creates an TraitSelectorSFRPG dialog
+     * Creates a TraitSelector dialog
      *
      * @param {Event} event HTML Event
      * @private
      */
     _onTraitSelector(event) {
         event.preventDefault();
-        const a = event.currentTarget;
-        const label = a.parentElement.querySelector('label');
         const options = {
-            name: label.getAttribute("for"),
-            title: label.innerText,
-            choices: CONFIG.SFRPG[a.dataset.options]
+            location: event.currentTarget.dataset.location,
+            title: event.currentTarget.dataset.title,
+            dataType: event.currentTarget.dataset.choices,
+            choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
+            format: event.currentTarget.dataset.format
         };
 
-        new TraitSelectorSFRPG(this.actor, options).render(true);
+        // Pick the appropriate trait selector subclass
+        const cls = {
+            "actorTraits": ActorTraitSelectorSFRPG
+        }[options.format];
+        new cls(this.actor, options).render(true);
     }
 
     /**
@@ -1296,7 +1349,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     async _onDrop(event) {
         event.preventDefault();
 
-        const parsedDragData = TextEditor.getDragEventData(event);
+        const parsedDragData = foundry.applications.ux.TextEditor.getDragEventData(event);
         if (Hooks.call('dropActorSheetData', this.actor, this, parsedDragData) === false) {
             // Further processing halted
         } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {
@@ -1337,7 +1390,10 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (event) {
             const targetId = $(event.target).parents('.item')
                 .attr('data-item-id');
-            targetContainer = targetActor.getItem(targetId);
+            targetContainer = targetActor.getItem(targetId) ?? null;
+            if (targetContainer && !targetContainer.system.container?.storage) {
+                targetContainer = null;
+            }
         }
 
         // Handle ItemCollections
@@ -1362,10 +1418,10 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         // Handle trading between actors
         } else if (parsedDragData.uuid.includes("Actor")) {
             const actor = fromUuidSync(parsedDragData.uuid)?.actor || await fromUuid(parsedDragData.uuid)?.actor;
-
             const tokenId = actor.isToken ? actor.token.id : null;
             const sceneId = actor.isToken ? actor.token.parent.id : null;
             const sourceActor = new ActorItemHelper(actor.id, tokenId, sceneId);
+
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                 return;
@@ -1457,7 +1513,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
                     newContents.push({ id: addedItem.id, index: preferredStorageIndex });
 
-                    const update = { id: targetContainer.id, "system.container.contents": newContents };
+                    const update = { id: targetContainer.id, "container.contents": newContents };
                     await targetActor.updateItem(targetContainer.id, update);
                 }
 

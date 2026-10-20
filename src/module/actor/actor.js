@@ -29,34 +29,26 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
-/** @import { RollResult } from '../dice.js' */
+/** @import RollResult from '../dice.js' */
 
 /** @extends {foundry.documents.Actor} */
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
-        // Set module art if available. This applies art to actors viewed or created from compendiums.
-        if (context.pack && data._id) {
-            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
-            if (art) {
-                data.img = art.actor;
-                const tokenArt = typeof art.token === "string"
-                    ? { texture: { src: art.token } }
-                    : {
-                        texture: {
-                            src: art.token.img,
-                            scaleX: art.token.scale,
-                            scaleY: art.token.scale
-                        }
-                    };
-                data.prototypeToken = foundry.utils.mergeObject(data.prototypeToken ?? {}, tokenArt);
-            }
-        }
         super(data, context);
-        // console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+    }
+
+    // appliedEffects effects can be displayed on the token, so hijack it and include shown effects
+    get appliedEffects() {
+        const fromEffects = this.items
+            .filter((e) => e.type === "effect" && e.system.showOnToken && e.system.enabled)
+            .map((e) => new TokenEffect(e));
+
+        return [...super.appliedEffects, ...fromEffects];
     }
 
     // Temporary effects are displayed on the token, so hijack it and include effects
+    // This is no longer called in Foundry V14 but the code is still present so we'll keep it here for now in case they call it again.
     get temporaryEffects() {
         const fromEffects = this.items
             .filter((e) => e.type === "effect" && e.system.showOnToken && e.system.enabled)
@@ -81,10 +73,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     prepareData() {
         super.prepareData();
 
-        this._ensureHasModifiers(this.system);
-        const modifiers = this.getAllModifiers(false, false, true);
-
         // Store all modifiers, from the actor and from items, on the actor in an instantiated state.
+        const modifiers = this.getAllModifiers(false, false, true);
         this.system.allModifiers = modifiers;
 
         // const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
@@ -192,12 +182,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Extend preCreate to apply some defaults to newly created characters
-     * See the base Actor class for API documentation of this method
-     *
-     * @param {object} data               The initial data object provided to the document creation request
-     * @param {object} options            Additional options which modify the creation request
-     * @param {documents.BaseUser} user   The User requesting the document creation
-     * @returns {boolean|void}         Explicitly return false to prevent creation of this Document
+     * @inheritdoc
      */
     async _preCreate(data, options, user) {
         const autoLinkedTypes = ['character', 'drone'];
@@ -245,13 +230,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Extend preUpdate to clamp certain PC changes
-     * See the base Actor class for API documentation of this method
-     *
-     * Pre-update operations only occur for the client which requested the operation.
-     *
-     * @param {object} changed            The differential data that is changed relative to the documents prior values
-     * @param {object} options            Additional options which modify the update request
-     * @param {documents.BaseUser} user   The User requesting the document update
+     * @inheritdoc
      */
     async _preUpdate(changed, options, user) {
 
@@ -298,6 +277,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     /**
      * Delete any of corresponding timedEffect objects of the actor's items.
      * Also remove linked hotbar instances from item apps before deleting so the hotbar isn't closed.
+     * @inheritdoc
      */
     async _onDelete(options, userId) {
         for (const item of this.items) {
@@ -310,6 +290,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Toggle scrolling text for created effects
+     * @inheritdoc
      */
     _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
@@ -325,6 +306,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Delete item's corresponding timedEffect objects
+     * @inheritdoc
      */
     _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
@@ -591,8 +573,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            rollType: "abilityCheck",
+            difficulty: options.dc
         });
     }
 
@@ -624,8 +606,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            rollType: "save",
+            difficulty: options.dc
         });
     }
 
@@ -675,8 +657,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
+            rollType: "skillCheck",
             difficulty: options.dc,
-            displayDifficulty: options.displayDC,
             tags: tags
         });
     }
@@ -731,12 +713,13 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
-            onClose: options.onClose,
             dialogOptions: {
                 skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
-            }
+            },
+            rollType: "skillCheck",
+            onClose: options.onClose
         });
     }
 
@@ -967,7 +950,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             speaker: ChatMessage.getSpeaker({ actor: this }),
             content: rollContent,
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         }, { rollMode: rollMode});
 

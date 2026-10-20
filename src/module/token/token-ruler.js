@@ -41,8 +41,8 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     }
                     return false;
                 },
-                getCostFunction: (token, _options) => {
-                    if (token.actor.system.attributes.speed.climbing?.value) return cost => cost;
+                getCostFunction: (token) => {
+                    if (token.actor.system.attributes.speed?.climbing?.value) return cost => cost;
                     else return cost => cost * 2;
                 }
             },
@@ -57,7 +57,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     }
                     return false;
                 },
-                getCostFunction: (token, _options) => {
+                getCostFunction: (...[,]) => {
                     return cost => cost;
                 }
             },
@@ -87,7 +87,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     }
                     return false;
                 },
-                getCostFunction: (token, _options) => {
+                getCostFunction: (...[,]) => {
                     return cost => cost;
                 }
             },
@@ -102,8 +102,8 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     }
                     return false;
                 },
-                getCostFunction: (token, _options) => {
-                    if (token.actor.system.attributes.speed.swimming?.value) return cost => cost;
+                getCostFunction: (token) => {
+                    if (token.actor.system.attributes.speed?.swimming?.value) return cost => cost;
                     else return cost => cost * 2;
                 }
             },

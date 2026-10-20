@@ -73,6 +73,9 @@ export default class CheckEnricher extends BaseEnricher {
         const shortName = CheckNameHelper.shortFormName(this.args.type);
         const C = CONFIG.SFRPG;
 
+        // Disambiguate between "INTelligence and INTimidate"
+        if (shortName === "int") return this.args.type === "intimidate" ? "skill" : "ability";
+
         if (shortName in C.skills) return "skill";
         else if (shortName in C.saves) return "save";
         else if (shortName in C.abilities) return "ability";
@@ -81,12 +84,12 @@ export default class CheckEnricher extends BaseEnricher {
 
     get localizedType() {
         const C = CONFIG.SFRPG;
-        const type = CheckNameHelper.shortFormName(this.args.type);
+        const shortName = CheckNameHelper.shortFormName(this.args.type);
 
         switch (this.checkType) {
-            case "skill": return C.skills[type];
-            case "save": return C.saves[type];
-            case "ability": return C.abilities[type];
+            case "skill": return C.skills[shortName];
+            case "save": return C.saves[shortName];
+            case "ability": return C.abilities[shortName];
             default: return "";
         }
     }
@@ -115,12 +118,15 @@ export default class CheckEnricher extends BaseEnricher {
      * @returns {HTMLAnchorElement} */
     createElement() {
         const a = super.createElement();
+        if (this.args.displayDC === 'true' || this.args.displayDC === 'false') a.dataset.displayDC = this.args.displayDC;
 
-        if (this.args.dc) a.dataset.dc = parseInt(this.args.dc);
-        if (this.args.displayDC) a.dataset.displayDC = this.args.displayDC === 'true';
+        const dcValue = this.args.dc ? parseInt(this.args.dc) : null;
+        if (dcValue) a.dataset.dc = parseInt(this.args.dc);
+
         const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
-        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${a.innerHTML}`;
+        const displayDC = this.args.displayDC !== undefined ? (this.args.displayDC === 'true' ? true : false) : (dcValue ? true : false);
+        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${((displayDC || game.user.isGM) && dcValue) ? `<span class="dc-value">DC ${a.dataset.dc} </span>` : ''}${a.innerHTML}`;
 
         return a;
 
@@ -133,7 +139,7 @@ export default class CheckEnricher extends BaseEnricher {
         const data = event.currentTarget.dataset;
 
         const actor = _token?.actor ?? game.user?.character;
-        if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
+        if (!actor) return void ui.notifications.error("You must have a token or an actor selected.");
         const options = {
             event,
             dc: data.dc,
@@ -141,7 +147,9 @@ export default class CheckEnricher extends BaseEnricher {
         };
         const id = CheckNameHelper.shortFormName(data.type);
 
-        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
+        // Disambiguate between "INTelligence and INTimidate", then select skill/save/ability
+        if (id === "int") data.type === "intimidate" ? actor.rollSkill(id, options) : actor.rollAbility(id, options);
+        else if (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
         else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
         else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 

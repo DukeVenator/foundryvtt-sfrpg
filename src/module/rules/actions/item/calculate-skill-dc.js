@@ -9,7 +9,6 @@ export default function(engine) {
 
         const actor = fact.owner.actor;
         if (!actor) return fact;
-        const actorData = fact.owner.actorData;
         const classes = actor.items.filter(item => item.type === "class");
 
         if (data.actionType) {
@@ -44,7 +43,8 @@ export default function(engine) {
 
                     const rollResult = DiceSFRPG.resolveFormulaWithoutDice(dcFormula, rollContext, {logErrors: false});
                     if (!rollResult.hadError) {
-                        item.labels.skillCheck = `DC ${rollResult.total} ${checkLabel}`;
+                        item.labels.dcValue = rollResult.total;
+                        item.labels.skillCheck = `DC ${item.labels.dcValue} ${checkLabel}`;
                         item.labels.skillFormula = dcFormula;
                         computedSkill = true;
                     } else {

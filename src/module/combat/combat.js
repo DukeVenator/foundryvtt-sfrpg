@@ -76,7 +76,8 @@ export class CombatSFRPG extends foundry.documents.Combat {
             "turn": combatType === "starship" ? null : 0
         };
         Hooks.callAll("combatStart", this, update);
-        await this.update(update, {advanceTime: CONFIG.time.roundTime});
+        await game.time.advance(CONFIG.time.roundTime);
+        await this.update(update);
 
         const currentPhase = this.getCurrentPhase();
         const eventData = {
@@ -105,14 +106,14 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
 
         Hooks.callAll("onBeginCombat", eventData);
-        this._handleTimedEffects(eventData);
+        await this._handleTimedEffects(eventData);
         await this._notifyAfterUpdate(eventData);
     }
 
     async delete(options = {}) {
         Hooks.callAll("onBeforeCombatEnd", this);
         super.delete(options);
-        game.time.advance(CONFIG.time.roundTime * 300);
+        await game.time.advance(CONFIG.time.roundTime);
     }
 
     // Override to account for ascending or descending turn order.
@@ -356,7 +357,8 @@ export class CombatSFRPG extends foundry.documents.Combat {
             newPhase: newPhase,
             oldCombatant: currentPhase.iterateTurns ? this.turns[this.turn] : null,
             newCombatant: newPhase.iterateTurns ? this.turns[nextTurn] : null,
-            direction: updateOptions.direction || nextRound - this.round || nextTurn - this.turn
+            direction: updateOptions.direction || nextRound - this.round || nextTurn - this.turn,
+            advanceTime: updateOptions.advanceTime || 0
         };
 
         if (!eventData.isNewRound && !eventData.isNewPhase && !eventData.isNewTurn) {
@@ -406,7 +408,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         await this._notifyAfterUpdate(eventData);
     }
 
-    _onUpdate(changed, options, userId) {
+    async _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
 
         // Get an active GM to run events players may not have permissions to do.
@@ -414,7 +416,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Handle timed events if the event that is occurring is phase/round/turn advance.
         if (options.eventData) {
-            this._handleTimedEffects(options.eventData);
+            await this._handleTimedEffects(options.eventData);
         }
     }
 
@@ -484,7 +486,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -523,7 +525,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -561,7 +563,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],
             content: html
@@ -703,7 +705,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         } else {
             rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
             parts.push("@combatant.attributes.init.total");
-            if (game.settings.get("sfrpg", "useInitiativeTiebreaker")) {
+            if (game.settings.get("sfrpg", "useInitiativeTiebreaker") && combatant.actor.system.attributes?.init?.total) {
                 parts.push(combatant.actor.system.attributes.init.total / 100);
             }
         }
@@ -713,6 +715,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             actorContextKey: "combatant",
             parts: parts,
             event,
+            rollType: "initiative",
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
         });
 
@@ -786,7 +789,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 content: explainedRollContent,
                 rollMode: combatant.hidden && rollMode === CONST.DICE_ROLL_MODES.PUBLIC && defaultRollMode === CONST.DICE_ROLL_MODES.PUBLIC ? "gmroll" : rollMode,
                 rolls: [roll],
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 sound: CONFIG.sounds.dice
             };
 
@@ -862,7 +865,10 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
     }
 
-    _handleTimedEffects(eventData) {
+    async _handleTimedEffects(eventData) {
+        if (eventData.advanceTime) {
+            await game.time.advance(eventData.advanceTime);
+        }
         if (!eventData.isNewTurn) return;
 
         const timedEffects = game.sfrpg.timedEffects;

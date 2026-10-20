@@ -37,6 +37,20 @@
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
+
+            // For Drone owner name clickability
+            li.drone-owner {
+                font-weight: bold;
+                span.drone-owner-name {
+                    font-family: "Exo 2";
+                    font-weight: normal;
+                    font-size: 12pt;
+                    cursor: pointer;
+                    &:hover {
+                        text-shadow: 0 0 10px red;
+                    }
+                }
+            }
         }
 
         /* Header Summary Details */
@@ -890,6 +904,19 @@
                 }
             }
 
+            .item-utilisation {
+                .use {
+                    background: @sfrpgYellow;
+                    color: #000;
+                    cursor: pointer;
+
+                    &:hover,
+                    &:focus {
+                        box-shadow: 0 0 5px @sfrpgYellow;
+                    }
+                }
+            }
+
             // Item Dropdown Properties
             .item-properties,
             .crew-properties {
@@ -955,6 +982,8 @@
             }
             &.modifier-value-affected {
                 flex: 0 0 120px;
+                overflow: clip;
+                max-width: 120px;
             }
             &.modifier-type {
                 flex: 0 0 95px;
