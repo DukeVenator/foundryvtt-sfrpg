@@ -17,6 +17,16 @@
         </div>
 
         {{#if itemData.actionType}}
+            {{#if (and item.hasAttack (eq item.chargeSpendHint "missing-usage"))}}
+            <p class="notes setup-warning">
+                <i class="fas fa-exclamation-triangle"></i> {{localize "SFRPG.Items.Capacity.MissingUsageHint"}}
+            </p>
+            {{else if (and item.hasAttack (or (eq item.chargeSpendHint "attack-ignores-charges") (eq item.chargeSpendHint "activation-ignores-charges")))}}
+            <p class="notes setup-warning">
+                <i class="fas fa-exclamation-triangle"></i> {{localize "SFRPG.Items.Capacity.AttackIgnoresChargesHint"}}
+            </p>
+            {{/if}}
+
             {{!-- Action Target --}}
             <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
                 <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>

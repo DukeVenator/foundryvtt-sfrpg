@@ -19,6 +19,11 @@
                 </select>
             </div>
         </div>
+        {{#if item.activationSpendHint}}
+        <p class="notes setup-warning">
+            <i class="fas fa-exclamation-triangle"></i> {{localize "SFRPG.Items.Activation.MissingActivationHint"}}
+        </p>
+        {{/if}}
         {{#if itemData.activation.type}}
 
         {{!-- Activation Condition --}}

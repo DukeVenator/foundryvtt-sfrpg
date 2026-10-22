@@ -41,6 +41,22 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         }
     }
 
+    /**
+     * Blank Activation Cost hides the character-sheet button and the Limited Uses fields.
+     * A feat attack still rolls, and that roll does not spend a use.
+     * @returns {boolean}
+     */
+    get activationSpendHint() {
+        const activationType = this.system.activation?.type ?? "";
+        if (activationType || this.type === "consumable") return false;
+
+        const uses = this.system.uses;
+        const maxText = String(uses?.max ?? "").trim();
+        const hasUses = (maxText !== "" && maxText !== "0") || Number(uses?.value) > 0;
+        if (hasUses) return true;
+        return this.type === "feat" && !!this.system.actionType;
+    }
+
     isActive() {
         return !!this.system.isActive;
     }

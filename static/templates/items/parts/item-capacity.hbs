@@ -38,5 +38,24 @@
                 </select>
             </div>
         </div>
+
+        {{#if (eq item.chargeSpendHint "missing-usage")}}
+        <p class="notes setup-warning">
+            <i class="fas fa-exclamation-triangle"></i> {{localize "SFRPG.Items.Capacity.MissingUsageHint"}}
+        </p>
+        {{else if (eq item.chargeSpendHint "activation-ignores-charges")}}
+        <p class="notes setup-warning">
+            <i class="fas fa-exclamation-triangle"></i> {{localize "SFRPG.Items.Capacity.ActivationIgnoresChargesHint"}}
+        </p>
+        {{else if (eq item.chargeSpendHint "attack-ignores-charges")}}
+        <p class="notes setup-warning">
+            <i class="fas fa-exclamation-triangle"></i> {{localize "SFRPG.Items.Capacity.AttackIgnoresChargesHint"}}
+        </p>
+        {{/if}}
+        {{#if itemData.ammunitionType}}
+        <p class="notes">
+            <i class="fas fa-circle-info"></i> {{localize "SFRPG.Items.Capacity.AmmunitionTypeHint"}}
+        </p>
+        {{/if}}
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js";
+import { ActorItemHelper, getChildItems, getFirstAcceptableStorageIndex, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js";
 
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
@@ -18,6 +18,33 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         }
 
         return (this.getMaxCapacity() > 0);
+    }
+
+    /**
+     * Why the character sheet is not offering a button that spends this item's charges.
+     * Blank Usage hides that button. An Activation button spends limited uses instead.
+     * An attack spends charges only when Usage is Action or Shot.
+     * @returns {""|"missing-usage"|"activation-ignores-charges"|"attack-ignores-charges"}
+     */
+    get chargeSpendHint() {
+        if (["consumable", "ammunition", "starshipWeapon"].includes(this.type)) return "";
+        if (!this.system.capacity) return "";
+
+        const max = Number(this.getMaxCapacity());
+        const current = Number(this.system.capacity.value);
+        const usageValue = Number(this.system.usage?.value);
+        const hasCharges = max > 0 || current > 0 || usageValue > 0;
+        if (!hasCharges) return "";
+
+        const per = this.system.usage?.per ?? "";
+        if (!per) {
+            const activationType = this.system.activation?.type ?? "";
+            const activationButtonShown = !!activationType && !(this.type === "weapon" && activationType === "none");
+            return activationButtonShown ? "activation-ignores-charges" : "missing-usage";
+        }
+
+        if (this.hasAttack && !["action", "shot"].includes(per)) return "attack-ignores-charges";
+        return "";
     }
 
     /**
@@ -185,34 +212,42 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
      * Attempts to reload the item's capacity.
      */
-    reload() {
+    async reload() {
         const itemData = this.system;
-        const currentCapacity = this.getCurrentCapacity();
+        const currentCapacity = Number(this.getCurrentCapacity()) || 0;
         const maxCapacity = this.getMaxCapacity();
 
-        if (currentCapacity >= maxCapacity) {
-            // No need to reload if already at max capacity.
+        // A missing max is null. `0 >= null` is true in JS, which used to report a full magazine.
+        if (maxCapacity !== null && maxCapacity !== undefined && currentCapacity >= maxCapacity) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.AlreadyFullyLoaded", {name: this.name}));
             return false;
         }
 
-        let updatePromise = null;
+        let reloaded = false;
         if (this.requiresCapacityItem()) {
             const capacityItem = this.getCapacityItem();
 
-            // Find more items matching ammunition type
             const matchingItems = this.actor.items
-                .filter(x => x.type === "ammunition" && x.system.ammunitionType === itemData.ammunitionType && ((x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity) || !x.system.useCapacity))
+                .filter(x => {
+                    if (x.type !== "ammunition" || x.system.ammunitionType !== itemData.ammunitionType) return false;
+                    if (!x.system.useCapacity) return true;
+                    const spareCharges = Number(x.getCurrentCapacity()) || 0;
+                    const spareMax = x.getMaxCapacity();
+                    const hasMoreCharges = spareCharges > currentCapacity;
+                    const weaponHasMax = maxCapacity !== null && maxCapacity !== undefined;
+                    const spareHasMax = spareMax !== null && spareMax !== undefined;
+                    const fitsWeapon = !weaponHasMax || !spareHasMax || (Number(spareMax) <= Number(maxCapacity));
+                    return hasMoreCharges && fitsWeapon;
+                })
                 .filter(x => {
                     const container = getItemContainer(this.actor.items, x);
                     return !container || container.type === "container";
                 })
-                .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
+                .sort((firstEl, secondEl) => (Number(secondEl.getCurrentCapacity()) || 0) - (Number(firstEl.getCurrentCapacity()) || 0));
 
             if (matchingItems.length > 0) {
                 const newAmmunition = matchingItems[0];
 
-                // Create actor item helper
                 const tokenId = this.actor.isToken ? this.actor.token.id : null;
                 const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
                 const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId, { actor: this.actor });
@@ -220,27 +255,29 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 const originalContainer = getItemContainer(this.actor.items, newAmmunition);
 
                 if (newAmmunition.system.useCapacity || capacityItem === null) {
-                    if (capacityItem) {
-                        updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
-                    }
-
-                    if (updatePromise) {
-                        updatePromise.then(() => {
-                            setItemContainer(itemHelper, newAmmunition, this, 1);
-                        });
+                    const slotIndex = getFirstAcceptableStorageIndex(this, newAmmunition, capacityItem?.id ?? null);
+                    if (slotIndex === null) {
+                        ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.name}));
                     } else {
+                        // Eject the spent battery before inserting the replacement, so the ammunition slot is free.
+                        if (capacityItem) {
+                            await setItemContainer(itemHelper, capacityItem, null, 1);
+                        }
+
                         let totalAmountLoaded = 1;
                         if (!newAmmunition.system.useCapacity) {
                             totalAmountLoaded = Math.min(maxCapacity, newAmmunition.getCurrentCapacity());
                         }
 
-                        updatePromise = setItemContainer(itemHelper, newAmmunition, this, totalAmountLoaded);
+                        const loaded = await setItemContainer(itemHelper, newAmmunition, this, totalAmountLoaded);
+                        reloaded = !!loaded && getItemContainer(this.actor.items, loaded) === this;
                     }
                 } else {
-                    updatePromise = this._internalQuantityReload(currentCapacity, maxCapacity, capacityItem, newAmmunition);
+                    const updated = await this._internalQuantityReload(currentCapacity, maxCapacity, capacityItem, newAmmunition);
+                    reloaded = !!updated;
                 }
 
-                if (updatePromise && originalContainer) {
+                if (reloaded && originalContainer) {
                     ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.ReloadFromContainer", {name: this.name, ammoName: newAmmunition.name, containerName: originalContainer.name}), {permanent: true});
                 }
 
@@ -249,21 +286,19 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             }
         } else {
             if (this.type === "consumable") {
-                updatePromise = this.update({'system.uses.value': maxCapacity});
+                await this.update({'system.uses.value': maxCapacity});
             } else {
-                updatePromise = this.update({'system.capacity.value': maxCapacity});
+                await this.update({'system.capacity.value': maxCapacity});
             }
+            reloaded = true;
         }
 
-        if (updatePromise) {
-            updatePromise.then(() => {
-                this._postReloadMessage();
-
-                Hooks.callAll("itemReloaded", {actor: this.actor, item: this});
-            });
+        if (reloaded) {
+            this._postReloadMessage();
+            Hooks.callAll("itemReloaded", {actor: this.actor, item: this});
         }
 
-        return updatePromise;
+        return reloaded;
     }
 
     _internalQuantityReload(currentCapacity, maxCapacity, capacityItem, newAmmunition) {

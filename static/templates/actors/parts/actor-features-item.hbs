@@ -27,6 +27,11 @@
                     </div>
                     {{/if}}
                 </h4>
+                {{#if item.activationSpendHint}}
+                <span class="setup-warning" data-tooltip="{{localize "SFRPG.Items.Activation.MissingActivationHint"}}">
+                    <i class="fas fa-exclamation-triangle"></i> {{localize "SFRPG.Items.Activation.MissingActivationShort"}}
+                </span>
+                {{/if}}
                 {{#if (or item.config.hasAttack item.config.hasDamage)}}
                 <div class="item-action flexcol">
                     {{#if item.config.hasAttack}}

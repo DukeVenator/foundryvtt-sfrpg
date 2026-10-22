@@ -1614,6 +1614,8 @@
                 "Label": "Label",
                 "LabelTooltip": "Appears on the HUD when this item is activated. Leave blank to use the item name.",
                 "LimitedUses": "Limited Uses",
+                "MissingActivationShort": "Set activation",
+                "MissingActivationHint": "Choose an Activation Cost to put a button on the character sheet and to show Limited Uses. That button spends one use. Attack and damage buttons only roll.",
                 "Range": "Range",
                 "RangeIncrement": "Range Increment",
                 "Target": "Target"
@@ -1663,7 +1665,12 @@
                 "HeaderTooltip": "The number of rounds, charges, etc. that can be held by this item (e.g. the number of charges a battery can hold)",
                 "Usage": "Usage",
                 "UsageTooltip": "The amount of charges, pieces of ammunition, etc. that are consumed when this item is used.",
-                "UsageValueTooltip": "The time unit used to determine when the item's capacity is consumed."
+                "UsageValueTooltip": "When these charges are spent. Leave this blank and the character sheet has no button that spends them. Action and Shot are also spent when you roll an attack.",
+                "MissingUsageShort": "Set usage",
+                "MissingUsageHint": "Choose a Usage option to put a button on the character sheet that spends these charges. Action and Shot are also spent when you roll an attack.",
+                "ActivationIgnoresChargesHint": "The button in Utilisation spends a limited use and leaves these charges unchanged. Set Usage to add a button that spends the charges. Action and Shot are also spent when you roll an attack.",
+                "AttackIgnoresChargesHint": "Rolling this attack leaves the charges unchanged. Set Usage to Action or Shot under Capacity & Usage so the attack spends them.",
+                "AmmunitionTypeHint": "Current charges are stored on a battery or ammunition item dragged onto this item."
             },
             "Categories": {
                 "AbilityScoreIncrease": "Ability Score Increases",
