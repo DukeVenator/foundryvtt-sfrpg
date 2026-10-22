@@ -524,7 +524,20 @@
                 "Use": "Use",
                 "UseCapacity": "Used Capacity"
             },
-            "PlaceAbilityTemplate": "Place {label}"
+            "PlaceAbilityTemplate": "Place {label}",
+            "Conserving": {
+                "Title": "Conserving",
+                "ReturnAmmo": "Restituisci munizioni",
+                "KeepSpent": "Lascia consumate",
+                "MissPrompt": "{name} ha mancato. Restituire {amount} munizioni?",
+                "AmmoReturned": "Restituite {amount} munizioni a {name}.",
+                "NothingToReturn": "Nessuna munizione da restituire.",
+                "AlreadyReturned": "Quelle munizioni sono già state restituite.",
+                "Returned": "Munizioni restituite",
+                "Returns": "Restituisce munizioni",
+                "ReturnedCard": "Conserving restituisce {amount} munizioni.",
+                "Kept": "Munizioni consumate"
+            }
         },
         "Check": "Check",
         "ClassArmorProf": "Competenza nelle Armature",

@@ -164,12 +164,18 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             return;
         }
 
-        // Get max capacity
-        const maxCapacity = this.getMaxCapacity() ?? this.parentItem.getMaxCapacity();
+        // Quantity ammunition has no max. A null max used to call a missing parent and produce NaN.
+        const ownMax = this.getMaxCapacity();
+        const maxCapacity = (ownMax === null || ownMax === undefined)
+            ? (this.parentItem?.getMaxCapacity?.() ?? null)
+            : ownMax;
         const updatedCapacity = currentCapacity + increaseAmount;
+        const cappedCapacity = (maxCapacity === null || maxCapacity === undefined)
+            ? updatedCapacity
+            : Math.min(updatedCapacity, maxCapacity);
 
         if (this.type === "ammunition" && !this.system.useCapacity) {
-            return this.update({'system.quantity': Math.min(updatedCapacity, maxCapacity)});
+            return this.update({'system.quantity': cappedCapacity});
         } else if (this.type === "consumable") {
             if (updatedCapacity > maxCapacity) {
                 const capacityOvershoot = (updatedCapacity - maxCapacity) % maxCapacity;
@@ -180,10 +186,10 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 });
             } else {
                 // Add charges
-                this.update({'system.uses.value': Math.min(updatedCapacity, maxCapacity)});
+                this.update({'system.uses.value': Math.min(updatedCapacity, maxCapacity ?? updatedCapacity)});
             }
         } else {
-            return this.update({'system.capacity.value': Math.min(updatedCapacity, maxCapacity)});
+            return this.update({'system.capacity.value': cappedCapacity});
         }
     }
 

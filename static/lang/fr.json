@@ -524,7 +524,20 @@
                 "Use": "Utiliser",
                 "UseCapacity": "Used Capacity"
             },
-            "PlaceAbilityTemplate": "Placer {label}"
+            "PlaceAbilityTemplate": "Placer {label}",
+            "Conserving": {
+                "Title": "Conserving",
+                "ReturnAmmo": "Rendre les munitions",
+                "KeepSpent": "Laisser dépensées",
+                "MissPrompt": "{name} a raté. Rendre {amount} munition ?",
+                "AmmoReturned": "{amount} munition rendue à {name}.",
+                "NothingToReturn": "Aucune munition n'attend d'être rendue.",
+                "AlreadyReturned": "Ces munitions ont déjà été rendues.",
+                "Returned": "Munitions rendues",
+                "Returns": "Rend les munitions",
+                "ReturnedCard": "Conserving rend {amount} munition.",
+                "Kept": "Munitions dépensées"
+            }
         },
         "Check": "Check",
         "ClassArmorProf": "Maniements des armures",

@@ -529,7 +529,20 @@
                 "Use": "Use",
                 "UseCapacity": "Used Capacity"
             },
-            "PlaceAbilityTemplate": "Place {label}"
+            "PlaceAbilityTemplate": "Place {label}",
+            "Conserving": {
+                "Title": "Conserving",
+                "ReturnAmmo": "Return Ammo",
+                "KeepSpent": "Keep Spent",
+                "MissPrompt": "{name} missed. Return {amount} ammunition?",
+                "AmmoReturned": "Returned {amount} ammunition to {name}.",
+                "NothingToReturn": "No ammunition is waiting to be returned.",
+                "AlreadyReturned": "That ammunition was already returned.",
+                "Returned": "Ammo Returned",
+                "Returns": "Returns Ammunition",
+                "ReturnedCard": "Conserving returns {amount} ammunition.",
+                "Kept": "Ammo Spent"
+            }
         },
         "Check": "Check",
         "ClassArmorProf": "Armor Proficiencies",

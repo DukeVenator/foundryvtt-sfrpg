@@ -524,7 +524,20 @@
                 "Use": "Usar",
                 "UseCapacity": "Used Capacity"
             },
-            "PlaceAbilityTemplate": "Colocar {label}"
+            "PlaceAbilityTemplate": "Colocar {label}",
+            "Conserving": {
+                "Title": "Conserving",
+                "ReturnAmmo": "Devolver munición",
+                "KeepSpent": "Mantener gastada",
+                "MissPrompt": "{name} falló. ¿Devolver {amount} de munición?",
+                "AmmoReturned": "Se devolvieron {amount} de munición a {name}.",
+                "NothingToReturn": "No hay munición pendiente de devolución.",
+                "AlreadyReturned": "Esa munición ya fue devuelta.",
+                "Returned": "Munición devuelta",
+                "Returns": "Devuelve munición",
+                "ReturnedCard": "Conserving devuelve {amount} de munición.",
+                "Kept": "Munición gastada"
+            }
         },
         "Check": "Chequeo",
         "ClassArmorProf": "Competencias en Armadura",

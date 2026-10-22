@@ -264,6 +264,7 @@ export class DiceSFRPG {
             // Roll Evaluation
             const evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions, difficulty);
             const rollSuccess = DiceSFRPG.evaluateRollVsValue(roll, evalValue);
+            roll.options.sfrpgRollSuccess = rollSuccess;
             DiceSFRPG.addRollSuccessTag(roll, rollInfo, rollOptions, rollType, difficulty, evalValue, rollSuccess, tags);
 
             // Chat Cards
@@ -272,6 +273,7 @@ export class DiceSFRPG {
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
 
+            let chatCard = null;
             if (useCustomCard && chatMessage) {
                 // Push the roll to the ChatBox
                 const customData = {
@@ -289,7 +291,8 @@ export class DiceSFRPG {
                 };
 
                 try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
+                    chatCard = await SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
+                    useCustomCard = Boolean(chatCard);
                 } catch (error) {
                     useCustomCard = false;
                     errorToThrow = error;
@@ -305,10 +308,16 @@ export class DiceSFRPG {
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
+                if (rollOptions?.conserving && SFRPGCustomChatMessage.offerConservingRefund(roll, rollSuccess)) {
+                    const item = itemContext?.entity;
+                    messageData.content += SFRPGCustomChatMessage.conservingRefundControl(item, rollOptions.conserving);
+                }
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
+                chatCard = await ChatMessage.create(messageData, { rollMode: rollInfo.mode });
             }
+
+            if (chatCard?.id) roll.options.sfrpgMessageId = chatCard.id;
 
             if (onClose) {
                 onClose(roll, formula, finalFormula);
@@ -739,7 +748,7 @@ export class DiceSFRPG {
                 }
 
                 try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
+                    useCustomCard = await SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
                 } catch (error) {
                     useCustomCard = false;
                     errorToThrow = error;
@@ -859,6 +868,84 @@ export class DiceSFRPG {
         }
 
         return false;
+    }
+
+    /**
+     * Whether an attack hit, missed, or could not be judged.
+     * A natural 20 is a hit and a natural 1 is a miss. Anything else needs a target number.
+     * @param {Roll} roll
+     * @returns {"hit"|"miss"|"unknown"|null}
+     */
+    static attackOutcome(roll) {
+        if (!roll) return null;
+        if (roll.d20Critical) return "hit";
+        if (roll.d20Fumble || DiceSFRPG.isFumble(roll)) return "miss";
+        if (roll.options?.sfrpgRollSuccess === true) return "hit";
+        if (roll.options?.sfrpgRollSuccess === false) return "miss";
+        return "unknown";
+    }
+
+    /**
+     * The attack card is in the chat log and is not hidden while dice are animating.
+     * @param {string} messageId
+     * @returns {boolean}
+     */
+    static chatCardIsVisible(messageId) {
+        const card = document.querySelector(`#chat-log [data-message-id="${messageId}"]`);
+        if (!card) return false;
+        const style = window.getComputedStyle(card);
+        return style.display !== "none" && style.visibility !== "hidden" && card.getClientRects().length > 0;
+    }
+
+    /**
+     * Resolve once Dice So Nice has finished and the attack chat card is on screen.
+     * Without that module, this resolves as soon as the card is rendered.
+     * @param {string|null|undefined} messageId
+     * @returns {Promise<void>}
+     */
+    static waitForChatCard(messageId) {
+        if (!messageId) return Promise.resolve();
+
+        const dice3d = game.modules.get("dice-so-nice")?.active ? game.dice3d : null;
+        const diceAnimation = dice3d?.waitFor3DAnimationByMessageID
+            ? Promise.race([
+                dice3d.waitFor3DAnimationByMessageID(messageId).catch(() => undefined),
+                new Promise((resolve) => {
+                    window.setTimeout(resolve, 10000);
+                })
+            ])
+            : Promise.resolve();
+
+        const cardAppeared = new Promise((resolve) => {
+            let settled = false;
+            const log = document.getElementById("chat-log");
+            let observer = null;
+            const finish = (force = false) => {
+                if (settled) return;
+                if (!force && !DiceSFRPG.chatCardIsVisible(messageId)) return;
+                settled = true;
+                window.clearTimeout(timeout);
+                observer?.disconnect();
+                Hooks.off("renderChatMessageHTML", onRender);
+                resolve();
+            };
+            const onRender = (message) => {
+                if (message.id === messageId) finish();
+            };
+            const timeout = window.setTimeout(() => finish(true), 10000);
+            Hooks.on("renderChatMessageHTML", onRender);
+            observer = log
+                ? new MutationObserver(() => finish())
+                : null;
+            observer?.observe(log, {
+                attributes: true,
+                childList: true,
+                subtree: true
+            });
+            finish();
+        });
+
+        return Promise.all([diceAnimation, cardAppeared]).then(() => undefined);
     }
 
     /**

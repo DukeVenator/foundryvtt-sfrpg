@@ -8,7 +8,9 @@
     </header>
 
     <div class="card-content">
-        {{#if item.system.description.enrichedShort}}
+        {{#if summary}}
+        <p>{{summary}}</p>
+        {{else if item.system.description.enrichedShort}}
         {{{item.system.description.enrichedShort}}}
         {{else}}
         {{{item.system.description.enrichedValue}}}

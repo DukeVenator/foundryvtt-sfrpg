@@ -524,7 +524,20 @@
                 "Use": "Use",
                 "UseCapacity": "Used Capacity"
             },
-            "PlaceAbilityTemplate": "Place {label}"
+            "PlaceAbilityTemplate": "Place {label}",
+            "Conserving": {
+                "Title": "Conserving",
+                "ReturnAmmo": "弾薬を戻す",
+                "KeepSpent": "消費したまま",
+                "MissPrompt": "{name}は外しました。弾薬を{amount}戻しますか？",
+                "AmmoReturned": "{name}に弾薬を{amount}戻しました。",
+                "NothingToReturn": "戻せる弾薬はありません。",
+                "AlreadyReturned": "その弾薬は既に戻されています。",
+                "Returned": "弾薬を戻した",
+                "Returns": "弾薬を戻す",
+                "ReturnedCard": "コンサービングで弾薬を{amount}戻す。",
+                "Kept": "消費済み"
+            }
         },
         "Check": "Check",
         "ClassArmorProf": "アーマー習熟",

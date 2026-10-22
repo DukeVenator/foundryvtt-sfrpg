@@ -14,6 +14,22 @@ import { ItemChatMixin } from "./mixins/item-chat.js";
  * @import { RollResult } from '../dice.js'
  */
 
+/** Compendium id for the Conserving weapon fusion. */
+const CONSERVING_FUSION_ID = "sIJubAueNWSJztF6";
+
+/** Ammunition the Conserving fusion can give back after a miss. */
+const CONSERVING_AMMO_TYPES = new Set([
+    "arrow",
+    "charge",
+    "dart",
+    "flare",
+    "rocket",
+    "roundS",
+    "roundL",
+    "roundH",
+    "shell"
+]);
+
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin, ItemChatMixin) {
 
@@ -339,6 +355,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
+            hasConserving: this.canConserveAmmo(),
             hasSave: this.hasSave,
             hasSkill: this.hasSkill,
             hasArea: this.hasArea && ["ft", "meter"].includes(this.system.area.units) && !["", "other"].includes(this.system.area.shape),
@@ -995,6 +1012,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
+        const conservingShot = this._conservingShotForAttack(options);
+        if (conservingShot) rollOptions.conserving = conservingShot;
+        options.conservingShot = conservingShot;
+
         // Call the roll helper utility
         return DiceSFRPG.d20Roll({
             event: options.event,
@@ -1129,6 +1150,212 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
+     * A ranged weapon with the Conserving fusion and ammunition that fusion can preserve.
+     * @returns {boolean}
+     */
+    canConserveAmmo() {
+        if (!this.actor || this.system.actionType !== "rwak") return false;
+        if (!CONSERVING_AMMO_TYPES.has(this.system.ammunitionType)) return false;
+        if (!["action", "shot"].includes(this.system.usage?.per)) return false;
+        if (!this._hasConservingFusion()) return false;
+        return this.conservingRefundAmount() > 0;
+    }
+
+    /**
+     * Charges or ammunition this attack would spend, after usage modifiers.
+     * @returns {number}
+     */
+    conservingRefundAmount() {
+        return this._calculateAmmoUsageWithModifiers(this.system.usage?.value || 0);
+    }
+
+    /**
+     * @returns {boolean}
+     */
+    _hasConservingFusion() {
+        return this._getContainedItems().some(item => {
+            if (item.type !== "fusion") return false;
+            const sourceId = item.flags?.core?.sourceId ?? "";
+            if (typeof sourceId === "string" && sourceId.endsWith(CONSERVING_FUSION_ID)) return true;
+            return item.name?.replace(/\s+/g, " ").trim()
+                .toLowerCase() === "conserving";
+        });
+    }
+
+    /**
+     * A shot id and amount to offer back if this attack spends ammunition under Conserving.
+     * @param {object} options
+     * @returns {{id: string, amount: number}|null}
+     */
+    _conservingShotForAttack(options) {
+        if (options.disableDeductAmmo || !this.canConserveAmmo()) return null;
+        const amount = this.conservingRefundAmount();
+        if (!(amount > 0)) return null;
+        if ((Number(this.getCurrentCapacity()) || 0) < amount) return null;
+        return { id: foundry.utils.randomID(), amount };
+    }
+
+    /**
+     * Remember a spent shot so a miss can give it back.
+     * @param {{id: string, amount: number}} shot
+     */
+    async _rememberConservingShot(shot) {
+        const pending = foundry.utils.deepClone(this.getFlag("sfrpg", "conservingRefund") ?? []);
+        pending.push(shot);
+        await this.setFlag("sfrpg", "conservingRefund", pending);
+    }
+
+    /**
+     * Remove one pending shot. The latest shot is used when no id is given.
+     * @param {string|null} shotId
+     * @returns {Promise<{id: string, amount: number}|null>}
+     */
+    async _takeConservingShot(shotId = null) {
+        if (this._conservingBusy) return null;
+        this._conservingBusy = true;
+        try {
+            const pending = foundry.utils.deepClone(this.getFlag("sfrpg", "conservingRefund") ?? []);
+            const index = shotId ? pending.findIndex(entry => entry.id === shotId) : pending.length - 1;
+            if (index < 0) return null;
+            const [shot] = pending.splice(index, 1);
+            await this.setFlag("sfrpg", "conservingRefund", pending);
+            return shot;
+        } finally {
+            this._conservingBusy = false;
+        }
+    }
+
+    /**
+     * Put the spent ammunition back and retire the chat button for that shot.
+     * @param {string|null} [shotId]
+     * @returns {Promise<boolean>}
+     */
+    async returnConservingAmmo(shotId = null) {
+        const shot = await this._takeConservingShot(shotId);
+        if (!shot) {
+            const key = shotId ? "AlreadyReturned" : "NothingToReturn";
+            ui.notifications.info(game.i18n.localize(`SFRPG.ChatCard.Conserving.${key}`));
+            return false;
+        }
+
+        await this.increaseCapacity(shot.amount);
+        ui.notifications.info(game.i18n.format("SFRPG.ChatCard.Conserving.AmmoReturned", {
+            amount: shot.amount,
+            name: this.name
+        }));
+        await this._markConservingShotResolved(shot.id, game.i18n.localize("SFRPG.ChatCard.Conserving.Returned"));
+        await this._postConservingCard(shot.amount);
+        return true;
+    }
+
+    /**
+     * Tell the table that Conserving returned this shot.
+     * @param {number} amount
+     */
+    async _postConservingCard(amount) {
+        const templateData = {
+            actor: this.actor,
+            item: this,
+            action: "SFRPG.ChatCard.Conserving.Returns",
+            summary: game.i18n.format("SFRPG.ChatCard.Conserving.ReturnedCard", { amount })
+        };
+        if (this.actor?.token) {
+            templateData.tokenId = this.actor.token.id;
+            templateData.sceneId = this.actor.token.parent?.id;
+        }
+
+        const html = await foundry.applications.handlebars.renderTemplate("systems/sfrpg/templates/chat/item-action-card.hbs", templateData);
+        const chatData = {
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html,
+            flags: {
+                core: { canPopout: true },
+                sfrpg: {
+                    item: this.uuid,
+                    actor: this.actor?.uuid
+                }
+            }
+        };
+        ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+        await ChatMessage.create(chatData, { displaySheet: false });
+    }
+
+    /**
+     * Leave a missed shot spent and retire its chat button.
+     * @param {string} shotId
+     */
+    async _dropConservingShot(shotId) {
+        const shot = await this._takeConservingShot(shotId);
+        if (!shot) return;
+        await this._markConservingShotResolved(shot.id, game.i18n.localize("SFRPG.ChatCard.Conserving.Kept"));
+    }
+
+    /**
+     * Ask to return ammunition after a detected miss, or keep the shot available on the card.
+     * @param {{id: string, amount: number}} shot
+     * @param {"hit"|"miss"|"unknown"|null} outcome
+     */
+    async _handleConservingShot(shot, outcome) {
+        await this._rememberConservingShot(shot);
+        if (outcome !== "miss") return;
+
+        await DiceSFRPG.waitForChatCard(shot.messageId);
+
+        let choice = null;
+        try {
+            choice = await foundry.applications.api.DialogV2.wait({
+                window: { title: game.i18n.localize("SFRPG.ChatCard.Conserving.Title") },
+                content: `<p>${game.i18n.format("SFRPG.ChatCard.Conserving.MissPrompt", {
+                    name: foundry.utils.escapeHTML(this.name),
+                    amount: shot.amount
+                })}</p>`,
+                buttons: [
+                    {
+                        action: "return",
+                        icon: "fa-solid fa-rotate-left",
+                        label: game.i18n.localize("SFRPG.ChatCard.Conserving.ReturnAmmo"),
+                        default: true,
+                        callback: () => "return"
+                    },
+                    {
+                        action: "keep",
+                        label: game.i18n.localize("SFRPG.ChatCard.Conserving.KeepSpent"),
+                        callback: () => "keep"
+                    }
+                ]
+            });
+        } catch {
+            choice = null;
+        }
+
+        if (choice === "return") await this.returnConservingAmmo(shot.id);
+        else if (choice === "keep") await this._dropConservingShot(shot.id);
+    }
+
+    /**
+     * @param {string} shotId
+     * @param {string} label
+     */
+    async _markConservingShotResolved(shotId, label) {
+        const updates = [];
+        for (const message of game.messages) {
+            if (!message.content?.includes(`data-shot-id="${shotId}"`)) continue;
+            if (!message.isAuthor && !game.user.isGM) continue;
+            const wrapper = document.createElement("div");
+            wrapper.innerHTML = message.content;
+            let changed = false;
+            for (const button of wrapper.querySelectorAll(`button[data-action="returnAmmo"][data-shot-id="${shotId}"]`)) {
+                button.disabled = true;
+                button.textContent = label;
+                changed = true;
+            }
+            if (changed) updates.push(message.update({ content: wrapper.innerHTML }));
+        }
+        await Promise.all(updates);
+    }
+
+    /**
      * Handle updating item capacity when the attack dialog closes.
      *
      * @param {Html} html The html from the dailog
@@ -1139,17 +1366,22 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
-    _onAttackRollClose(options, roll, formula, finalFormula) {
+    async _onAttackRollClose(options, roll, formula, finalFormula) {
         if (!roll) {
             return;
         }
 
         const itemData = this.system;
+        let spent = 0;
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
             if (usage.per && ["action", "shot"].includes(usage.per)) {
-                this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
+                const amount = this._calculateAmmoUsageWithModifiers(usage.value);
+                const before = Number(this.getCurrentCapacity()) || 0;
+                await this.consumeCapacity(amount);
+                const after = Number(this.getCurrentCapacity()) || 0;
+                spent = Math.max(0, before - after);
             } else if (usage.per && ['minute'].includes(usage.per)) {
                 if (game.combat) {
                     Hooks.callAll("consumeCapacityMinute", {
@@ -1160,6 +1392,16 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 } else {
                     ui.notifications.info("You currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
                 }
+            }
+        }
+
+        if (spent > 0 && options.conservingShot && DiceSFRPG.attackOutcome(roll) !== "hit") {
+            options.conservingShot.amount = spent;
+            options.conservingShot.messageId = roll.options?.sfrpgMessageId ?? null;
+            try {
+                await this._handleConservingShot(options.conservingShot, DiceSFRPG.attackOutcome(roll));
+            } catch (error) {
+                console.error(error);
             }
         }
 

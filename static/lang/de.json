@@ -524,7 +524,20 @@
                 "Use": "Benutzen",
                 "UseCapacity": "Used Capacity"
             },
-            "PlaceAbilityTemplate": "Plazieren {label}"
+            "PlaceAbilityTemplate": "Plazieren {label}",
+            "Conserving": {
+                "Title": "Conserving",
+                "ReturnAmmo": "Munition zurückgeben",
+                "KeepSpent": "Verbraucht lassen",
+                "MissPrompt": "{name} hat verfehlt. {amount} Munition zurückgeben?",
+                "AmmoReturned": "{amount} Munition an {name} zurückgegeben.",
+                "NothingToReturn": "Es wartet keine Munition auf eine Rückgabe.",
+                "AlreadyReturned": "Diese Munition wurde bereits zurückgegeben.",
+                "Returned": "Munition zurückgegeben",
+                "Returns": "Gibt Munition zurück",
+                "ReturnedCard": "Conserving gibt {amount} Munition zurück.",
+                "Kept": "Munition verbraucht"
+            }
         },
         "Check": "Check",
         "ClassArmorProf": "Umgang mit Rüstungen",

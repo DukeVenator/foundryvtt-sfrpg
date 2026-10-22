@@ -69,6 +69,7 @@ export const ItemChatMixin = (superclass) => class extends superclass {
 
         // Item capacity and consumable usage
         else if (action === "use") await item.useItem({ event });
+        else if (action === "returnAmmo") await item.returnConservingAmmo(button.dataset.shotId || null);
     }
 
     /**

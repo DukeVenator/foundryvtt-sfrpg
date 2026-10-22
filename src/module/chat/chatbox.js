@@ -33,7 +33,7 @@ export default class SFRPGCustomChatMessage {
      * @param {Boolean}     [data.rollSuccess]  Whether the roll, evaluated against the action target, was a success
      * @param {Tag[]}       [data.tags]         Any item metadata that will be output at the bottom of the chat card.
      */
-    static renderStandardRoll(roll, data) {
+    static async renderStandardRoll(roll, data) {
         /** Get entities */
         const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
 
@@ -80,7 +80,10 @@ export default class SFRPGCustomChatMessage {
             hasMagicDamage: data.hasMagicDamage,
             rollOptions: data.rollOptions,
             rollDices: data.rollDices,
-            rollSuccess: data.rollSuccess
+            rollSuccess: data.rollSuccess,
+            conservingShot: (data.rollOptions?.conserving && SFRPGCustomChatMessage.offerConservingRefund(roll, data.rollSuccess))
+                ? data.rollOptions.conserving
+                : null
         };
 
         const speaker = data.speaker;
@@ -102,9 +105,34 @@ export default class SFRPGCustomChatMessage {
             }
         }
 
-        SFRPGCustomChatMessage._render(roll, data, options);
+        return SFRPGCustomChatMessage._render(roll, data, options);
+    }
 
-        return true;
+    /**
+     * A miss, or an attack with no target number, can give Conserving ammunition back.
+     * A natural 20 never does.
+     * @param {Roll} roll
+     * @param {boolean|null} rollSuccess
+     * @returns {boolean}
+     */
+    static offerConservingRefund(roll, rollSuccess) {
+        if (!roll || roll.d20Critical) return false;
+        if (roll.d20Fumble) return true;
+        return rollSuccess !== true;
+    }
+
+    /**
+     * Return Ammo control appended to a standard attack chat message.
+     * @param {ItemSFRPG} item
+     * @param {{id: string}} shot
+     * @returns {string}
+     */
+    static conservingRefundControl(item, shot) {
+        if (!item || !shot?.id) return "";
+        const tokenId = item.actor ? this.getToken(item.actor) : "";
+        const tokenAttr = tokenId ? ` data-token-id="${tokenId}"` : "";
+        const label = game.i18n.localize("SFRPG.ChatCard.Conserving.ReturnAmmo");
+        return `<div class="sfrpg chat-card conserving-refund" data-actor-id="${item.actor?.id ?? ""}" data-item-id="${item.id}"${tokenAttr}><div class="card-buttons"><button type="button" class="chat-button-conserving" data-action="returnAmmo" data-shot-id="${shot.id}">${label}</button></div></div>`;
     }
 
     static async _render(roll, data, options) {
@@ -165,6 +193,6 @@ export default class SFRPGCustomChatMessage {
             messageData.flags.sfrpg.rollOptions = options.rollOptions;
         }
 
-        ChatMessage.create(messageData, { rollMode: rollMode });
+        return ChatMessage.create(messageData, { rollMode: rollMode });
     }
 }
