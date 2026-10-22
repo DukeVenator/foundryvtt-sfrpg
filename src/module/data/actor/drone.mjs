@@ -2,7 +2,39 @@ import SFRPGActorBase from "./base-actor.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * Older drone sheets stored the owner as free text, often with a UUID link pasted in.
+ * Foundry's document UUID field only accepts an Actor UUID.
+ * @param {string|null} owner
+ * @returns {string|null}
+ */
+export function resolveLegacyDroneOwner(owner) {
+    if (typeof owner !== "string") return owner ?? null;
+    const trimmed = owner.trim();
+    if (!trimmed) return null;
+
+    const linked = trimmed.match(/@UUID\[(Actor\.[A-Za-z0-9]{16})\]/);
+    if (linked) return linked[1];
+
+    const parsed = foundry.utils.parseUuid(trimmed);
+    const documentId = parsed?.documentId ?? "";
+    if (parsed?.type === "Actor" && !parsed.embedded?.length && /^[A-Za-z0-9]{16}$/.test(documentId)) {
+        return trimmed;
+    }
+
+    return null;
+}
+
 export default class SFRPGActorDrone extends SFRPGActorBase {
+    /** @inheritDoc */
+    static migrateData(data) {
+        if (typeof data.details?.owner === "string") {
+            const uuid = resolveLegacyDroneOwner(data.details.owner);
+            if (uuid) data.details.owner = uuid;
+        }
+        return super.migrateData(data);
+    }
+
     static defineSchema() {
         const schema = super.defineSchema();
 
@@ -58,6 +90,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
 
         foundry.utils.mergeObject(schema.details.fields, {
             owner: new fields.DocumentUUIDField({
+                type: "Actor",
                 initial: null,
                 nullable: true
             })

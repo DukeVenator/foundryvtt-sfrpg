@@ -1,3 +1,4 @@
+import { resolveLegacyDroneOwner } from "./data/actor/drone.mjs";
 import SFRPGModifier from "./modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./modifiers/types.js";
 
@@ -9,7 +10,8 @@ const SFRPGMigrationSchemas = Object.freeze({
     DAMAGE_TYPE_REFACTOR: 0.005,
     DAMAGE_REDUCTION_REFACTOR: 0.006,
     THE_WEBP_UPDATE: 0.008, // We changed all icons from .png to .webp
-    THE_GUNNERY_UPDATE: 0.009 // Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
+    THE_GUNNERY_UPDATE: 0.009, // Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
+    DRONE_OWNER_UUID: 0.010 // Drone owners changed from free text to an Actor UUID.
 });
 
 /**
@@ -151,6 +153,8 @@ const migrateActor = async function(actor, schema) {
         _migrateDocumentIconToWebP(actorData, updateData);
     if (schema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE && actorData.type === 'starship' && actorData.system.crew.useNPCCrew)
         _migrateStarshipGunnerySkill(actorData, updateData);
+    if (schema < SFRPGMigrationSchemas.DRONE_OWNER_UUID && actorData.type === 'drone')
+        _migrateDroneOwner(actorData, updateData);
 
     for (const item of actor.items) {
         const itemUpdateData = await migrateItem(item, schema);
@@ -539,6 +543,25 @@ const _migrateStringContentToWebP = function(string) {
     string = string.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
     string = string.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
     return string;
+};
+
+// ================== 0.010: Drone owner UUID ==================
+const _migrateDroneOwner = function(actorData, updateData) {
+    const owner = actorData._source?.system?.details?.owner ?? actorData.system?.details?.owner;
+    if (typeof owner !== "string" || !owner.trim()) return updateData;
+
+    let uuid = resolveLegacyDroneOwner(owner);
+    if (!uuid) {
+        const name = owner.replace(/@UUID\[[^\]]*\](?:\{[^}]*\})?/g, "").trim();
+        const match = game.actors?.find(actor => {
+            if (actor.id === actorData.id || !name) return false;
+            return actor.name === name || actor.name.startsWith(`${name} "`) || actor.name.startsWith(`${name} `);
+        });
+        uuid = match?.uuid ?? null;
+    }
+
+    if (uuid !== owner) updateData["system.details.owner"] = uuid;
+    return updateData;
 };
 
 // ================== 0.009: Starship Gunnery Conversion ==================
